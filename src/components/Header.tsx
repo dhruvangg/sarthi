@@ -9,23 +9,20 @@ interface HeaderProps {
 
 export function Header({ showBackToCalculators = false }: HeaderProps) {
   return (
-    <header className="bg-white shadow-sm border-b">
-      <div className="container mx-auto px-4 py-4">
-        <div className="flex items-center justify-between">
-          <Link href="/" className="flex items-center space-x-3">
-            <Image
-              src="/logo.png"
-              alt="SS Sarthi Financial Services"
-              width={60}
-              height={60}
-              className="h-12 w-auto"
-            />
-            {/* <div>
-              <h1 className="text-xl font-bold text-red-600">SS SARTHI</h1>
-              <p className="text-sm text-gray-600">Financial Services</p>
-            </div> */}
-          </Link>
+    <header className="bg-white shadow-sm border-b flex items-center justify-between">
+      <div className="container flex items-center mx-auto">
+        <Link href="/" className="flex items-center flex-shrink-0 pl-4 lg:pl-8">
+          <Image
+            src="/logo.png?v=2"
+            alt="SS Sarthi Financial Services"
+            width={150}
+            height={150}
+            className="h-20 w-auto lg:h-24 object-contain"
+            unoptimized
+          />
+        </Link>
 
+        <div className="container mx-auto px-4 py-4 flex items-center justify-end">
           {showBackToCalculators ? (
             <Link href="/calculators">
               <Button variant="outline" className="border-red-600 text-red-600 hover:bg-red-50">
@@ -34,7 +31,7 @@ export function Header({ showBackToCalculators = false }: HeaderProps) {
               </Button>
             </Link>
           ) : (
-            <>
+            <div className="flex items-center space-x-8">
               <nav className="hidden md:flex space-x-8">
                 <Link href="/" className="text-gray-700 hover:text-red-600 font-medium">Home</Link>
                 <Link href="/calculators" className="text-gray-700 hover:text-red-600 font-medium">Calculators</Link>
@@ -45,7 +42,7 @@ export function Header({ showBackToCalculators = false }: HeaderProps) {
               <Button className="bg-red-600 hover:bg-red-700 text-white">
                 Get Consultation
               </Button>
-            </>
+            </div>
           )}
         </div>
       </div>

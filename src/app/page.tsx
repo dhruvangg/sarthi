@@ -718,19 +718,6 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-8">
             <div>
-              <div className="flex items-center space-x-3 mb-4">
-                <Image
-                  src="/logo.png"
-                  alt="SS Sarthi Financial Services"
-                  width={40}
-                  height={40}
-                  className="h-10 w-auto"
-                />
-                {/* <div>
-                  <h3 className="text-xl font-bold text-red-400">SS SARTHI</h3>
-                  <p className="text-sm text-gray-400">Financial Services</p>
-                </div> */}
-              </div>
               <p className="text-gray-400 mb-4">
                 Your trusted partner in building wealth through expert financial advisory services.
               </p>

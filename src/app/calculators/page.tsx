@@ -4,37 +4,12 @@ import { Calculator, Target, BarChart3, PieChart, Home, Shield, ArrowRight } fro
 import Link from "next/link"
 import Image from "next/image"
 
+import { Header } from "@/components/Header"
+
 export default function CalculatorsPage() {
   return (
     <div className="min-h-screen bg-white">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-center space-x-3">
-              <Image
-                src="/logo.png"
-                alt="SS Sarthi Financial Services"
-                width={60}
-                height={60}
-                className="h-12 w-auto"
-              />
-              <div>
-                <h1 className="text-xl font-bold text-red-600">SS SARTHI</h1>
-                <p className="text-sm text-gray-600">Financial Services</p>
-              </div>
-            </Link>
-            <nav className="hidden md:flex space-x-8">
-              <Link href="/" className="text-gray-700 hover:text-red-600 font-medium">Home</Link>
-              <Link href="/calculators" className="text-red-600 font-medium">Calculators</Link>
-              <Link href="#contact" className="text-gray-700 hover:text-red-600 font-medium">Contact</Link>
-            </nav>
-            <Button className="bg-red-600 hover:bg-red-700 text-white">
-              Get Consultation
-            </Button>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-red-50 to-orange-50 py-16">
@@ -156,7 +131,7 @@ export default function CalculatorsPage() {
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">Need Personalized Advice?</h2>
           <p className="text-xl text-red-100 mb-8 max-w-2xl mx-auto">
-            Our calculators provide estimates. For comprehensive financial planning tailored to your specific needs, 
+            Our calculators provide estimates. For comprehensive financial planning tailored to your specific needs,
             consult with our SEBI-registered advisors.
           </p>
           <Button size="lg" className="bg-white text-red-600 hover:bg-gray-100">

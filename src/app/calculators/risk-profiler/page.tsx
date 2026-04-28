@@ -9,6 +9,7 @@ import { Progress } from "@/components/ui/progress"
 import { BarChart3, ArrowLeft, TrendingUp, Shield, AlertTriangle } from 'lucide-react'
 import Link from "next/link"
 import Image from "next/image"
+import { Header } from "@/components/Header"
 
 export default function RiskProfiler() {
   const [currentQuestion, setCurrentQuestion] = useState(0)
@@ -172,32 +173,7 @@ export default function RiskProfiler() {
   if (showResults && riskProfile) {
     return (
       <div className="min-h-screen bg-gray-50">
-        {/* Header */}
-        <header className="bg-white shadow-sm border-b">
-          <div className="container mx-auto px-4 py-4">
-            <div className="flex items-center justify-between">
-              <Link href="/" className="flex items-center space-x-3">
-                <Image
-                  src="/logo.png"
-                  alt="SS Sarthi Financial Services"
-                  width={60}
-                  height={60}
-                  className="h-12 w-auto"
-                />
-                <div>
-                  <h1 className="text-xl font-bold text-red-600">SS SARTHI</h1>
-                  <p className="text-sm text-gray-600">Financial Services</p>
-                </div>
-              </Link>
-              <Link href="/calculators">
-                <Button variant="outline" className="border-green-600 text-green-600 hover:bg-green-50">
-                  <ArrowLeft className="mr-2 h-4 w-4" />
-                  Back to Calculators
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </header>
+        <Header showBackToCalculators={true} />
 
         <div className="container mx-auto px-4 py-8">
           <div className="max-w-4xl mx-auto">
@@ -331,32 +307,7 @@ export default function RiskProfiler() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-center space-x-3">
-              <Image
-                src="/logo.png"
-                alt="SS Sarthi Financial Services"
-                width={60}
-                height={60}
-                className="h-12 w-auto"
-              />
-              <div>
-                <h1 className="text-xl font-bold text-red-600">SS SARTHI</h1>
-                <p className="text-sm text-gray-600">Financial Services</p>
-              </div>
-            </Link>
-            <Link href="/calculators">
-              <Button variant="outline" className="border-green-600 text-green-600 hover:bg-green-50">
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                Back to Calculators
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </header>
+      <Header showBackToCalculators={true} />
 
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-2xl mx-auto">

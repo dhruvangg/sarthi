@@ -9,6 +9,8 @@ import { Calculator, TrendingUp, ArrowLeft, PieChart } from 'lucide-react'
 import Link from "next/link"
 import Image from "next/image"
 
+import { Header } from "@/components/Header"
+
 export default function SIPCalculator() {
   const [monthlyInvestment, setMonthlyInvestment] = useState(5000)
   const [expectedReturn, setExpectedReturn] = useState(12)
@@ -20,9 +22,10 @@ export default function SIPCalculator() {
   })
 
   const calculateSIP = () => {
-    const monthlyRate = expectedReturn / 100 / 12
+    const annualRate = expectedReturn / 100
+    const monthlyRate = Math.pow(1 + annualRate, 1 / 12) - 1
     const months = timePeriod * 12
-    
+
     const totalInvestment = monthlyInvestment * months
     const futureValue = monthlyInvestment * (((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate) * (1 + monthlyRate))
     const estimatedReturns = futureValue - totalInvestment
@@ -48,32 +51,7 @@ export default function SIPCalculator() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-center space-x-3">
-              <Image
-                src="/logo.png"
-                alt="SS Sarthi Financial Services"
-                width={60}
-                height={60}
-                className="h-12 w-auto"
-              />
-              <div>
-                <h1 className="text-xl font-bold text-red-600">SS SARTHI</h1>
-                <p className="text-sm text-gray-600">Financial Services</p>
-              </div>
-            </Link>
-            <Link href="/calculators">
-              <Button variant="outline" className="border-red-600 text-red-600 hover:bg-red-50">
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                Back to Calculators
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </header>
+      <Header showBackToCalculators={true} />
 
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">
@@ -226,13 +204,13 @@ export default function SIPCalculator() {
                 <div className="space-y-4">
                   <div className="relative">
                     <div className="flex h-8 rounded-lg overflow-hidden">
-                      <div 
+                      <div
                         className="bg-blue-500 flex items-center justify-center text-white text-sm font-medium"
                         style={{ width: `${(results.totalInvestment / results.totalValue) * 100}%` }}
                       >
                         {((results.totalInvestment / results.totalValue) * 100).toFixed(1)}%
                       </div>
-                      <div 
+                      <div
                         className="bg-green-500 flex items-center justify-center text-white text-sm font-medium"
                         style={{ width: `${(results.estimatedReturns / results.totalValue) * 100}%` }}
                       >
@@ -270,8 +248,8 @@ export default function SIPCalculator() {
         <Card className="mt-8 bg-yellow-50 border-yellow-200">
           <CardContent className="pt-6">
             <p className="text-sm text-gray-600">
-              <strong>Disclaimer:</strong> The calculations are based on the inputs provided and assumed rate of return. 
-              Actual returns may vary depending on market conditions. Mutual fund investments are subject to market risks. 
+              <strong>Disclaimer:</strong> The calculations are based on the inputs provided and assumed rate of return.
+              Actual returns may vary depending on market conditions. Mutual fund investments are subject to market risks.
               Please read all scheme-related documents carefully before investing.
             </p>
           </CardContent>

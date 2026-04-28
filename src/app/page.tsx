@@ -7,39 +7,13 @@ import { TrendingUp, Shield, Calculator, Users, Award, Phone, Mail, MapPin, Chec
 import Image from "next/image"
 import Link from "next/link"
 
+import { Header } from "@/components/Header"
+import { ContactForm } from "@/components/ContactForm"
+
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <Image
-                src="/logo.png"
-                alt="SS Sarthi Financial Services"
-                width={60}
-                height={60}
-                className="h-12 w-auto"
-              />
-              <div>
-                <h1 className="text-xl font-bold text-red-600">SS SARTHI</h1>
-                <p className="text-sm text-gray-600">Financial Services</p>
-              </div>
-            </div>
-            <nav className="hidden md:flex space-x-8">
-              <Link href="#home" className="text-gray-700 hover:text-red-600 font-medium">Home</Link>
-              <Link href="#about" className="text-gray-700 hover:text-red-600 font-medium">About</Link>
-              <Link href="#services" className="text-gray-700 hover:text-red-600 font-medium">Services</Link>
-              <Link href="#tools" className="text-gray-700 hover:text-red-600 font-medium">Tools</Link>
-              <Link href="#contact" className="text-gray-700 hover:text-red-600 font-medium">Contact</Link>
-            </nav>
-            <Button className="bg-red-600 hover:bg-red-700 text-white">
-              Get Consultation
-            </Button>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       {/* Hero Section */}
       <section id="home" className="bg-gradient-to-br from-red-50 to-orange-50 py-20">
@@ -83,22 +57,7 @@ export default function HomePage() {
             </div>
             <div className="relative">
               <div className="bg-white rounded-2xl shadow-2xl p-8">
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Quick Consultation</h3>
-                <form className="space-y-4">
-                  <Input placeholder="Your Name" />
-                  <Input placeholder="Phone Number" />
-                  <Input placeholder="Email Address" />
-                  <select className="w-full p-3 border border-gray-300 rounded-md">
-                    <option>Select Service Interest</option>
-                    <option>Mutual Funds</option>
-                    <option>Insurance</option>
-                    <option>Tax Planning</option>
-                    <option>Property Valuation</option>
-                  </select>
-                  <Button className="w-full bg-red-600 hover:bg-red-700 text-white">
-                    Schedule Free Consultation
-                  </Button>
-                </form>
+                <ContactForm title="Quick Consultation" buttonText="Schedule Free Consultation" />
               </div>
             </div>
           </div>
@@ -699,30 +658,7 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-12">
             <div>
               <Card className="p-8">
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Schedule Free Consultation</h3>
-                <form className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <Input placeholder="First Name" />
-                    <Input placeholder="Last Name" />
-                  </div>
-                  <Input placeholder="Email Address" />
-                  <Input placeholder="Phone Number" />
-                  <select className="w-full p-3 border border-gray-300 rounded-md">
-                    <option>Select Primary Interest</option>
-                    <option>Mutual Fund Planning</option>
-                    <option>Insurance Advisory</option>
-                    <option>Tax Planning</option>
-                    <option>Property Valuation</option>
-                    <option>Comprehensive Financial Planning</option>
-                  </select>
-                  <textarea
-                    placeholder="Tell us about your financial goals..."
-                    className="w-full p-3 border border-gray-300 rounded-md h-24"
-                  ></textarea>
-                  <Button className="w-full bg-red-600 hover:bg-red-700 text-white">
-                    Schedule Consultation
-                  </Button>
-                </form>
+                <ContactForm title="Schedule Free Consultation" buttonText="Schedule Consultation" />
               </Card>
             </div>
 
@@ -790,10 +726,10 @@ export default function HomePage() {
                   height={40}
                   className="h-10 w-auto"
                 />
-                <div>
+                {/* <div>
                   <h3 className="text-xl font-bold text-red-400">SS SARTHI</h3>
                   <p className="text-sm text-gray-400">Financial Services</p>
-                </div>
+                </div> */}
               </div>
               <p className="text-gray-400 mb-4">
                 Your trusted partner in building wealth through expert financial advisory services.

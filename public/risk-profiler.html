@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Risk Profiler — Sarthi Financial Services</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: { DEFAULT: '#b8933a', light: '#d4aa55', pale: '#fdf6e7', dark: '#8a6b22', muted: '#e8d9b0' },
+            ink: { DEFAULT: '#1c1609', mid: '#4a3c28', soft: '#7a6a52', pale: '#f5f0e8' },
+          },
+          fontFamily: {
+            display: ['Cormorant Garamond', 'serif'],
+            body: ['DM Sans', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .fade-up {
+      animation: fadeUp .4s cubic-bezier(.22, 1, .36, 1) both;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .option-card {
+      transition: border-color .18s, background .18s, transform .15s, box-shadow .18s;
+    }
+
+    .option-card:hover {
+      transform: translateY(-1px);
+    }
+
+    .option-card.selected {
+      border-color: #b8933a !important;
+      background: #fdf6e7 !important;
+      box-shadow: 0 0 0 3px #b8933a22;
+    }
+
+    .option-card.selected .bullet {
+      background: #b8933a;
+      color: white;
+      border-color: #b8933a;
+    }
+
+    .bar-fill {
+      transition: width 1s cubic-bezier(.22, 1, .36, 1);
+    }
+
+    .progress-track {
+      transition: width .5s cubic-bezier(.22, 1, .36, 1);
+    }
+
+    input[type=date]::-webkit-calendar-picker-indicator {
+      opacity: .4;
+    }
+
+    @media print {
+      .no-print {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-ink-pale min-h-screen">
+
+  <!-- ══════════ HEADER ══════════ -->
+  <header class="bg-ink text-white">
+    <div class="max-w-3xl mx-auto px-6 py-5 flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <div class="w-11 h-11 rounded-full bg-gold flex items-center justify-center text-xl">🐎</div>
+        <div>
+          <div class="font-display text-xl font-semibold tracking-wide">Sarthi Financial Services</div>
+          <div class="text-xs text-gold-light tracking-widest uppercase mt-0.5">Individual Risk Profiler</div>
+        </div>
+      </div>
+      <div class="text-xs text-ink-soft hidden sm:block">ARN-257409</div>
+    </div>
+  </header>
+
+  <!-- ══════════ MAIN ══════════ -->
+  <main class="max-w-3xl mx-auto px-4 py-10" id="app"></main>
+
+  <script>
+    // ─────────────────────────────────────────────
+    //  DATA
+    // ─────────────────────────────────────────────
+    const QUESTIONS = [
+      // Original 6 from PDF
+      {
+        section: "Personal Profile",
+        icon: "👤",
+        q: "What is your age?",
+        hint: "Age is a key factor in determining how much risk you can afford to take.",
+        opts: [
+          { label: "Less than 40 years old", detail: "Long runway ahead — time is your greatest asset.", score: 6 },
+          { label: "Between 40–55 years old", detail: "Prime earning years with moderate time horizon.", score: 4 },
+          { label: "Between 55–70 years old", detail: "Approaching or in retirement planning phase.", score: 2 },
+          { label: "More than 70 years old", detail: "Capital preservation becomes a priority.", score: 1 },
+        ]
+      },
+      {
+        section: "Income & Stability",
+        icon: "💼",
+        q: "What best describes your income levels?",
+        hint: "Your income stability affects how well you can absorb investment losses.",
+        opts: [
+          { label: "Expect income to increase at a high rate", detail: "Growing career / business with strong upside.", score: 6 },
+          { label: "Expect income to remain steady", detail: "Stable job or predictable business income.", score: 4 },
+          { label: "Do not have a fixed monthly income", detail: "Freelance, self-employed, or variable income.", score: 2 },
+          { label: "Retired or no active source of income", detail: "Living off savings, pension, or investments.", score: 1 },
+        ]
+      },
+      {
+        section: "Time Horizon",
+        icon: "⏳",
+        q: "When do you plan to start withdrawing money from your portfolio?",
+        hint: "Longer time horizons allow you to ride out market volatility.",
+        opts: [
+          { label: "Less than 1 year", detail: "Short-term need — liquidity is critical.", score: 1 },
+          { label: "1 to 3 years", detail: "Near-term goal — some stability needed.", score: 2 },
+          { label: "3 to 5 years", detail: "Medium-term — balanced approach works.", score: 3 },
+          { label: "More than 5 years", detail: "Long-term — can weather market cycles.", score: 4 },
+        ]
+      },
+      {
+        section: "Loss Tolerance",
+        icon: "📉",
+        q: "If your investments decline by 20% a few months after investing, what would you do?",
+        hint: "This reveals your true emotional response to market downturns.",
+        opts: [
+          { label: "Cut losses and liquidate everything immediately", detail: "Capital safety is non-negotiable for me.", score: 1 },
+          { label: "Wait a little longer before deciding", detail: "I'd be worried but give it some time.", score: 2 },
+          { label: "Hold steady — volatility is part of investing", detail: "I accept drawdowns as normal market behaviour.", score: 3 },
+          { label: "Buy more — I see it as an opportunity", detail: "I'm confident and not rattled by paper losses.", score: 4 },
+        ]
+      },
+      {
+        section: "Knowledge Level",
+        icon: "📚",
+        q: "How would you best describe your investment knowledge?",
+        hint: "Your understanding of financial products determines suitable investment complexity.",
+        opts: [
+          { label: "Limited — only aware of FDs and savings accounts", detail: "Traditional instruments only.", score: 1 },
+          { label: "Moderate — familiar with MFs and some risks", detail: "Beyond basics but still learning.", score: 2 },
+          { label: "Advanced — regular investor across multiple products", detail: "Comfortable with equity, debt, and hybrids.", score: 3 },
+          { label: "Extensive — active investor, self-directed decisions", detail: "Deep understanding across all asset classes.", score: 4 },
+        ]
+      },
+      {
+        section: "Investment Style",
+        icon: "💡",
+        q: "If you received a large lump sum today, how would you invest it?",
+        hint: "This reflects your natural preference for safety vs. growth.",
+        opts: [
+          { label: "Conservative instruments for moderate, stable income", detail: "Safety over returns — FDs, liquid funds.", score: 1 },
+          { label: "High income with moderate risk", detail: "Balanced debt-heavy products.", score: 2 },
+          { label: "High total return with moderately high risk", detail: "Hybrid or balanced equity funds.", score: 3 },
+          { label: "Maximum capital appreciation despite high risk", detail: "Pure equity or growth portfolios.", score: 4 },
+        ]
+      },
+      // Extended questions
+      {
+        section: "Financial Dependents",
+        icon: "👨‍👩‍👧",
+        q: "How many financial dependents do you currently have?",
+        hint: "More dependents mean more responsibility and often a need for lower risk.",
+        opts: [
+          { label: "4 or more", detail: "High financial obligations — stability is key.", score: 1 },
+          { label: "2 to 3", detail: "Moderate family responsibilities.", score: 2 },
+          { label: "1", detail: "Limited dependents — more flexibility.", score: 3 },
+          { label: "None", detail: "Full financial freedom — can take more risk.", score: 4 },
+        ]
+      },
+      {
+        section: "Emergency Fund",
+        icon: "🛡️",
+        q: "Do you have an emergency fund to cover 6+ months of expenses?",
+        hint: "An emergency fund acts as a buffer and allows you to stay invested during downturns.",
+        opts: [
+          { label: "No emergency fund at all", detail: "Investments could be disrupted by emergencies.", score: 1 },
+          { label: "Covers 1–3 months of expenses", detail: "Partial cushion — some vulnerability.", score: 2 },
+          { label: "Covers 3–6 months of expenses", detail: "Reasonable buffer in place.", score: 3 },
+          { label: "Covers 6+ months of expenses", detail: "Strong safety net — free to invest aggressively.", score: 4 },
+        ]
+      },
+      {
+        section: "Debt Situation",
+        icon: "🏦",
+        q: "What is your current level of personal debt (loans, EMIs)?",
+        hint: "High debt reduces your investable surplus and risk capacity.",
+        opts: [
+          { label: "Very high — consuming majority of income", detail: "EMIs eat most of my monthly earnings.", score: 1 },
+          { label: "Significant — 40–60% of income as EMIs", detail: "Heavy monthly commitments.", score: 2 },
+          { label: "Moderate — 20–40% of income as EMIs", detail: "Manageable obligations.", score: 3 },
+          { label: "None or minimal", detail: "Debt-free or very low obligations.", score: 4 },
+        ]
+      },
+      {
+        section: "Prior Experience",
+        icon: "📊",
+        q: "Have you previously experienced a significant market downturn in your portfolio?",
+        hint: "Past experience with losses shapes realistic expectations.",
+        opts: [
+          { label: "No, and I'd find it very distressing", detail: "Untested — likely to react emotionally.", score: 1 },
+          { label: "No, but I understand it's possible", detail: "Mentally prepared but not battle-tested.", score: 2 },
+          { label: "Yes, and I panicked or exited", detail: "Experienced but reacted emotionally.", score: 3 },
+          { label: "Yes, and I stayed invested or bought more", detail: "Battle-tested with disciplined behaviour.", score: 4 },
+        ]
+      },
+      {
+        section: "Return Expectation",
+        icon: "🎯",
+        q: "What annual return are you realistically targeting from your investments?",
+        hint: "Higher return expectations naturally imply higher risk tolerance.",
+        opts: [
+          { label: "Up to 6–7% (FD-like returns)", detail: "Preservation with slight growth.", score: 1 },
+          { label: "8–10% (slightly above inflation)", detail: "Steady real-wealth growth.", score: 2 },
+          { label: "11–15% (equity-level returns)", detail: "Willing to accept equity volatility.", score: 3 },
+          { label: "15%+ (alpha-seeking returns)", detail: "Comfortable with high risk for high reward.", score: 4 },
+        ]
+      },
+      {
+        section: "Goal Clarity",
+        icon: "🗺️",
+        q: "How clearly defined are your financial goals?",
+        hint: "Clear goals lead to better investment strategy and discipline.",
+        opts: [
+          { label: "No specific goals — just want to save", detail: "Accumulation without a target.", score: 1 },
+          { label: "Vague goals — broadly aware of needs", detail: "Some direction but not specific.", score: 2 },
+          { label: "Defined goals with rough timelines", detail: "Structured thinking in place.", score: 3 },
+          { label: "Very specific goals with detailed plans", detail: "Clarity on corpus, timeline, and strategy.", score: 4 },
+        ]
+      },
+    ];
+
+    const PROFILES = [
+      {
+        min: 12, max: 21, name: "Conservative", color: "#60a5fa", emoji: "🔵",
+        desc: "You prioritise capital preservation above all else. You are most comfortable with low-volatility instruments and are willing to accept modest returns in exchange for stability.",
+        strengths: ["Capital safety", "Predictable income", "Low stress"],
+        watchouts: ["Inflation erosion", "Opportunity cost", "Underperformance vs goals"],
+        products: ["Liquid Funds", "Ultra-Short Duration Funds", "Fixed Deposits", "Short-Term Debt Funds", "Government Securities"],
+        debt: 80, eq: 20
+      },
+      {
+        min: 22, max: 31, name: "Balanced", color: "#a78bfa", emoji: "🟣",
+        desc: "You seek a middle ground — growth without extreme volatility. You understand that some risk is necessary for meaningful wealth creation and are comfortable with calculated exposure.",
+        strengths: ["Diversification", "Moderate growth", "Inflation-beating returns"],
+        watchouts: ["Market timing temptation", "Rebalancing discipline", "Dual-asset complexity"],
+        products: ["Balanced Advantage Funds", "Hybrid Funds", "Corporate Bonds", "Multi-Asset Funds", "Arbitrage Funds"],
+        debt: 50, eq: 50
+      },
+      {
+        min: 32, max: 41, name: "Growth", color: "#34d399", emoji: "🟢",
+        desc: "You are a growth-oriented investor comfortable with high volatility in pursuit of long-term wealth accumulation. You understand market cycles and can stay the course.",
+        strengths: ["Wealth compounding", "Long-term returns", "Equity upside"],
+        watchouts: ["Short-term drawdowns", "Behavioural discipline", "Rebalancing timing"],
+        products: ["Large Cap Funds", "Flexi Cap Funds", "Index Funds", "NPS", "REITs", "Balanced Advantage Funds"],
+        debt: 30, eq: 70
+      },
+      {
+        min: 42, max: 52, name: "High Growth", color: "#f59e0b", emoji: "🟡",
+        desc: "You are an aggressive investor who places capital appreciation above security. You are seasoned, self-directed, and fully aware that short-term volatility is the price of extraordinary long-term returns.",
+        strengths: ["Maximum wealth creation", "Active participation", "Alpha potential"],
+        watchouts: ["Concentration risk", "Emotional discipline", "Liquidity management"],
+        products: ["Small & Mid Cap Funds", "Sectoral / Thematic Funds", "Direct Equities", "PMS", "AIFs", "International Funds"],
+        debt: 10, eq: 90
+      },
+    ];
+
+    // ─────────────────────────────────────────────
+    //  STATE
+    // ─────────────────────────────────────────────
+    let step = 0; // 0 = intro, 1..N = questions, N+1 = result
+    let answers = new Array(QUESTIONS.length).fill(null);
+    let meta = { name: '', date: new Date().toISOString().slice(0, 10), pan: '', type: 'new', minor: 'no' };
+
+    function calcScore() {
+      return answers.reduce((s, a, i) => s + (a !== null ? QUESTIONS[i].opts[a].score : 0), 0);
+    }
+    function getProfile(score) {
+      return PROFILES.find(p => score >= p.min && score <= p.max) || PROFILES[0];
+    }
+    function getSectionScores() {
+      const map = {};
+      answers.forEach((a, i) => {
+        const sec = QUESTIONS[i].section;
+        if (!map[sec]) map[sec] = { score: 0, max: 0 };
+        map[sec].max += 4;
+        if (a !== null) map[sec].score += QUESTIONS[i].opts[a].score;
+      });
+      return map;
+    }
+
+    // ─────────────────────────────────────────────
+    //  RENDER
+    // ─────────────────────────────────────────────
+    function render() {
+      const app = document.getElementById('app');
+      if (step === 0) renderIntro(app);
+      else if (step <= QUESTIONS.length) renderQuestion(app);
+      else renderResult(app);
+    }
+
+    // ── INTRO ──
+    function renderIntro(app) {
+      app.innerHTML = `
+  <div class="fade-up">
+    <div class="bg-white rounded-2xl shadow-sm border border-gold-muted overflow-hidden">
+      <div class="bg-gradient-to-r from-ink to-ink-mid px-8 py-7">
+        <div class="text-gold text-xs uppercase tracking-widest mb-2 font-body">Section A — Risk Profiling</div>
+        <h2 class="font-display text-3xl text-white font-semibold">Let's understand your investor profile</h2>
+        <p class="text-ink-soft text-sm mt-2 font-body">${QUESTIONS.length} questions · ~5 minutes · Valid for 2 years</p>
+      </div>
+      <div class="p-8">
+        <div class="bg-gold-pale border-l-4 border-gold rounded-r-xl p-4 mb-8 text-sm text-ink-mid leading-relaxed font-body">
+          This questionnaire assesses your risk tolerance, investment experience, and financial situation to recommend a suitable portfolio strategy. Re-assessment may be done if your profile or objectives change.
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+          <div>
+            <label class="block text-xs uppercase tracking-widest text-gold font-medium mb-2 font-body">Applicant Name</label>
+            <input id="mName" value="${meta.name}" placeholder="Full legal name"
+              class="w-full border border-gold-muted rounded-lg px-4 py-2.5 text-sm text-ink font-body focus:outline-none focus:border-gold bg-white"/>
+          </div>
+          <div>
+            <label class="block text-xs uppercase tracking-widest text-gold font-medium mb-2 font-body">Date of Profiling</label>
+            <input id="mDate" type="date" value="${meta.date}"
+              class="w-full border border-gold-muted rounded-lg px-4 py-2.5 text-sm text-ink font-body focus:outline-none focus:border-gold bg-white"/>
+          </div>
+          <div>
+            <label class="block text-xs uppercase tracking-widest text-gold font-medium mb-2 font-body">Client ID / PAN</label>
+            <input id="mPan" value="${meta.pan}" placeholder="e.g. ABCDE1234F"
+              class="w-full border border-gold-muted rounded-lg px-4 py-2.5 text-sm text-ink font-body focus:outline-none focus:border-gold bg-white"/>
+          </div>
+          <div>
+            <label class="block text-xs uppercase tracking-widest text-gold font-medium mb-2 font-body">Profiling Type</label>
+            <select id="mType" class="w-full border border-gold-muted rounded-lg px-4 py-2.5 text-sm text-ink font-body focus:outline-none focus:border-gold bg-white">
+              <option value="new" ${meta.type === 'new' ? 'selected' : ''}>New Profiling</option>
+              <option value="reprofiling" ${meta.type === 'reprofiling' ? 'selected' : ''}>Re-profiling</option>
+            </select>
+          </div>
+          <div class="sm:col-span-2">
+            <label class="block text-xs uppercase tracking-widest text-gold font-medium mb-2 font-body">Is the Applicant a Minor? (Age &lt; 18)</label>
+            <div class="flex gap-6">
+              <label class="flex items-center gap-2 cursor-pointer text-sm text-ink-mid font-body">
+                <input type="radio" name="minor" value="no" ${meta.minor !== 'yes' ? 'checked' : ''} class="accent-gold w-4 h-4"/> No
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer text-sm text-ink-mid font-body">
+                <input type="radio" name="minor" value="yes" ${meta.minor === 'yes' ? 'checked' : ''} class="accent-gold w-4 h-4"/> Yes (Guardian details required)
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-4 border-t border-gold-muted">
+          <div class="flex gap-2 flex-wrap">
+            ${QUESTIONS.map(q => `<span class="text-xs px-2 py-1 rounded-full bg-gold-pale text-gold-dark font-body">${q.icon}</span>`).join('')}
+          </div>
+          <button onclick="startQuiz()" class="bg-ink text-white px-7 py-3 rounded-xl text-sm font-medium font-body hover:bg-ink-mid transition-colors flex items-center gap-2">
+            Begin Assessment <span class="text-gold">→</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>`;
+    }
+
+    // ── QUESTION ──
+    function renderQuestion(app) {
+      const qi = step - 1;
+      const q = QUESTIONS[qi];
+      const pct = Math.round((step / (QUESTIONS.length + 1)) * 100);
+      const sections = [...new Set(QUESTIONS.map(q => q.section))];
+      const curSection = q.section;
+
+      app.innerHTML = `
+  <div class="fade-up">
+    <!-- Progress -->
+    <div class="mb-6">
+      <div class="flex justify-between items-center mb-2">
+        <span class="text-xs uppercase tracking-widest text-gold font-medium font-body">${q.section}</span>
+        <span class="text-xs text-ink-soft font-body">${step} / ${QUESTIONS.length}</span>
+      </div>
+      <div class="h-1.5 bg-gold-muted rounded-full overflow-hidden">
+        <div class="h-full bg-gold rounded-full progress-track" style="width:${pct}%"></div>
+      </div>
+      <!-- Section dots -->
+      <div class="flex gap-1.5 mt-3 flex-wrap">
+        ${QUESTIONS.map((qq, i) => `
+          <div class="h-1 rounded-full flex-1 min-w-[18px] transition-colors duration-300 ${i < step ? 'bg-gold' : i === step - 1 ? 'bg-gold-light' : 'bg-gold-muted'}"></div>
+        `).join('')}
+      </div>
+    </div>
+
+    <!-- Card -->
+    <div class="bg-white rounded-2xl shadow-sm border border-gold-muted overflow-hidden">
+      <div class="px-8 pt-8 pb-6">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-12 h-12 rounded-2xl bg-gold-pale flex items-center justify-center text-2xl">${q.icon}</div>
+          <div>
+            <div class="text-xs text-gold uppercase tracking-widest font-body">Question ${step}</div>
+            <h2 class="font-display text-2xl text-ink font-semibold leading-tight">${q.q}</h2>
+          </div>
+        </div>
+        ${q.hint ? `<p class="text-sm text-ink-soft mb-6 leading-relaxed font-body bg-ink-pale rounded-lg px-4 py-2.5">${q.hint}</p>` : ''}
+
+        <div class="space-y-3">
+          ${q.opts.map((o, i) => `
+            <div class="option-card border-2 border-gold-muted rounded-xl p-4 cursor-pointer select-none ${answers[qi] === i ? 'selected' : ''}"
+                 onclick="selectOpt(${qi}, ${i})">
+              <div class="flex items-start gap-3">
+                <div class="bullet w-8 h-8 rounded-full border-2 border-gold-muted flex items-center justify-center text-xs font-semibold text-gold shrink-0 mt-0.5 transition-colors duration-200">
+                  ${String.fromCharCode(65 + i)}
+                </div>
+                <div class="flex-1">
+                  <div class="text-sm font-medium text-ink font-body">${o.label}</div>
+                  ${o.detail ? `<div class="text-xs text-ink-soft mt-0.5 font-body">${o.detail}</div>` : ''}
+                </div>
+                <div class="w-4 h-4 rounded-full border-2 border-gold-muted flex items-center justify-center shrink-0 mt-1 ${answers[qi] === i ? 'bg-gold border-gold' : ''}">
+                  ${answers[qi] === i ? '<svg class="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 1 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z"/></svg>' : ''}
+                </div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+
+      <div class="px-8 py-5 border-t border-gold-muted flex items-center justify-between bg-ink-pale/30">
+        <button onclick="goBack()" class="text-sm text-ink-soft hover:text-ink font-body flex items-center gap-1.5 transition-colors px-4 py-2 rounded-lg hover:bg-gold-pale">
+          ← Back
+        </button>
+        <button id="btnNext" onclick="goNext()" ${answers[qi] === null ? 'disabled' : ''}
+          class="bg-gold text-white px-7 py-2.5 rounded-xl text-sm font-medium font-body transition-colors flex items-center gap-2 ${answers[qi] === null ? 'opacity-40 cursor-not-allowed' : 'hover:bg-gold-light'}">
+          ${step === QUESTIONS.length ? 'View My Profile' : 'Next Question'} →
+        </button>
+      </div>
+    </div>
+  </div>`;
+    }
+
+    // ── RESULT ──
+    function renderResult(app) {
+      const score = calcScore();
+      const maxScore = QUESTIONS.length * 4;
+      const profile = getProfile(score);
+      const pct = Math.round((score / maxScore) * 100);
+      const secScores = getSectionScores();
+
+      const meterColors = ['#60a5fa', '#a78bfa', '#34d399', '#f59e0b'];
+      const profileIdx = PROFILES.indexOf(profile);
+
+      app.innerHTML = `
+  <div class="fade-up space-y-6">
+
+    <!-- Hero Card -->
+    <div class="bg-white rounded-2xl shadow-sm border border-gold-muted overflow-hidden">
+      <div class="bg-gradient-to-br from-ink via-ink-mid to-ink px-8 py-10 text-center relative overflow-hidden">
+        <div class="absolute inset-0 opacity-5" style="background-image:radial-gradient(circle at 30% 50%, #b8933a 0%, transparent 60%), radial-gradient(circle at 70% 20%, #d4aa55 0%, transparent 50%)"></div>
+        <div class="relative z-10">
+          <div class="text-4xl mb-3">${profile.emoji}</div>
+          <div class="text-gold text-xs uppercase tracking-widest mb-2 font-body">Your Risk Profile</div>
+          <h2 class="font-display text-5xl text-white font-bold mb-1">${profile.name}</h2>
+          <div class="text-ink-soft text-sm font-body mb-6">Score: ${score} / ${maxScore}</div>
+
+          <!-- Score Meter -->
+          <div class="max-w-sm mx-auto">
+            <div class="h-3 bg-white/10 rounded-full overflow-hidden">
+              <div class="h-full rounded-full bar-fill" style="width:${pct}%; background:${profile.color}"></div>
+            </div>
+            <div class="flex justify-between mt-1 text-xs text-white/40 font-body">
+              <span>Conservative</span><span>Balanced</span><span>Growth</span><span>High Growth</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-8">
+        <!-- Profile desc -->
+        <p class="text-ink-mid leading-relaxed font-body mb-6 text-[15px]">${profile.desc}</p>
+
+        <!-- Allocation -->
+        <div class="mb-8">
+          <div class="text-xs uppercase tracking-widest text-gold font-medium mb-3 font-body">Indicative Asset Allocation</div>
+          <div class="flex rounded-xl overflow-hidden h-10 mb-3">
+            <div class="flex items-center justify-center text-white text-sm font-semibold font-body transition-all bar-fill" style="width:${profile.debt}%; background:#60a5fa">${profile.debt}%</div>
+            <div class="flex items-center justify-center text-white text-sm font-semibold font-body transition-all bar-fill" style="width:${profile.eq}%; background:#f59e0b">${profile.eq}%</div>
+          </div>
+          <div class="flex gap-6 text-xs font-body text-ink-soft">
+            <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-blue-400 inline-block"></span> Debt ${profile.debt}%</span>
+            <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-amber-400 inline-block"></span> Equity ${profile.eq}%</span>
+          </div>
+        </div>
+
+        <!-- Strengths & Watchouts -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+          <div class="bg-green-50 rounded-xl p-5">
+            <div class="text-xs uppercase tracking-widest text-green-600 font-medium mb-3 font-body">✓ Strengths</div>
+            <ul class="space-y-1.5">
+              ${profile.strengths.map(s => `<li class="text-sm text-ink-mid font-body flex items-start gap-2"><span class="text-green-500 mt-0.5">●</span>${s}</li>`).join('')}
+            </ul>
+          </div>
+          <div class="bg-amber-50 rounded-xl p-5">
+            <div class="text-xs uppercase tracking-widest text-amber-600 font-medium mb-3 font-body">⚠ Watch-outs</div>
+            <ul class="space-y-1.5">
+              ${profile.watchouts.map(w => `<li class="text-sm text-ink-mid font-body flex items-start gap-2"><span class="text-amber-500 mt-0.5">●</span>${w}</li>`).join('')}
+            </ul>
+          </div>
+        </div>
+
+        <!-- Recommended Products -->
+        <div class="mb-8">
+          <div class="text-xs uppercase tracking-widest text-gold font-medium mb-3 font-body">Recommended Product Universe</div>
+          <div class="flex flex-wrap gap-2">
+            ${profile.products.map(p => `<span class="text-xs px-3 py-1.5 rounded-full border border-gold-muted bg-gold-pale text-ink-mid font-body">${p}</span>`).join('')}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section Breakdown -->
+    <div class="bg-white rounded-2xl shadow-sm border border-gold-muted p-8">
+      <div class="text-xs uppercase tracking-widest text-gold font-medium mb-6 font-body">Response Analysis by Category</div>
+      <div class="space-y-4">
+        ${Object.entries(secScores).map(([sec, val]) => {
+        const icon = QUESTIONS.find(q => q.section === sec)?.icon || '📌';
+        const pctSec = Math.round((val.score / val.max) * 100);
+        const color = pctSec >= 75 ? '#34d399' : pctSec >= 50 ? '#a78bfa' : pctSec >= 25 ? '#f59e0b' : '#60a5fa';
+        const label = pctSec >= 75 ? 'Aggressive' : pctSec >= 50 ? 'Moderate-High' : pctSec >= 25 ? 'Moderate-Low' : 'Conservative';
+        return `
+          <div>
+            <div class="flex justify-between items-center mb-1.5">
+              <div class="flex items-center gap-2 text-sm text-ink font-body">${icon} ${sec}</div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-body" style="color:${color}">${label}</span>
+                <span class="text-xs text-ink-soft font-body">${val.score}/${val.max}</span>
+              </div>
+            </div>
+            <div class="h-2 bg-gold-muted rounded-full overflow-hidden">
+              <div class="h-full rounded-full bar-fill" style="width:${pctSec}%; background:${color}"></div>
+            </div>
+          </div>`;
+      }).join('')}
+      </div>
+    </div>
+
+    <!-- All Profiles Comparison -->
+    <div class="bg-white rounded-2xl shadow-sm border border-gold-muted p-8">
+      <div class="text-xs uppercase tracking-widest text-gold font-medium mb-6 font-body">Risk Profile Score Grid</div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm font-body">
+          <thead>
+            <tr class="border-b border-gold-muted">
+              <th class="text-left py-2 px-3 text-xs uppercase tracking-widest text-gold font-medium">Score</th>
+              <th class="text-left py-2 px-3 text-xs uppercase tracking-widest text-gold font-medium">Profile</th>
+              <th class="text-left py-2 px-3 text-xs uppercase tracking-widest text-gold font-medium">Debt</th>
+              <th class="text-left py-2 px-3 text-xs uppercase tracking-widest text-gold font-medium">Equity</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${PROFILES.map(p => `
+              <tr class="border-b border-gold-muted/50 ${p.name === profile.name ? 'bg-gold-pale' : ''}">
+                <td class="py-3 px-3 ${p.name === profile.name ? 'font-semibold text-ink' : 'text-ink-soft'}">${p.min}–${p.max}</td>
+                <td class="py-3 px-3">
+                  <span class="flex items-center gap-2 ${p.name === profile.name ? 'font-semibold text-ink' : 'text-ink-soft'}">
+                    ${p.emoji} ${p.name}
+                    ${p.name === profile.name ? '<span class="text-xs bg-gold text-white px-2 py-0.5 rounded-full">You</span>' : ''}
+                  </span>
+                </td>
+                <td class="py-3 px-3 ${p.name === profile.name ? 'font-semibold text-ink' : 'text-ink-soft'}">${p.debt}%</td>
+                <td class="py-3 px-3 ${p.name === profile.name ? 'font-semibold text-ink' : 'text-ink-soft'}">${p.eq}%</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Disclaimer + Actions -->
+    <div class="bg-white rounded-2xl shadow-sm border border-gold-muted p-8">
+      <p class="text-xs text-ink-soft font-body leading-relaxed mb-6">
+        <strong class="text-ink">Disclaimer:</strong> This risk profile is based on responses provided by the applicant and is valid for 2 years from the date of profiling. The suggested asset allocations are indicative and serve as general guidelines only. Actual portfolio construction should be done in consultation with your wealth manager at Sarthi Financial Services.
+      </p>
+
+      <!-- Signature area -->
+      <div class="grid grid-cols-2 gap-8 mb-6">
+        <div>
+          <div class="text-xs uppercase tracking-widest text-gold font-medium mb-3 font-body">Customer Signature</div>
+          <div class="border border-gold-muted rounded-lg h-16 bg-ink-pale/30 flex items-end px-3 pb-2">
+            <span class="text-xs text-ink-soft font-body">${meta.name || 'Applicant / Guardian'}</span>
+          </div>
+          <div class="text-xs text-ink-soft mt-2 font-body">Date: ${meta.date}</div>
+        </div>
+        <div>
+          <div class="text-xs uppercase tracking-widest text-gold font-medium mb-3 font-body">Wealth Manager Signature</div>
+          <div class="border border-gold-muted rounded-lg h-16 bg-ink-pale/30 flex items-end px-3 pb-2">
+            <span class="text-xs text-ink-soft font-body">Sheetal Suthar — ARN-XXXX</span>
+          </div>
+          <div class="text-xs text-ink-soft mt-2 font-body">EMP Code: ___________</div>
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-3">
+        <button onclick="downloadPDF()" class="flex-1 bg-gold text-white px-6 py-3 rounded-xl text-sm font-medium font-body hover:bg-gold-light transition-colors flex items-center justify-center gap-2">
+          ⬇ Download PDF Report
+        </button>
+        <button onclick="restart()" class="flex-1 border border-gold-muted text-ink-mid px-6 py-3 rounded-xl text-sm font-medium font-body hover:bg-gold-pale transition-colors flex items-center justify-center gap-2">
+          ↩ Start New Assessment
+        </button>
+      </div>
+    </div>
+  </div>`;
+    }
+
+    // ─────────────────────────────────────────────
+    //  ACTIONS
+    // ─────────────────────────────────────────────
+    function startQuiz() {
+      meta.name = document.getElementById('mName').value;
+      meta.date = document.getElementById('mDate').value;
+      meta.pan = document.getElementById('mPan').value;
+      meta.type = document.getElementById('mType').value;
+      meta.minor = document.querySelector('input[name=minor]:checked')?.value || 'no';
+      step = 1; render(); scrollTop();
+    }
+    function selectOpt(qi, i) { answers[qi] = i; render(); }
+    function goNext() {
+      const qi = step - 1;
+      if (answers[qi] === null) return;
+      step++; render(); scrollTop();
+    }
+    function goBack() { if (step > 0) { step--; render(); scrollTop(); } }
+    function restart() { step = 0; answers = new Array(QUESTIONS.length).fill(null); meta = { name: '', date: new Date().toISOString().slice(0, 10), pan: '', type: 'new', minor: 'no' }; render(); scrollTop(); }
+    function scrollTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+    // ─────────────────────────────────────────────
+    //  PDF DOWNLOAD
+    // ─────────────────────────────────────────────
+    function downloadPDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+      const score = calcScore();
+      const maxScore = QUESTIONS.length * 4;
+      const profile = getProfile(score);
+      const secScores = getSectionScores();
+      const W = 210; const margin = 18;
+      let y = 0;
+
+      // Color helpers — avoids spread inside jsPDF calls which can fail in some runtimes
+      const C = {
+        gold: [184, 147, 58], ink: [28, 22, 9], mid: [74, 60, 40],
+        soft: [122, 106, 82], pale: [245, 240, 232],
+        blue: [96, 165, 250], amber: [245, 158, 11],
+        green: [52, 211, 153], purple: [167, 139, 250],
+        greenBg: [240, 253, 244], greenTxt: [22, 101, 52],
+        amberBg: [255, 251, 235], amberTxt: [146, 64, 14],
+        highlightBg: [253, 246, 231], divider: [230, 220, 200],
+      };
+      function fc(c) { doc.setFillColor(c[0], c[1], c[2]); }
+      function tc(c) { doc.setTextColor(c[0], c[1], c[2]); }
+      function dc(c) { doc.setDrawColor(c[0], c[1], c[2]); }
+
+      function addPage() { doc.addPage(); y = 20; }
+      function checkY(needed = 20) { if (y + needed > 270) addPage(); }
+      function sectionDivider() {
+        fc(C.gold); doc.rect(margin, y, barW, 0.5, 'F'); y += 6;
+      }
+
+      const barW = W - margin * 2;
+
+      // ── Cover ──
+      fc(C.ink); doc.rect(0, 0, W, 60, 'F');
+      fc(C.gold); doc.rect(0, 60, W, 2, 'F');
+
+      doc.setTextColor(255, 255, 255);
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(22);
+      doc.text('Sarthi Financial Services', margin, 24);
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(10);
+      tc(C.gold);
+      doc.text('INDIVIDUAL RISK PROFILER — SECTION A', margin, 32);
+
+      doc.setTextColor(255, 255, 255); doc.setFontSize(9);
+      doc.text(`Applicant: ${meta.name || '\u2014'}`, margin, 42);
+      doc.text(`PAN / Client ID: ${meta.pan || '\u2014'}`, margin, 48);
+      doc.text(`Date of Profiling: ${meta.date}   |   Type: ${meta.type === 'new' ? 'New Profiling' : 'Re-profiling'}`, margin, 54);
+
+      y = 74;
+
+      // ── Profile Headline ──
+      fc(C.pale); doc.roundedRect(margin, y, barW, 40, 3, 3, 'F');
+      tc(C.gold); doc.setFont('helvetica', 'bold'); doc.setFontSize(9);
+      doc.text('YOUR RISK PROFILE', margin + 6, y + 10);
+      tc(C.ink); doc.setFont('helvetica', 'bold'); doc.setFontSize(24);
+      doc.text(profile.name, margin + 6, y + 24);
+      tc(C.mid); doc.setFont('helvetica', 'normal'); doc.setFontSize(10);
+      doc.text(`Score: ${score} / ${maxScore}`, margin + 6, y + 34);
+      tc(C.soft); doc.setFont('helvetica', 'normal'); doc.setFontSize(9);
+      doc.text(`Indicative Allocation: Debt ${profile.debt}%  |  Equity ${profile.eq}%`, W - margin - 2, y + 34, { align: 'right' });
+      y += 50;
+
+      // ── Allocation Bar ──
+      const debtBarW = barW * (profile.debt / 100);
+      fc(C.blue); doc.rect(margin, y, debtBarW, 6, 'F');
+      fc(C.amber); doc.rect(margin + debtBarW, y, barW - debtBarW, 6, 'F');
+      y += 10;
+      tc(C.blue); doc.setFontSize(8);
+      doc.text(`Debt ${profile.debt}%`, margin, y);
+      tc(C.amber);
+      doc.text(`Equity ${profile.eq}%`, margin + 28, y);
+      y += 12;
+
+      // ── Profile Description ──
+      tc(C.mid); doc.setFont('helvetica', 'normal'); doc.setFontSize(9);
+      const descLines = doc.splitTextToSize(profile.desc, barW);
+      doc.text(descLines, margin, y); y += descLines.length * 5 + 8;
+
+      // ── Strengths & Watchouts ──
+      checkY(40);
+      const colW = (barW - 6) / 2;
+      fc(C.greenBg); doc.roundedRect(margin, y, colW, 36, 2, 2, 'F');
+      tc(C.greenTxt); doc.setFont('helvetica', 'bold'); doc.setFontSize(8);
+      doc.text('STRENGTHS', margin + 4, y + 8);
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(8.5); tc(C.mid);
+      profile.strengths.forEach((s, i) => { doc.text(`• ${s}`, margin + 4, y + 16 + i * 7); });
+      const c2 = margin + colW + 6;
+      fc(C.amberBg); doc.roundedRect(c2, y, colW, 36, 2, 2, 'F');
+      tc(C.amberTxt); doc.setFont('helvetica', 'bold'); doc.setFontSize(8);
+      doc.text('WATCH-OUTS', c2 + 4, y + 8);
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(8.5); tc(C.mid);
+      profile.watchouts.forEach((w, i) => { doc.text(`• ${w}`, c2 + 4, y + 16 + i * 7); });
+      y += 44;
+
+      // ── Recommended Products ──
+      checkY(30);
+      tc(C.gold); doc.setFont('helvetica', 'bold'); doc.setFontSize(9);
+      doc.text('RECOMMENDED PRODUCT UNIVERSE', margin, y); y += 7;
+      tc(C.mid); doc.setFont('helvetica', 'normal'); doc.setFontSize(9);
+      const prodLine = profile.products.join('   •   ');
+      const pLines = doc.splitTextToSize(prodLine, barW);
+      doc.text(pLines, margin, y); y += pLines.length * 5 + 10;
+
+      // ── Section Analysis ──
+      checkY(60);
+      sectionDivider();
+      tc(C.gold); doc.setFont('helvetica', 'bold'); doc.setFontSize(9);
+      doc.text('RESPONSE ANALYSIS BY CATEGORY', margin, y); y += 8;
+
+      Object.entries(secScores).forEach(([sec, val]) => {
+        checkY(14);
+        const pct2 = Math.round((val.score / val.max) * 100);
+        const lbl = pct2 >= 75 ? 'Aggressive' : pct2 >= 50 ? 'Moderate-High' : pct2 >= 25 ? 'Moderate-Low' : 'Conservative';
+        const col = pct2 >= 75 ? C.green : pct2 >= 50 ? C.purple : pct2 >= 25 ? C.amber : C.blue;
+        tc(C.mid); doc.setFont('helvetica', 'normal'); doc.setFontSize(8.5);
+        doc.text(sec, margin, y);
+        tc(col); doc.text(lbl, W - margin - 2, y, { align: 'right' });
+        y += 5;
+        fc(C.divider); doc.rect(margin, y, barW, 3, 'F');
+        fc(col); doc.rect(margin, y, barW * (pct2 / 100), 3, 'F');
+        y += 8;
+      });
+
+      // ── Profile Grid ──
+      checkY(50);
+      y += 4;
+      sectionDivider();
+      tc(C.gold); doc.setFont('helvetica', 'bold'); doc.setFontSize(9);
+      doc.text('RISK PROFILE SCORE GRID', margin, y); y += 8;
+
+      const colWidths = [30, 50, 25, 25];
+      const headers = ['Score Range', 'Profile', 'Debt', 'Equity'];
+      let cx = margin;
+      headers.forEach((h, i) => {
+        tc(C.soft); doc.setFont('helvetica', 'bold'); doc.setFontSize(8);
+        doc.text(h, cx, y); cx += colWidths[i];
+      });
+      y += 6;
+
+      PROFILES.forEach(pr => {
+        checkY(10);
+        const isMe = pr.name === profile.name;
+        if (isMe) { fc(C.highlightBg); doc.rect(margin, y - 4, barW, 9, 'F'); }
+        cx = margin;
+        const rowVals = [`${pr.min}\u2013${pr.max}`, `${pr.name}${isMe ? ' \u25C4 YOU' : ''}`, `${pr.debt}%`, `${pr.eq}%`];
+        rowVals.forEach((v, i) => {
+          if (isMe) { tc(C.ink); } else { tc(C.soft); }
+          doc.setFont('helvetica', isMe ? 'bold' : 'normal'); doc.setFontSize(8.5);
+          doc.text(v, cx, y); cx += colWidths[i];
+        });
+        y += 9;
+      });
+
+      y += 8;
+
+      // ── Answers Summary ──
+      checkY(20);
+      sectionDivider();
+      tc(C.gold); doc.setFont('helvetica', 'bold'); doc.setFontSize(9);
+      doc.text('APPLICANT RESPONSES SUMMARY', margin, y); y += 8;
+
+      QUESTIONS.forEach((q, i) => {
+        const ans = answers[i];
+        checkY(16);
+        tc(C.ink); doc.setFont('helvetica', 'bold'); doc.setFontSize(8);
+        const qLines = doc.splitTextToSize(`Q${i + 1}. ${q.q}`, barW);
+        doc.text(qLines, margin, y); y += qLines.length * 4.5;
+        tc(C.mid); doc.setFont('helvetica', 'normal'); doc.setFontSize(8);
+        const aText = ans !== null ? `\u2192 ${q.opts[ans].label} [Score: ${q.opts[ans].score}]` : '\u2192 Not answered';
+        const aLines = doc.splitTextToSize(aText, barW - 4);
+        doc.text(aLines, margin + 4, y); y += aLines.length * 4.5 + 4;
+      });
+
+      // ── Signatures ──
+      checkY(60);
+      sectionDivider();
+      y += 2;
+      const sigColW = (barW - 10) / 2;
+      tc(C.gold); doc.setFont('helvetica', 'bold'); doc.setFontSize(8);
+      doc.text('CUSTOMER SIGNATURE', margin, y);
+      doc.text('WEALTH MANAGER SIGNATURE', margin + sigColW + 10, y);
+      y += 5;
+      dc(C.soft);
+      doc.rect(margin, y, sigColW, 18);
+      doc.rect(margin + sigColW + 10, y, sigColW, 18);
+      y += 22;
+      tc(C.mid); doc.setFont('helvetica', 'normal'); doc.setFontSize(8);
+      doc.text(`Name: ${meta.name || '_______________'}`, margin, y);
+      doc.text('Name: Sheetal Suthar', margin + sigColW + 10, y); y += 5;
+      doc.text(`Date: ${meta.date}`, margin, y);
+      doc.text('EMP Code: ___________', margin + sigColW + 10, y); y += 12;
+
+      // ── Disclaimer ──
+      checkY(22);
+      fc(C.pale); doc.rect(margin, y, barW, 20, 'F');
+      tc(C.soft); doc.setFont('helvetica', 'italic'); doc.setFontSize(7.5);
+      const disclaimer = 'Disclaimer: This risk profile is based on responses provided by the applicant and is valid for 2 years from the date of profiling. The suggested asset allocations are indicative and serve as general guidelines only. Actual portfolio construction should be done in consultation with your wealth manager at Sarthi Financial Services (ARN-XXXX). M: [80003 83222] | [EMAIL_ADDRESS] | sarthifineservices.com';
+      const dLines = doc.splitTextToSize(disclaimer, barW - 8);
+      doc.text(dLines, margin + 4, y + 5);
+
+      doc.save(`Sarthi_RiskProfile_${(meta.name || 'Applicant').replace(/\s+/g, '_')}_${meta.date}.pdf`);
+    }
+
+    // ─────────────────────────────────────────────
+    //  INIT
+    // ─────────────────────────────────────────────
+    render();
+  </script>
+</body>
+
+</html>

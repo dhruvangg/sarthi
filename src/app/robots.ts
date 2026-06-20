@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/api/', '/admin/'],
     },
-    sitemap: 'https://sssarthifinancial.com/sitemap.xml',
+    sitemap: 'https://sarthisip.com/sitemap.xml',
   };
 }

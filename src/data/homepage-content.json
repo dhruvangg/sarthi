@@ -1,0 +1,66 @@
+{
+  "financialResources": [
+    {
+      "iconName": "Calculator",
+      "title": "SIP Calculator",
+      "description": "Estimate the compound interest growth of your systematic monthly plans.",
+      "href": "/resources/sip",
+      "buttonText": "Start SIP Calculator"
+    },
+    {
+      "iconName": "Target",
+      "title": "Goal Planner",
+      "description": "Establish educational, marriage, or retirement targets with timelines.",
+      "href": "/resources/goal-planner",
+      "buttonText": "Plan My Goals"
+    },
+    {
+      "iconName": "BarChart3",
+      "title": "Risk Profiler",
+      "description": "Determine your exact investment risk capacity under standard metrics.",
+      "href": "/resources/risk-profiler",
+      "buttonText": "Test My Profile"
+    },
+    {
+      "iconName": "PieChart",
+      "title": "Fund Screener",
+      "description": "Screen Mutual Funds based on return percentages, standard deviation and Sharpe ratios.",
+      "href": "/resources/fund-screener",
+      "buttonText": "Screen Mutual Funds"
+    },
+    {
+      "iconName": "Home",
+      "title": "Property Valuator",
+      "description": "Need an official valuation or local guide estimation for a plot/building?",
+      "href": "/contact",
+      "buttonText": "Connect Valuation Lead"
+    },
+    {
+      "iconName": "Shield",
+      "title": "Insurance Calculator",
+      "description": "Estimate your cover guidelines based on monthly dependents expenses.",
+      "href": "/contact",
+      "buttonText": "Get Custom Quote"
+    }
+  ],
+  "testimonials": [
+    {
+      "rating": 5,
+      "text": "Sarthi SIP helped me structure a diverse Mutual Fund SIP portfolio. Their transparency, fee clarity, and periodic reviews have given me absolute trust in my wealth journey.",
+      "name": "Rajesh Patel",
+      "subtitle": "Business Owner, Nikol, Ahmedabad"
+    },
+    {
+      "rating": 5,
+      "text": "The tax strategies recommended by Sheetal Suthar saved me over ₹60,000 in deductions. She helped me mapping ELSS fund lock-ins and medical covers seamlessly.",
+      "name": "Priya Sharma",
+      "subtitle": "Lead software engineer, Bengaluru"
+    },
+    {
+      "rating": 5,
+      "text": "Siddharth Pandya's property valuation report was highly accurate and legally sound. It helped our family complete a secure commercial lease negotiations in Ahmedabad.",
+      "name": "Amit Trivedi",
+      "subtitle": "Director, Manufacturing, Delhi NCR"
+    }
+  ]
+}

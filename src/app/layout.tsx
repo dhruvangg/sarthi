@@ -13,20 +13,34 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://sssarthifinancial.com"),
+  metadataBase: new URL("https://sarthisip.com"),
   title: {
-    default: "SS Sarthi Financial Services | Mutual Funds & Investment Advisory",
-    template: "%s | SS Sarthi Financial Services"
+    default: "Sarthi SIP | Mutual Funds & Investment Advisory",
+    template: "%s | Sarthi SIP"
   },
   description: "Expert advisory in Mutual Funds, Fixed Deposits, Bonds, LIC, Taxation, General Insurance & Property Valuation in India.",
-  keywords: ["Financial Services", "Mutual Funds", "SIP Calculator", "Investment Advisory", "Tax Planning", "Property Valuation", "Insurance Planning"],
+  keywords: ["Financial Services", "Mutual Funds", "SIP Calculator", "Investment Advisory", "Tax Planning", "Property Valuation", "Insurance Planning", "Sarthi SIP"],
   openGraph: {
-    title: "SS Sarthi Financial Services",
+    title: "Sarthi SIP",
     description: "Your Trusted Partner in Mutual Funds, Insurance, Tax & Property Advisory",
-    url: "https://sssarthifinancial.com",
-    siteName: "SS Sarthi",
+    url: "https://sarthisip.com",
+    siteName: "Sarthi SIP",
     locale: "en_IN",
     type: "website",
+    images: [
+      {
+        url: "/logo.png",
+        width: 800,
+        height: 600,
+        alt: "Sarthi SIP Logo",
+      }
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sarthi SIP",
+    description: "Your Trusted Partner in Mutual Funds, Insurance, Tax & Property Advisory",
+    images: ["/logo.png"],
   },
   robots: {
     index: true,
@@ -40,7 +54,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge"
 import { PieChart, ArrowLeft, TrendingUp, Shield, Filter, Search, Loader2, ArrowRight } from 'lucide-react'
 import Link from "next/link"
 import { Header } from "@/components/Header"
+import { Footer } from "@/components/Footer"
 
 interface Scheme {
   mutualFundName: string;
@@ -44,7 +45,6 @@ export default function FundScreener() {
         const CACHE_KEY = 'amfi_nav_data';
         const today = new Date().toDateString();
         
-        // 1. Check Cache
         try {
           const cached = localStorage.getItem(CACHE_KEY);
           if (cached) {
@@ -61,7 +61,6 @@ export default function FundScreener() {
           // Ignore cache read errors
         }
 
-        // Try the API first, fallback to local json if it fails or CORS
         let response = await fetch('https://www.amfiindia.com/api/latest-nav').catch(() => null);
         if (!response || !response.ok) {
           response = await fetch('/latest-nav.json');
@@ -97,14 +96,13 @@ export default function FundScreener() {
         setFilteredSchemes(flattenedSchemes);
         setError(null);
 
-        // 2. Set Cache
         try {
           localStorage.setItem(CACHE_KEY, JSON.stringify({
             date: today,
             data: flattenedSchemes
           }));
         } catch (e) {
-          // Ignore cache write errors (e.g., quota exceeded)
+          // Ignore cache write errors
         }
       } catch (err: any) {
         console.error(err);
@@ -136,7 +134,7 @@ export default function FundScreener() {
       return matchSearch && matchCategory && matchFundHouse;
     });
     setFilteredSchemes(filtered);
-    setPage(1); // Reset pagination on search
+    setPage(1);
   }
 
   const resetFilters = () => {
@@ -152,41 +150,65 @@ export default function FundScreener() {
   const totalPages = Math.ceil(filteredSchemes.length / ITEMS_PER_PAGE);
   const paginatedSchemes = filteredSchemes.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE);
 
-  return (
-    <div className="min-h-screen bg-gray-50">
-      <Header showBackToCalculators={true} />
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Live Mutual Fund Screener | Sarthi SIP",
+    "description": "Screen and search live mutual fund Net Asset Values (NAV) sourced daily from AMFI.",
+    "url": "https://sarthisip.com/resources/fund-screener",
+    "applicationCategory": "FinancialApplication",
+    "operatingSystem": "All"
+  }
 
-      <div className="container mx-auto px-4 py-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2 flex items-center">
-            <PieChart className="mr-3 h-8 w-8 text-blue-600" />
+  return (
+    <div className="min-h-screen bg-slate-50 flex flex-col text-slate-800">
+      {/* Structured Data for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+
+      <Header />
+
+      {/* Hero Header Section */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-red-50/80 via-white to-rose-50/50 py-12 border-b border-slate-100">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(239,68,68,0.05),transparent_50%)]" />
+        <div className="container mx-auto px-4 md:px-8 relative z-10 text-center max-w-3xl space-y-3">
+          <Badge className="bg-red-50 text-red-700 hover:bg-red-100 border-red-200/80 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider">
+            Interactive Tools
+          </Badge>
+          <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 flex items-center justify-center gap-3">
+            <PieChart className="h-8 w-8 text-red-600" />
             Live Mutual Fund Screener
           </h1>
-          <p className="text-gray-600">
-            Find the latest Net Asset Value (NAV) and details of mutual funds directly from AMFI
+          <p className="text-slate-600 text-sm md:text-base leading-relaxed">
+            Find the latest Net Asset Value (NAV) and details of mutual funds directly from AMFI.
           </p>
         </div>
+      </section>
+
+      <div className="container mx-auto px-4 py-12 flex-grow">
 
         <div className="grid lg:grid-cols-4 gap-8">
           {/* Filters Section */}
           <div className="lg:col-span-1">
-            <Card className="sticky top-4">
+            <Card className="sticky top-4 border-slate-200">
               <CardHeader>
-                <CardTitle className="flex items-center">
-                  <Filter className="mr-2 h-5 w-5 text-blue-600" />
+                <CardTitle className="flex items-center text-slate-900">
+                  <Filter className="mr-2 h-5 w-5 text-red-600" />
                   Filters
                 </CardTitle>
                 <CardDescription>Search by name or category</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <Label htmlFor="searchQuery">Search Fund Name or ID</Label>
+                  <Label htmlFor="searchQuery" className="text-slate-700">Search Fund Name or ID</Label>
                   <div className="relative mt-2">
-                    <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-500" />
+                    <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-slate-400" />
                     <Input
                       id="searchQuery"
                       placeholder="e.g. HDFC Top 100"
-                      className="pl-9"
+                      className="pl-9 focus-visible:ring-red-500"
                       value={filters.searchQuery}
                       onChange={(e) => setFilters({ ...filters, searchQuery: e.target.value })}
                       onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
@@ -195,9 +217,9 @@ export default function FundScreener() {
                 </div>
 
                 <div>
-                  <Label htmlFor="category">Fund Category</Label>
+                  <Label htmlFor="category" className="text-slate-700">Fund Category</Label>
                   <Select value={filters.category} onValueChange={(value) => setFilters({ ...filters, category: value })}>
-                    <SelectTrigger className="mt-2">
+                    <SelectTrigger className="mt-2 focus:ring-red-500">
                       <SelectValue placeholder="Select category" />
                     </SelectTrigger>
                     <SelectContent>
@@ -210,9 +232,9 @@ export default function FundScreener() {
                 </div>
 
                 <div>
-                  <Label htmlFor="fund-house">Fund House</Label>
+                  <Label htmlFor="fund-house" className="text-slate-700">Fund House</Label>
                   <Select value={filters.fundHouse} onValueChange={(value) => setFilters({ ...filters, fundHouse: value })}>
-                    <SelectTrigger className="mt-2">
+                    <SelectTrigger className="mt-2 focus:ring-red-500">
                       <SelectValue placeholder="Select fund house" />
                     </SelectTrigger>
                     <SelectContent>
@@ -225,10 +247,10 @@ export default function FundScreener() {
                 </div>
 
                 <div className="space-y-2 pt-4">
-                  <Button onClick={handleSearch} className="w-full bg-blue-600 hover:bg-blue-700 text-white" disabled={loading}>
+                  <Button onClick={handleSearch} className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold" disabled={loading}>
                     Apply Filters
                   </Button>
-                  <Button onClick={resetFilters} variant="outline" className="w-full" disabled={loading}>
+                  <Button onClick={resetFilters} variant="outline" className="w-full font-semibold" disabled={loading}>
                     Reset
                   </Button>
                 </div>
@@ -239,24 +261,24 @@ export default function FundScreener() {
           {/* Results Section */}
           <div className="lg:col-span-3">
             {loading ? (
-              <Card className="h-96 flex flex-col items-center justify-center">
-                <Loader2 className="h-12 w-12 text-blue-600 animate-spin mb-4" />
-                <p className="text-gray-600">Fetching latest NAV data from AMFI...</p>
+              <Card className="h-96 flex flex-col items-center justify-center border-slate-200">
+                <Loader2 className="h-12 w-12 text-red-600 animate-spin mb-4" />
+                <p className="text-slate-500 font-semibold">Fetching latest NAV data from AMFI...</p>
               </Card>
             ) : error ? (
-              <Card className="h-96 flex flex-col items-center justify-center text-red-600 p-8">
-                <Shield className="h-12 w-12 mb-4" />
+              <Card className="h-96 flex flex-col items-center justify-center text-red-600 p-8 border-slate-200">
+                <Shield className="h-12 w-12 mb-4 text-red-600" />
                 <h3 className="text-lg font-bold mb-2">Error Loading Data</h3>
-                <p className="text-center">{error}</p>
-                <Button onClick={() => window.location.reload()} variant="outline" className="mt-4">
+                <p className="text-center text-slate-500">{error}</p>
+                <Button onClick={() => window.location.reload()} variant="outline" className="mt-4 border-red-600 text-red-600 hover:bg-red-50">
                   Try Again
                 </Button>
               </Card>
             ) : (
               <div className="space-y-4">
-                <div className="flex justify-between items-center bg-white p-4 rounded-lg shadow-sm border">
-                  <h2 className="text-lg font-semibold text-gray-900">
-                    Results <span className="text-gray-500 font-normal text-sm ml-2">(Showing {paginatedSchemes.length} of {filteredSchemes.length})</span>
+                <div className="flex justify-between items-center bg-white p-4 rounded-lg shadow-sm border border-slate-200">
+                  <h2 className="text-lg font-bold text-slate-900">
+                    Results <span className="text-slate-400 font-normal text-sm ml-2">(Showing {paginatedSchemes.length} of {filteredSchemes.length})</span>
                   </h2>
                   <div className="flex space-x-2">
                     <Button
@@ -264,10 +286,11 @@ export default function FundScreener() {
                       size="sm"
                       onClick={() => setPage(p => Math.max(1, p - 1))}
                       disabled={page === 1}
+                      className="h-8"
                     >
                       <ArrowLeft className="h-4 w-4 mr-1" /> Prev
                     </Button>
-                    <span className="py-1 px-3 text-sm border rounded bg-gray-50 flex items-center justify-center min-w-[3rem]">
+                    <span className="py-1 px-3 text-sm border border-slate-200 rounded bg-slate-50 flex items-center justify-center min-w-[3rem] font-bold text-slate-700">
                       {page} / {totalPages || 1}
                     </span>
                     <Button
@@ -275,6 +298,7 @@ export default function FundScreener() {
                       size="sm"
                       onClick={() => setPage(p => Math.min(totalPages, p + 1))}
                       disabled={page === totalPages || totalPages === 0}
+                      className="h-8"
                     >
                       Next <ArrowRight className="h-4 w-4 ml-1" />
                     </Button>
@@ -282,34 +306,36 @@ export default function FundScreener() {
                 </div>
 
                 {paginatedSchemes.length === 0 ? (
-                  <Card className="p-12 text-center text-gray-500">
-                    <p>No funds found matching your criteria.</p>
+                  <Card className="p-12 text-center text-slate-500 border-slate-200">
+                    <p className="font-medium">No funds found matching your criteria.</p>
                   </Card>
                 ) : (
                   paginatedSchemes.map((fund, index) => (
-                    <Card key={`${fund.schemeId}-${index}`} className="hover:shadow-md transition-shadow">
+                    <Card key={`${fund.schemeId}-${index}`} className="hover:shadow-md transition-shadow border-slate-200">
                       <CardContent className="p-5">
                         <div className="grid md:grid-cols-4 gap-4 items-center">
                           <div className="md:col-span-2 space-y-2">
-                            <h3 className="text-base font-bold text-gray-900 leading-tight">
+                            <h3 className="text-base font-extrabold text-slate-900 leading-tight">
                               {fund.schemeName}
                             </h3>
                             <div className="flex flex-wrap items-center gap-2">
-                              <Badge variant="outline" className="text-xs bg-gray-50">{fund.category}</Badge>
-                              <Badge className="bg-blue-50 text-blue-700 text-xs hover:bg-blue-100 border-blue-200">{fund.type}</Badge>
+                              <Badge variant="outline" className="text-xs bg-slate-50 text-slate-600 border-slate-200">{fund.category}</Badge>
+                              <Badge className="bg-red-50 text-red-700 text-xs hover:bg-red-100 border-red-100">{fund.type}</Badge>
                             </div>
-                            <p className="text-sm text-gray-500">{fund.mutualFundName} &bull; ID: {fund.schemeId}</p>
+                            <p className="text-xs text-slate-400 font-medium">{fund.mutualFundName} &bull; ID: {fund.schemeId}</p>
                           </div>
 
                           <div className="text-left md:text-right md:col-span-2 flex flex-col items-start md:items-end justify-center">
-                            <div className="text-sm text-gray-500 mb-1">Latest NAV ({fund.date})</div>
-                            <div className="text-2xl font-bold text-green-600 flex items-center">
+                            <div className="text-xs text-slate-500 mb-1">Latest NAV ({fund.date})</div>
+                            <div className="text-2xl font-bold text-emerald-700 flex items-center">
                               ₹{parseFloat(fund.netAssetValue).toFixed(4)}
-                              <TrendingUp className="h-5 w-5 ml-2" />
+                              <TrendingUp className="h-5 w-5 ml-2 text-emerald-600" />
                             </div>
-                            <Button className="mt-3 bg-red-600 hover:bg-red-700 text-white h-8 text-xs">
-                              Invest in this fund
-                            </Button>
+                            <Link href="/contact" className="mt-3">
+                              <Button className="bg-red-600 hover:bg-red-700 text-white h-9 text-xs font-semibold px-4">
+                                Invest in this fund
+                              </Button>
+                            </Link>
                           </div>
                         </div>
                       </CardContent>
@@ -324,6 +350,7 @@ export default function FundScreener() {
                         variant="outline"
                         onClick={() => setPage(p => Math.max(1, p - 1))}
                         disabled={page === 1}
+                        className="font-semibold"
                       >
                         Previous Page
                       </Button>
@@ -331,6 +358,7 @@ export default function FundScreener() {
                         variant="outline"
                         onClick={() => setPage(p => Math.min(totalPages, p + 1))}
                         disabled={page === totalPages}
+                        className="font-semibold"
                       >
                         Next Page
                       </Button>
@@ -343,9 +371,9 @@ export default function FundScreener() {
         </div>
 
         {/* Disclaimer */}
-        <Card className="mt-8 bg-yellow-50 border-yellow-200">
+        <Card className="mt-8 bg-amber-50/50 border-amber-100">
           <CardContent className="pt-6">
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-slate-600 leading-relaxed">
               <strong>Disclaimer:</strong> Past performance is not indicative of future results.
               Mutual fund investments are subject to market risks. Please read all scheme-related documents carefully before investing.
               Data is sourced directly from AMFI (Association of Mutual Funds in India).
@@ -353,6 +381,8 @@ export default function FundScreener() {
           </CardContent>
         </Card>
       </div>
+
+      <Footer />
     </div>
   )
 }

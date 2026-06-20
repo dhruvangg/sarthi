@@ -1,431 +1,385 @@
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { TrendingUp, Shield, Calculator, Users, Award, Phone, Mail, MapPin, CheckCircle, Star, ArrowRight, PieChart, Banknote, Home, FileText, Target, BarChart3 } from "lucide-react";
-import Image from "next/image"
+import {
+  TrendingUp, Shield, Calculator, Users, Award, Mail,
+  MapPin, CheckCircle, Star, ArrowRight, PieChart,
+  Home, Target, BarChart3, Clock
+} from "lucide-react";
 import Link from "next/link"
+import { Metadata } from "next"
 
 import { Header } from "@/components/Header"
+import { Footer } from "@/components/Footer"
 import { ContactForm } from "@/components/ContactForm"
+import homepageContent from "@/data/homepage-content.json"
+
+const IconMap = {
+  Calculator,
+  Target,
+  BarChart3,
+  PieChart,
+  Home,
+  Shield
+};
+
+export const metadata: Metadata = {
+  title: "Sarthi SIP | Mutual Funds, Insurance & Property Valuation",
+  description: "Invest in systematic plans and build wealth with Sarthi SIP (formerly SS Sarthi Financial Services). Expert mutual fund advisory, LIC insurance policies, tax planning, and government-approved property valuation in Ahmedabad.",
+  alternates: {
+    canonical: "https://sarthisip.com",
+  },
+  openGraph: {
+    title: "Sarthi SIP | Mutual Funds, Insurance & Property Valuation",
+    description: "Build robust portfolios and secure family future with Sarthi SIP. Mutual funds, tax planning, and property valuation advisor in Nikol, Ahmedabad.",
+    url: "https://sarthisip.com",
+    siteName: "Sarthi SIP",
+    type: "website",
+  }
+}
 
 export default function HomePage() {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Sarthi SIP",
+    "url": "https://sarthisip.com",
+    "description": "Expert advisory across Mutual Funds, Bonds, LIC, Taxation, General Insurance, and Govt-approved Property Valuation.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Sarthi SIP",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://sarthisip.com/logo.png"
+      }
+    }
+  }
+
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white flex flex-col text-slate-800">
+      {/* Structured Data for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+
       <Header />
 
       {/* Hero Section */}
-      <section id="home" className="bg-gradient-to-br from-red-50 to-orange-50 py-20">
-        <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <Badge className="bg-green-100 text-green-800 mb-4">Trusted Financial Partner</Badge>
-              <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-                Your Trusted Partner in{" "}
-                <span className="text-red-600">Mutual Funds, Insurance, Tax & Property Advisory</span>
+      <section id="home" className="relative overflow-hidden bg-gradient-to-br from-red-50/80 via-white to-rose-50/50 py-16 lg:py-24 border-b border-slate-100">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(239,68,68,0.05),transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(220,38,38,0.03),transparent_50%)]" />
+
+        <div className="container mx-auto px-4 md:px-8 relative z-10">
+          <div className="grid lg:grid-cols-12 gap-12 items-center">
+
+            {/* Hero Left Content */}
+            <div className="lg:col-span-7 space-y-6">
+              <Badge className="bg-red-50 text-red-700 hover:bg-red-100 border-red-200/80 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider">
+                Trusted Financial Advisor
+              </Badge>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-slate-900">
+                Your Trusted Guide in{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-rose-600">
+                  Mutual Funds, Insurance & Valuation
+                </span>
               </h1>
-              <p className="text-xl text-gray-600 mb-8">
-                Expert advisory in Mutual Funds, Fixed Deposits, Bonds, LIC, Taxation, General Insurance & Property Valuation.
-                Transparent, client-focused planning serving clients across India.
+              <p className="text-slate-600 text-base md:text-lg leading-relaxed max-w-2xl">
+                Expert advisory across Mutual Funds, Bonds, LIC, Taxation, General Insurance, and Govt-approved Property Valuation. Empowering investors with transparent, evidence-based wealth management.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white">
-                  Get Free Consultation
-                </Button>
-                <Button size="lg" variant="outline" className="border-red-600 text-red-600 hover:bg-red-50">
-                  Calculate Portfolio
-                </Button>
-                <Button size="lg" variant="outline" className="border-green-600 text-green-600 hover:bg-green-50">
-                  Explore Services
-                </Button>
+
+              <div className="flex flex-wrap gap-4 pt-2">
+                <Link href="/contact">
+                  <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white font-semibold shadow-lg shadow-red-600/15 h-12 px-6">
+                    Schedule Free Audit
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+                <Link href="#tools">
+                  <Button size="lg" variant="outline" className="border-slate-200 text-slate-700 hover:bg-slate-50 h-12 px-6">
+                    Try Financial Tools
+                  </Button>
+                </Link>
               </div>
-              <div className="grid grid-cols-3 gap-4 text-center">
+
+              {/* Stats Bar */}
+              <div className="grid grid-cols-3 gap-6 pt-8 border-t border-slate-200/80 max-w-lg">
                 <div>
-                  <div className="text-2xl font-bold text-red-600">300+</div>
-                  <div className="text-sm text-gray-600">Happy Clients</div>
+                  <div className="text-2xl md:text-3xl font-extrabold text-slate-900">300+</div>
+                  <div className="text-xs md:text-sm text-slate-500 font-medium">Happy Clients</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-orange-600">₹50Cr+</div>
-                  <div className="text-sm text-gray-600">Assets Managed</div>
+                  <div className="text-2xl md:text-3xl font-extrabold text-red-600">₹50Cr+</div>
+                  <div className="text-xs md:text-sm text-slate-500 font-medium">Assets Managed</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-green-600">15+</div>
-                  <div className="text-sm text-gray-600">Years Experience</div>
+                  <div className="text-2xl md:text-3xl font-extrabold text-emerald-600">15+</div>
+                  <div className="text-xs md:text-sm text-slate-500 font-medium">Years Experience</div>
                 </div>
               </div>
             </div>
-            <div className="relative">
-              <div className="bg-white rounded-2xl shadow-2xl p-8">
-                <ContactForm title="Quick Consultation" buttonText="Schedule Free Consultation" />
+
+            {/* Hero Right Form */}
+            <div className="lg:col-span-5 relative">
+              <div className="absolute -inset-1 bg-gradient-to-tr from-red-500 to-rose-500 rounded-2xl blur-lg opacity-10" />
+              <div className="relative bg-white border border-slate-200/80 rounded-2xl p-6 md:p-8 shadow-2xl shadow-slate-100">
+                <ContactForm title="Request Advisor Callback" buttonText="Schedule Consultation" />
               </div>
             </div>
+
           </div>
         </div>
       </section>
 
-      {/* About Us */}
-      <section id="about" className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">About SS Sarthi Financial Services</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Empowering investors to build wealth with strategic planning and expert insights
-            </p>
-          </div>
+      {/* About Us Brief Preview */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
 
-          <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
-            <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Our Mission & Vision</h3>
-              <p className="text-gray-600 mb-6">
-                We empower investors to build sustainable wealth through strategic planning and expert insights.
-                Our vision is to be India&apos;s most trusted financial advisory firm, known for transparency,
-                integrity, and client-first approach.
+            {/* Text details */}
+            <div className="space-y-6">
+              <Badge className="bg-red-50 text-red-700 border-none font-semibold px-3 py-1 text-xs">
+                About Our Firm
+              </Badge>
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 font-extrabold">
+                Sarthi SIP Financial Services
+              </h2>
+              <p className="text-slate-600 leading-relaxed text-sm md:text-base">
+                SS Sarthi signifies a dedicated guide or charioteer. We operate with strict compliance guidelines, supporting over 300+ retail and corporate investors with goal planning and asset management advisory solutions.
               </p>
-              <div className="space-y-4">
-                <div className="flex items-start space-x-3">
-                  <CheckCircle className="h-6 w-6 text-green-600 mt-1" />
-                  <div>
-                    <h4 className="font-semibold text-gray-900">SEBI Registered Advisors</h4>
-                    <p className="text-gray-600">Certified and compliant with regulatory standards</p>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <CheckCircle className="h-6 w-6 text-green-600 mt-1" />
-                  <div>
-                    <h4 className="font-semibold text-gray-900">Certified Property Valuers</h4>
-                    <p className="text-gray-600">Expert property valuation and advisory services</p>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <CheckCircle className="h-6 w-6 text-green-600 mt-1" />
-                  <div>
-                    <h4 className="font-semibold text-gray-900">LIC & Insurance Specialists</h4>
-                    <p className="text-gray-600">Comprehensive insurance planning and management</p>
-                  </div>
-                </div>
+              <p className="text-slate-600 leading-relaxed text-sm md:text-base">
+                We believe in commission transparency, and fee disclosures. Under Sheetal Suthar and Siddharth Pandya, our advisory team is built to prioritize client goals above all else.
+              </p>
+              <div className="flex gap-4 pt-2">
+                <Link href="/about">
+                  <Button variant="outline" className="border-red-600 text-red-600 hover:bg-red-50 font-semibold">
+                    Read Our Full Legacy Story
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-6">
-              <Card className="text-center p-6">
-                <Award className="h-12 w-12 text-red-600 mx-auto mb-4" />
-                <h4 className="font-bold text-gray-900 mb-2">Integrity</h4>
-                <p className="text-sm text-gray-600">Honest and transparent advice</p>
-              </Card>
-              <Card className="text-center p-6">
-                <Shield className="h-12 w-12 text-orange-600 mx-auto mb-4" />
-                <h4 className="font-bold text-gray-900 mb-2">Trust</h4>
-                <p className="text-sm text-gray-600">Client-first fiduciary mindset</p>
-              </Card>
-              <Card className="text-center p-6">
-                <Target className="h-12 w-12 text-green-600 mx-auto mb-4" />
-                <h4 className="font-bold text-gray-900 mb-2">Excellence</h4>
-                <p className="text-sm text-gray-600">Technology-driven solutions</p>
-              </Card>
-              <Card className="text-center p-6">
-                <Users className="h-12 w-12 text-blue-600 mx-auto mb-4" />
-                <h4 className="font-bold text-gray-900 mb-2">Partnership</h4>
-                <p className="text-sm text-gray-600">Long-term client relationships</p>
-              </Card>
-            </div>
-          </div>
 
-          <div className="bg-gradient-to-r from-red-50 to-orange-50 rounded-2xl p-8">
-            <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">Why Choose Us?</h3>
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="text-center">
-                <div className="bg-white rounded-full p-4 w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                  <Banknote className="h-8 w-8 text-red-600" />
-                </div>
-                <h4 className="font-bold text-gray-900 mb-2">Fee-Only Advisory</h4>
-                <p className="text-gray-600">No hidden trailing commissions, transparent pricing</p>
-              </div>
-              <div className="text-center">
-                <div className="bg-white rounded-full p-4 w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                  <BarChart3 className="h-8 w-8 text-orange-600" />
-                </div>
-                <h4 className="font-bold text-gray-900 mb-2">Data-Driven Approach</h4>
-                <p className="text-gray-600">Analytics and evidence-based investment advice</p>
-              </div>
-              <div className="text-center">
-                <div className="bg-white rounded-full p-4 w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                  <PieChart className="h-8 w-8 text-green-600" />
-                </div>
-                <h4 className="font-bold text-gray-900 mb-2">Comprehensive Suite</h4>
-                <p className="text-gray-600">Multi-asset, insurance, tax and property guidance</p>
-              </div>
+            {/* Icons Cards block */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <Card className="border-slate-100 shadow-sm">
+                <CardContent className="p-6 space-y-3">
+                  <div className="w-10 h-10 rounded-lg bg-red-50 text-red-600 flex items-center justify-center">
+                    <TrendingUp className="h-5 w-5" />
+                  </div>
+                  <h4 className="font-bold text-slate-900 text-sm">Grow Wealth</h4>
+                  <p className="text-xs text-slate-500">Maximize compounding growth with rolling return index models.</p>
+                </CardContent>
+              </Card>
+
+              <Card className="border-slate-100 shadow-sm">
+                <CardContent className="p-6 space-y-3">
+                  <div className="w-10 h-10 rounded-lg bg-red-50 text-red-600 flex items-center justify-center">
+                    <Shield className="h-5 w-5" />
+                  </div>
+                  <h4 className="font-bold text-slate-900 text-sm">Protect Assets</h4>
+                  <p className="text-xs text-slate-500">Fiduciary planning to shield your dependents and capital reserves.</p>
+                </CardContent>
+              </Card>
+
+              <Card className="border-slate-100 shadow-sm">
+                <CardContent className="p-6 space-y-3">
+                  <div className="w-10 h-10 rounded-lg bg-red-50 text-red-600 flex items-center justify-center">
+                    <Calculator className="h-5 w-5" />
+                  </div>
+                  <h4 className="font-bold text-slate-900 text-sm">Precise Calculations</h4>
+                  <p className="text-xs text-slate-500">Calculate target corpora, SIP interest rates, and tax exemptions.</p>
+                </CardContent>
+              </Card>
+
+              <Card className="border-slate-100 shadow-sm">
+                <CardContent className="p-6 space-y-3">
+                  <div className="w-10 h-10 rounded-lg bg-red-50 text-red-600 flex items-center justify-center">
+                    <Users className="h-5 w-5" />
+                  </div>
+                  <h4 className="font-bold text-slate-900 text-sm">Fiduciary Trust</h4>
+                  <p className="text-xs text-slate-500">Always recommending what fits you, not what pays commissions.</p>
+                </CardContent>
+              </Card>
             </div>
+
           </div>
         </div>
       </section>
 
-      {/* Services */}
-      <section id="services" className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Our Services</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Comprehensive financial solutions tailored to your goals and risk appetite
+      {/* Services Section with custom tabs layout */}
+      <section id="services" className="py-20 bg-slate-50 border-y border-slate-200/60">
+        <div className="container mx-auto px-4 md:px-8">
+
+          <div className="max-w-3xl mx-auto text-center mb-16 space-y-3">
+            <Badge className="bg-red-50 text-red-700 border-red-100 font-semibold">
+              Our Services
+            </Badge>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 font-extrabold">
+              What We Do Best
+            </h2>
+            <p className="text-slate-500 text-sm md:text-base leading-relaxed">
+              We align our capabilities across three main pillars: investment growth, risk shield coverage, and legal property valuation.
             </p>
           </div>
 
-          <Tabs defaultValue="mutual-funds" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 lg:grid-cols-5 mb-8">
-              <TabsTrigger value="mutual-funds">Mutual Funds</TabsTrigger>
-              <TabsTrigger value="fixed-deposits">FD & Bonds</TabsTrigger>
-              <TabsTrigger value="insurance">Insurance</TabsTrigger>
-              <TabsTrigger value="taxation">Taxation</TabsTrigger>
-              <TabsTrigger value="property">Property</TabsTrigger>
+          <Tabs defaultValue="funds" className="max-w-5xl mx-auto">
+            <TabsList className="grid w-full grid-cols-1 md:grid-cols-4 h-auto p-1.5 bg-slate-200/50 rounded-xl mb-12 gap-1.5">
+              <TabsTrigger value="funds" className="py-3 rounded-lg text-sm font-semibold transition-all data-[state=active]:bg-red-600 data-[state=active]:text-white">Mutual Funds</TabsTrigger>
+              <TabsTrigger value="insurance" className="py-3 rounded-lg text-sm font-semibold transition-all data-[state=active]:bg-red-600 data-[state=active]:text-white">LIC & Insurance</TabsTrigger>
+              <TabsTrigger value="taxation" className="py-3 rounded-lg text-sm font-semibold transition-all data-[state=active]:bg-red-600 data-[state=active]:text-white">Tax & ELSS</TabsTrigger>
+              <TabsTrigger value="valuation" className="py-3 rounded-lg text-sm font-semibold transition-all data-[state=active]:bg-red-600 data-[state=active]:text-white">Property Valuation</TabsTrigger>
             </TabsList>
 
-            <TabsContent value="mutual-funds">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center space-x-2">
-                    <TrendingUp className="h-6 w-6 text-red-600" />
-                    <span>Mutual Funds Advisory</span>
-                  </CardTitle>
-                  <CardDescription>
-                    Expert fund selection using advanced screening tools and performance analytics
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid md:grid-cols-2 gap-8">
-                    <div>
-                      <h4 className="font-semibold text-gray-900 mb-4">Our Approach</h4>
-                      <ul className="space-y-2 text-gray-600">
-                        <li className="flex items-start space-x-2">
-                          <CheckCircle className="h-5 w-5 text-green-600 mt-0.5" />
-                          <span>Fund selection via screening tools and rolling returns analysis</span>
-                        </li>
-                        <li className="flex items-start space-x-2">
-                          <CheckCircle className="h-5 w-5 text-green-600 mt-0.5" />
-                          <span>Performance comparisons and SIP modeling</span>
-                        </li>
-                        <li className="flex items-start space-x-2">
-                          <CheckCircle className="h-5 w-5 text-green-600 mt-0.5" />
-                          <span>Portfolio overlap analysis and risk assessment</span>
-                        </li>
-                        <li className="flex items-start space-x-2">
-                          <CheckCircle className="h-5 w-5 text-green-600 mt-0.5" />
-                          <span>Tax-efficient ELSS recommendations</span>
-                        </li>
-                      </ul>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900 mb-4">Fund Categories</h4>
-                      <div className="grid grid-cols-2 gap-3">
-                        <Badge variant="outline" className="justify-center py-2">Equity Funds</Badge>
-                        <Badge variant="outline" className="justify-center py-2">Debt Funds</Badge>
-                        <Badge variant="outline" className="justify-center py-2">Hybrid Funds</Badge>
-                        <Badge variant="outline" className="justify-center py-2">Index Funds</Badge>
-                        <Badge variant="outline" className="justify-center py-2">ELSS Funds</Badge>
-                        <Badge variant="outline" className="justify-center py-2">Sectoral Funds</Badge>
+            {/* Tab 1: Mutual Funds */}
+            <TabsContent value="funds" className="focus-visible:outline-none">
+              <Card className="bg-white border-slate-200/80 shadow-md">
+                <CardContent className="p-8 md:p-10 grid md:grid-cols-2 gap-12 items-center">
+                  <div className="space-y-6">
+                    <h3 className="text-2xl font-bold text-slate-900">Systematic Mutual Fund Advisory</h3>
+                    <p className="text-slate-600 text-sm leading-relaxed">
+                      Mutual Funds offer a flexible way to generate wealth over time. We help choose and manage equity, debt, and hybrid funds that best fit your timelines and risk capacity.
+                    </p>
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-3">
+                        <CheckCircle className="h-5 w-5 text-red-600 shrink-0" />
+                        <span className="text-sm font-medium text-slate-700">SIP vs Lumpsum optimization plans.</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <CheckCircle className="h-5 w-5 text-red-600 shrink-0" />
+                        <span className="text-sm font-medium text-slate-700">Performance benchmarking against major indexes.</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <CheckCircle className="h-5 w-5 text-red-600 shrink-0" />
+                        <span className="text-sm font-medium text-slate-700">Regular re-balancing and reviews of lagging funds.</span>
                       </div>
                     </div>
                   </div>
+                  <div className="space-y-4 bg-slate-50/50 p-6 rounded-2xl border border-slate-100">
+                    <h4 className="font-bold text-slate-800 text-sm">Key Products Advised:</h4>
+                    <div className="flex flex-wrap gap-2 text-xs">
+                      <Badge variant="outline" className="py-1.5 border-slate-200 font-medium text-slate-700">Large Cap Funds</Badge>
+                      <Badge variant="outline" className="py-1.5 border-slate-200 font-medium text-slate-700">Mid & Small Cap Funds</Badge>
+                      <Badge variant="outline" className="py-1.5 border-slate-200 font-medium text-slate-700">Flexi Cap / Multi Cap</Badge>
+                      <Badge variant="outline" className="py-1.5 border-slate-200 font-medium text-slate-700">Hybrid / Balanced Advantage</Badge>
+                      <Badge variant="outline" className="py-1.5 border-slate-200 font-medium text-slate-700">Liquid & Overnight Funds</Badge>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
             </TabsContent>
 
-            <TabsContent value="fixed-deposits">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center space-x-2">
-                    <Banknote className="h-6 w-6 text-orange-600" />
-                    <span>Fixed Deposits & Bonds</span>
-                  </CardTitle>
-                  <CardDescription>
-                    Comparative analysis and yield optimization for fixed income investments
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid md:grid-cols-2 gap-8">
-                    <div>
-                      <h4 className="font-semibold text-gray-900 mb-4">Services Offered</h4>
-                      <ul className="space-y-2 text-gray-600">
-                        <li className="flex items-start space-x-2">
-                          <CheckCircle className="h-5 w-5 text-green-600 mt-0.5" />
-                          <span>FD vs RD vs Debt Fund comparisons</span>
-                        </li>
-                        <li className="flex items-start space-x-2">
-                          <CheckCircle className="h-5 w-5 text-green-600 mt-0.5" />
-                          <span>Bond ladder planning strategies</span>
-                        </li>
-                        <li className="flex items-start space-x-2">
-                          <CheckCircle className="h-5 w-5 text-green-600 mt-0.5" />
-                          <span>Yield optimization techniques</span>
-                        </li>
-                        <li className="flex items-start space-x-2">
-                          <CheckCircle className="h-5 w-5 text-green-600 mt-0.5" />
-                          <span>Credit risk evaluation</span>
-                        </li>
-                      </ul>
-                    </div>
-                    <div className="bg-orange-50 rounded-lg p-6">
-                      <h4 className="font-semibold text-gray-900 mb-4">Current Best Rates</h4>
-                      <div className="space-y-3">
-                        <div className="flex justify-between">
-                          <span className="text-gray-600">Bank FD (1 Year)</span>
-                          <span className="font-semibold text-orange-600">7.25%</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-gray-600">Corporate Bonds</span>
-                          <span className="font-semibold text-orange-600">8.50%</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-gray-600">Debt Mutual Funds</span>
-                          <span className="font-semibold text-orange-600">7.80%</span>
-                        </div>
+            {/* Tab 2: LIC & Insurance */}
+            <TabsContent value="insurance" className="focus-visible:outline-none">
+              <Card className="bg-white border-slate-200/80 shadow-md">
+                <CardContent className="p-8 md:p-10 grid md:grid-cols-2 gap-12 items-center">
+                  <div className="space-y-6">
+                    <h3 className="text-2xl font-bold text-slate-900">Life & General Insurance Audits</h3>
+                    <p className="text-slate-600 text-sm leading-relaxed">
+                      Insurance planning is critical to protect your assets. We assist with mapping LIC term life policies, premium coverage amounts, and health plans.
+                    </p>
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-3">
+                        <CheckCircle className="h-5 w-5 text-red-600 shrink-0" />
+                        <span className="text-sm font-medium text-slate-700">Fiduciary comparison of cover features.</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <CheckCircle className="h-5 w-5 text-red-600 shrink-0" />
+                        <span className="text-sm font-medium text-slate-700">Claim settlement assistance and documentation support.</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <CheckCircle className="h-5 w-5 text-red-600 shrink-0" />
+                        <span className="text-sm font-medium text-slate-700">Health indemnity cover audits for families.</span>
                       </div>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            <TabsContent value="insurance">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center space-x-2">
-                    <Shield className="h-6 w-6 text-blue-600" />
-                    <span>LIC & Insurance Planning</span>
-                  </CardTitle>
-                  <CardDescription>
-                    Comprehensive insurance solutions aligned with your financial goals
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid md:grid-cols-3 gap-6">
-                    <div>
-                      <h4 className="font-semibold text-gray-900 mb-4">Life Insurance</h4>
-                      <ul className="space-y-2 text-gray-600 text-sm">
-                        <li>• Term Life Insurance</li>
-                        <li>• Whole Life Policies</li>
-                        <li>• ULIP Plans</li>
-                        <li>• Endowment Plans</li>
-                      </ul>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900 mb-4">Health Insurance</h4>
-                      <ul className="space-y-2 text-gray-600 text-sm">
-                        <li>• Individual Health Plans</li>
-                        <li>• Family Floater Policies</li>
-                        <li>• Critical Illness Cover</li>
-                        <li>• Senior Citizen Plans</li>
-                      </ul>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900 mb-4">General Insurance</h4>
-                      <ul className="space-y-2 text-gray-600 text-sm">
-                        <li>• Motor Insurance</li>
-                        <li>• Home Insurance</li>
-                        <li>• Travel Insurance</li>
-                        <li>• Business Insurance</li>
-                      </ul>
+                  <div className="space-y-4 bg-slate-50/50 p-6 rounded-2xl border border-slate-100">
+                    <h4 className="font-bold text-slate-800 text-sm">Insurance Pillars:</h4>
+                    <div className="flex flex-wrap gap-2 text-xs">
+                      <Badge variant="outline" className="py-1.5 border-slate-200 font-medium text-slate-700">LIC Endowment Plans</Badge>
+                      <Badge variant="outline" className="py-1.5 border-slate-200 font-medium text-slate-700">Term Life Covers</Badge>
+                      <Badge variant="outline" className="py-1.5 border-slate-200 font-medium text-slate-700">Indemnity Health Insurance</Badge>
+                      <Badge variant="outline" className="py-1.5 border-slate-200 font-medium text-slate-700">Critical Illness Riders</Badge>
+                      <Badge variant="outline" className="py-1.5 border-slate-200 font-medium text-slate-700">Motor & Asset Insurance</Badge>
                     </div>
                   </div>
                 </CardContent>
               </Card>
             </TabsContent>
 
-            <TabsContent value="taxation">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center space-x-2">
-                    <FileText className="h-6 w-6 text-green-600" />
-                    <span>Tax Planning & Advisory</span>
-                  </CardTitle>
-                  <CardDescription>
-                    Strategic tax planning to maximize your savings and optimize returns
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid md:grid-cols-2 gap-8">
-                    <div>
-                      <h4 className="font-semibold text-gray-900 mb-4">Tax-Efficient Strategies</h4>
-                      <ul className="space-y-2 text-gray-600">
-                        <li className="flex items-start space-x-2">
-                          <CheckCircle className="h-5 w-5 text-green-600 mt-0.5" />
-                          <span>ELSS vs Index Fund tax implications</span>
-                        </li>
-                        <li className="flex items-start space-x-2">
-                          <CheckCircle className="h-5 w-5 text-green-600 mt-0.5" />
-                          <span>Capital gains optimization planning</span>
-                        </li>
-                        <li className="flex items-start space-x-2">
-                          <CheckCircle className="h-5 w-5 text-green-600 mt-0.5" />
-                          <span>Insurance premium tax deductions</span>
-                        </li>
-                        <li className="flex items-start space-x-2">
-                          <CheckCircle className="h-5 w-5 text-green-600 mt-0.5" />
-                          <span>Home loan interest benefits</span>
-                        </li>
-                      </ul>
-                    </div>
-                    <div className="bg-green-50 rounded-lg p-6">
-                      <h4 className="font-semibold text-gray-900 mb-4">Tax Saving Limits (FY 2024-25)</h4>
-                      <div className="space-y-3 text-sm">
-                        <div className="flex justify-between">
-                          <span className="text-gray-600">80C Deductions</span>
-                          <span className="font-semibold text-green-600">₹1.5 Lakh</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-gray-600">80D Health Insurance</span>
-                          <span className="font-semibold text-green-600">₹25,000</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-gray-600">NPS 80CCD(1B)</span>
-                          <span className="font-semibold text-green-600">₹50,000</span>
-                        </div>
+            {/* Tab 3: Tax & ELSS */}
+            <TabsContent value="taxation" className="focus-visible:outline-none">
+              <Card className="bg-white border-slate-200/80 shadow-md">
+                <CardContent className="p-8 md:p-10 grid md:grid-cols-2 gap-12 items-center">
+                  <div className="space-y-6">
+                    <h3 className="text-2xl font-bold text-slate-900">Tax Exemption Planning</h3>
+                    <p className="text-slate-600 text-sm leading-relaxed">
+                      Legally minimize tax liabilities by utilizing lock-in mutual funds, retirement options, and insurance premium deductions under current laws.
+                    </p>
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-3">
+                        <CheckCircle className="h-5 w-5 text-red-600 shrink-0" />
+                        <span className="text-sm font-medium text-slate-700">Section 80C ELSS planning (3-year lock-in only).</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <CheckCircle className="h-5 w-5 text-red-600 shrink-0" />
+                        <span className="text-sm font-medium text-slate-700">Capital gains tax reduction advisory.</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <CheckCircle className="h-5 w-5 text-red-600 shrink-0" />
+                        <span className="text-sm font-medium text-slate-700">Corporate employee tax-saving audits.</span>
                       </div>
                     </div>
                   </div>
+                  <div className="space-y-4 bg-slate-50/50 p-6 rounded-2xl border border-slate-100">
+                    <h4 className="font-bold text-slate-800 text-sm">Tax Saving Paths:</h4>
+                    <div className="flex flex-wrap gap-2 text-xs">
+                      <Badge variant="outline" className="py-1.5 border-slate-200 font-medium text-slate-700">ELSS Mutual Funds</Badge>
+                      <Badge variant="outline" className="py-1.5 border-slate-200 font-medium text-slate-700">National Pension System (NPS)</Badge>
+                      <Badge variant="outline" className="py-1.5 border-slate-200 font-medium text-slate-700">80D Health Premium Deductions</Badge>
+                      <Badge variant="outline" className="py-1.5 border-slate-200 font-medium text-slate-700">80C Life Insurance Covers</Badge>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
             </TabsContent>
 
-            <TabsContent value="property">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center space-x-2">
-                    <Home className="h-6 w-6 text-purple-600" />
-                    <span>Property Valuation & Advisory</span>
-                  </CardTitle>
-                  <CardDescription>
-                    Professional property valuation and investment advisory services
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid md:grid-cols-2 gap-8">
-                    <div>
-                      <h4 className="font-semibold text-gray-900 mb-4">Valuation Services</h4>
-                      <ul className="space-y-2 text-gray-600">
-                        <li className="flex items-start space-x-2">
-                          <CheckCircle className="h-5 w-5 text-green-600 mt-0.5" />
-                          <span>Fair market value assessments</span>
-                        </li>
-                        <li className="flex items-start space-x-2">
-                          <CheckCircle className="h-5 w-5 text-green-600 mt-0.5" />
-                          <span>Property investment analysis</span>
-                        </li>
-                        <li className="flex items-start space-x-2">
-                          <CheckCircle className="h-5 w-5 text-green-600 mt-0.5" />
-                          <span>Resale value projections</span>
-                        </li>
-                        <li className="flex items-start space-x-2">
-                          <CheckCircle className="h-5 w-5 text-green-600 mt-0.5" />
-                          <span>Mortgage planning assistance</span>
-                        </li>
-                      </ul>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900 mb-4">Property Types</h4>
-                      <div className="grid grid-cols-2 gap-3">
-                        <Badge variant="outline" className="justify-center py-2">Residential</Badge>
-                        <Badge variant="outline" className="justify-center py-2">Commercial</Badge>
-                        <Badge variant="outline" className="justify-center py-2">Industrial</Badge>
-                        <Badge variant="outline" className="justify-center py-2">Agricultural</Badge>
+            {/* Tab 4: Property Valuation */}
+            <TabsContent value="valuation" className="focus-visible:outline-none">
+              <Card className="bg-white border-slate-200/80 shadow-md">
+                <CardContent className="p-8 md:p-10 grid md:grid-cols-2 gap-12 items-center">
+                  <div className="space-y-6">
+                    <h3 className="text-2xl font-bold text-slate-900">Government Approved Property Valuation</h3>
+                    <p className="text-slate-600 text-sm leading-relaxed">
+                      Siddharth Pandya leads our property advisory. We issue legally binding, precise valuation reports for buildings, industrial areas, and agricultural land in Gujarat.
+                    </p>
+                    <div className="space-y-4">
+                      <div className="space-y-4">
+                        <h4 className="font-bold text-slate-800 text-base">Valuation Expertise:</h4>
+                        <ul className="space-y-2 text-slate-600 text-sm">
+                          <li className="flex items-start gap-2">
+                            <CheckCircle className="h-4 w-4 text-red-600 mt-0.5 shrink-0" />
+                            <span>Government-approved physical property assessments.</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <CheckCircle className="h-4 w-4 text-red-600 mt-0.5 shrink-0" />
+                            <span>Accurate resale projection models using locality growth indexes.</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <CheckCircle className="h-4 w-4 text-red-600 mt-0.5 shrink-0" />
+                            <span>Secured loan mortgage assessment advisory.</span>
+                          </li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-800 text-base mb-4">Supported Properties:</h4>
+                        <div className="grid grid-cols-2 gap-2 text-xs">
+                          <Badge variant="outline" className="justify-center py-2 border-slate-200 font-medium text-slate-700">Residential Apartments</Badge>
+                          <Badge variant="outline" className="justify-center py-2 border-slate-200 font-medium text-slate-700">Commercial Spaces</Badge>
+                          <Badge variant="outline" className="justify-center py-2 border-slate-200 font-medium text-slate-700">Industrial Sheds</Badge>
+                          <Badge variant="outline" className="justify-center py-2 border-slate-200 font-medium text-slate-700">Agricultural Plots</Badge>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -433,337 +387,184 @@ export default function HomePage() {
               </Card>
             </TabsContent>
           </Tabs>
+
         </div>
       </section>
 
-      {/* Tools & Calculators */}
+      {/* Tools & Resources Grid */}
       <section id="tools" className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Financial Tools & Calculators</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Powerful tools to help you plan and track your financial journey
+        <div className="container mx-auto px-4 md:px-8">
+
+          <div className="max-w-3xl mx-auto text-center mb-16 space-y-3">
+            <Badge className="bg-red-50 text-red-700 border-red-100 font-semibold">
+              Interactive Tools
+            </Badge>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 font-extrabold">
+              Try Free Financial Resources
+            </h2>
+            <p className="text-slate-500 text-sm md:text-base leading-relaxed">
+              Plan your systematic savings, evaluate retirement sums, or profile your risk tolerance instantly.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Card className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <Calculator className="h-12 w-12 text-red-600 mb-4" />
-                <CardTitle>SIP Calculator</CardTitle>
-                <CardDescription>Calculate returns on your systematic investment plans</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Link href="/calculators/sip">
-                  <Button className="w-full bg-red-600 hover:bg-red-700 text-white">
-                    Try Calculator
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
-
-            <Card className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <Target className="h-12 w-12 text-orange-600 mb-4" />
-                <CardTitle>Goal Planner</CardTitle>
-                <CardDescription>Plan for your financial goals with precision</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Link href="/calculators/goal-planner">
-                  <Button className="w-full bg-orange-600 hover:bg-orange-700 text-white">
-                    Start Planning
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
-
-            <Card className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <BarChart3 className="h-12 w-12 text-green-600 mb-4" />
-                <CardTitle>Risk Profiler</CardTitle>
-                <CardDescription>Assess your investment risk tolerance</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Link href="/calculators/risk-profiler">
-                  <Button className="w-full bg-green-600 hover:bg-green-700 text-white">
-                    Take Assessment
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
-
-            <Card className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <PieChart className="h-12 w-12 text-blue-600 mb-4" />
-                <CardTitle>Fund Screener</CardTitle>
-                <CardDescription>Find the best mutual funds for your portfolio</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Link href="/calculators/fund-screener">
-                  <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
-                    Screen Funds
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
-
-            <Card className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <Home className="h-12 w-12 text-purple-600 mb-4" />
-                <CardTitle>Property Valuator</CardTitle>
-                <CardDescription>Get accurate property valuation estimates</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white">
-                  Value Property
-                </Button>
-              </CardContent>
-            </Card>
-
-            <Card className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <Shield className="h-12 w-12 text-indigo-600 mb-4" />
-                <CardTitle>Insurance Calculator</CardTitle>
-                <CardDescription>Calculate your insurance premium estimates</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white">
-                  Calculate Premium
-                </Button>
-              </CardContent>
-            </Card>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {homepageContent.financialResources.map((tool, idx) => {
+              const IconComponent = IconMap[tool.iconName as keyof typeof IconMap] || Calculator;
+              return (
+                <Card key={idx} className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-slate-100">
+                  <CardHeader>
+                    <IconComponent className="h-10 w-10 text-red-600 mb-4" />
+                    <CardTitle className="text-lg font-bold text-slate-900">{tool.title}</CardTitle>
+                    <CardDescription className="text-xs">{tool.description}</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <Link href={tool.href}>
+                      <Button className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold shadow-md shadow-red-600/10">
+                        {tool.buttonText}
+                      </Button>
+                    </Link>
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
+
         </div>
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">What Our Clients Say</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Trusted by hundreds of satisfied clients across India
+      <section className="py-20 bg-slate-50 border-t border-slate-200/60">
+        <div className="container mx-auto px-4 md:px-8">
+
+          <div className="max-w-3xl mx-auto text-center mb-16 space-y-3">
+            <Badge className="bg-red-50 text-red-700 border-none font-semibold">
+              Client Feedback
+            </Badge>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 font-extrabold">
+              What Our Clients Say
+            </h2>
+            <p className="text-slate-500 text-sm md:text-base leading-relaxed">
+              We manage portfolios for families across India with commitment to transparent, long-term growth.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="p-6">
-              <div className="flex items-center mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
-                ))}
-              </div>
-              <p className="text-gray-600 mb-4">SS Sarthi helped me create a diversified portfolio that has consistently outperformed the market.
-                Their transparent approach and regular reviews give me confidence in my investments.
-              </p>
-              <div className="font-semibold text-gray-900">Rajesh K.</div>
-              <div className="text-sm text-gray-500">Mumbai, Maharashtra</div>
-            </Card>
-
-            <Card className="p-6">
-              <div className="flex items-center mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
-                ))}
-              </div>
-              <p className="text-gray-600 mb-4">
-                The tax planning strategies suggested by their team saved me over ₹50,000 in taxes last year.
-                Their expertise in ELSS and insurance planning is exceptional.
-              </p>
-              <div className="font-semibold text-gray-900">Priya S.</div>
-              <div className="text-sm text-gray-500">Bangalore, Karnataka</div>
-            </Card>
-
-            <Card className="p-6">
-              <div className="flex items-center mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
-                ))}
-              </div>
-              <p className="text-gray-600 mb-4">
-                Professional property valuation service helped me make an informed decision on my home purchase.
-                Their market analysis was spot-on and saved me from overpaying.
-              </p>
-              <div className="font-semibold text-gray-900">Amit T.</div>
-              <div className="text-sm text-gray-500">Delhi, NCR</div>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">How We Work</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Our systematic approach to financial planning and wealth management
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="bg-red-100 rounded-full p-6 w-20 h-20 mx-auto mb-6 flex items-center justify-center">
-                <span className="text-2xl font-bold text-red-600">1</span>
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Discovery Call</h3>
-              <p className="text-gray-600">
-                Understand your financial goals, risk profile, and current situation through detailed consultation
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="bg-orange-100 rounded-full p-6 w-20 h-20 mx-auto mb-6 flex items-center justify-center">
-                <span className="text-2xl font-bold text-orange-600">2</span>
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Custom Plan</h3>
-              <p className="text-gray-600">
-                Create tailored financial plan with specific recommendations across all service areas
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="bg-green-100 rounded-full p-6 w-20 h-20 mx-auto mb-6 flex items-center justify-center">
-                <span className="text-2xl font-bold text-green-600">3</span>
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Implementation</h3>
-              <p className="text-gray-600">
-                Execute the plan with SIP setups, insurance policies, and investment portfolio creation
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="bg-blue-100 rounded-full p-6 w-20 h-20 mx-auto mb-6 flex items-center justify-center">
-                <span className="text-2xl font-bold text-blue-600">4</span>
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Monitoring</h3>
-              <p className="text-gray-600">
-                Regular performance tracking, annual reviews, and plan adjustments as needed
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact */}
-      <section id="contact" className="py-20 bg-gradient-to-br from-red-50 to-orange-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Get In Touch</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Ready to start your financial journey? Contact us for a free consultation
-            </p>
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-12">
-            <div>
-              <Card className="p-8">
-                <ContactForm title="Schedule Free Consultation" buttonText="Schedule Consultation" />
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {homepageContent.testimonials.map((t, idx) => (
+              <Card key={idx} className="p-6 md:p-8 bg-white border-slate-200/80 shadow-sm relative hover:border-red-100 hover:shadow-md transition-all duration-300">
+                <div className="flex items-center gap-1 mb-4 text-red-500">
+                  {[...Array(t.rating)].map((_, i) => (
+                    <Star key={i} className="h-4.5 w-4.5 fill-current text-red-600" />
+                  ))}
+                </div>
+                <p className="text-slate-600 text-sm leading-relaxed mb-6 italic">
+                  &quot;{t.text}&quot;
+                </p>
+                <div>
+                  <div className="font-bold text-slate-900 text-sm">{t.name}</div>
+                  <div className="text-xs text-slate-500">{t.subtitle}</div>
+                </div>
               </Card>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* How We Work */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 md:px-8">
+
+          <div className="max-w-3xl mx-auto text-center mb-16 space-y-3">
+            <Badge className="bg-red-50 text-red-700 border-none font-semibold">
+              Step-By-Step Process
+            </Badge>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 font-extrabold">
+              Our Systematic Approach
+            </h2>
+            <p className="text-slate-500 text-sm md:text-base leading-relaxed">
+              We guide you from initial discovery to active compound monitoring.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-4 gap-8 max-w-5xl mx-auto">
+            <div className="text-center space-y-3">
+              <div className="w-14 h-14 bg-red-50 border border-red-100 rounded-full flex items-center justify-center mx-auto text-red-600 font-extrabold text-lg">
+                1
+              </div>
+              <h3 className="font-bold text-slate-900">Discovery Call</h3>
+              <p className="text-xs text-slate-500 leading-relaxed font-medium">We schedule a phone call to list your current investments, age profile, and wealth goals.</p>
             </div>
 
-            <div className="space-y-8">
-              <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Contact Information</h3>
-                <div className="space-y-4">
-                  <div className="flex items-center space-x-4">
-                    <Phone className="h-6 w-6 text-red-600" />
-                    <div>
-                      <div className="font-semibold text-gray-900">Phone</div>
-                      <div className="text-gray-600">Sheetal Suthar <a className="font-semibold" href="tel:+918000383222">+91 8000 383222</a></div>
-                      <div className="text-gray-600">Siddharth Pandya <a className="font-semibold" href="tel:+918141316000">+91 8141 316000</a></div>
-                    </div>
-                  </div>
-                  <div className="flex items-center space-x-4">
-                    <Mail className="h-6 w-6 text-red-600" />
-                    <div>
-                      <div className="font-semibold text-gray-900">Email</div>
-                      <div className="text-gray-600">hello@sssarthifinancial.com</div>
-                    </div>
-                  </div>
-                  <div className="flex items-center space-x-4">
-                    <MapPin className="h-6 w-6 text-red-600" />
-                    <div>
-                      <div className="font-semibold text-gray-900">Office</div>
-                      <div className="text-gray-600">Ahmedabad, Gujarat, India</div>
-                    </div>
-                  </div>
-                </div>
+            <div className="text-center space-y-3">
+              <div className="w-14 h-14 bg-red-50 border border-red-100 rounded-full flex items-center justify-center mx-auto text-red-600 font-extrabold text-lg">
+                2
               </div>
+              <h3 className="font-bold text-slate-900">Custom Allocation</h3>
+              <p className="text-xs text-slate-500 leading-relaxed font-medium">We structure a dedicated plan including Mutual Fund selection, ELSS caps, and life covers.</p>
+            </div>
 
-              <div className="bg-white rounded-lg p-6">
-                <h4 className="font-bold text-gray-900 mb-4">Download Free Resources</h4>
-                <div className="space-y-3">
-                  <Button variant="outline" className="w-full justify-between">
-                    Ultimate SIP Planning Guide
-                    <ArrowRight className="h-4 w-4" />
-                  </Button>
-                  <Button variant="outline" className="w-full justify-between">
-                    Top 30 Mutual Funds - FY25
-                    <ArrowRight className="h-4 w-4" />
-                  </Button>
-                  <Button variant="outline" className="w-full justify-between">
-                    Tax Saving Checklist
-                    <ArrowRight className="h-4 w-4" />
-                  </Button>
-                </div>
+            <div className="text-center space-y-3">
+              <div className="w-14 h-14 bg-red-50 border border-red-100 rounded-full flex items-center justify-center mx-auto text-red-600 font-extrabold text-lg">
+                3
               </div>
+              <h3 className="font-bold text-slate-900">Execution</h3>
+              <p className="text-xs text-slate-500 leading-relaxed font-medium">Setting up systematic investment plans (SIP), filing covers, or issuing valuation certificates.</p>
+            </div>
+
+            <div className="text-center space-y-3">
+              <div className="w-14 h-14 bg-red-50 border border-red-100 rounded-full flex items-center justify-center mx-auto text-red-600 font-extrabold text-lg">
+                4
+              </div>
+              <h3 className="font-bold text-slate-900">Periodic Review</h3>
+              <p className="text-xs text-slate-500 leading-relaxed font-medium">Annual portfolio re-balancing checks to review lagging funds and capture index shifts.</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* Conversion Banner Section */}
+      <section className="bg-gradient-to-br from-red-50 via-white to-rose-50 text-slate-900 py-16 relative overflow-hidden border-t border-red-100">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(220,38,38,0.04),transparent_60%)]" />
+        <div className="container mx-auto px-4 md:px-8 relative z-10 text-center space-y-6 max-w-3xl">
+          <Badge className="bg-red-100 text-red-700 border-red-200/80 px-3 py-1 text-xs font-semibold">
+            Start Your Financial Journey
+          </Badge>
+          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900">
+            Take Control of Your Wealth Protection and Growth
+          </h2>
+          <p className="text-slate-600 text-sm md:text-base leading-relaxed max-w-2xl mx-auto">
+            Contact Sheetal Suthar or Siddharth Pandya directly. Let us schedule a free review session of your current mutual funds or value your property.
+          </p>
+
+          <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4">
+            <Link href="/contact">
+              <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white font-semibold px-8 h-12 shadow-lg shadow-red-600/15">
+                Connect With Advisors
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
+            <a href="tel:+918000383222">
+              <Button size="lg" variant="outline" className="border-slate-200 text-slate-700 hover:bg-slate-50 h-12">
+                Call Advisor Now
+              </Button>
+            </a>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-md mx-auto pt-8 text-xs text-slate-500 font-medium">
+            <div className="flex items-center justify-center gap-2">
+              <MapPin className="h-4.5 w-4.5 text-red-600 shrink-0" />
+              <span>Office: Nikol, Ahmedabad</span>
+            </div>
+            <div className="flex items-center justify-center gap-2">
+              <Clock className="h-4.5 w-4.5 text-red-600 shrink-0" />
+              <span>Response time: Under 24 Hrs</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <p className="text-gray-400 mb-4">
-                Your trusted partner in building wealth through expert financial advisory services.
-              </p>
-              <p className="text-sm text-gray-500">
-                SEBI Registered Investment Advisor
-              </p>
-            </div>
-
-            <div>
-              <h4 className="font-bold text-white mb-4">Services</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><Link href="#" className="hover:text-white">Mutual Funds</Link></li>
-                <li><Link href="#" className="hover:text-white">Insurance Planning</Link></li>
-                <li><Link href="#" className="hover:text-white">Tax Advisory</Link></li>
-                <li><Link href="#" className="hover:text-white">Property Valuation</Link></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-bold text-white mb-4">Resources</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><Link href="#" className="hover:text-white">Financial Calculators</Link></li>
-                <li><Link href="#" className="hover:text-white">Market Insights</Link></li>
-                <li><Link href="#" className="hover:text-white">Tax Guides</Link></li>
-                <li><Link href="#" className="hover:text-white">Investment Tips</Link></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-bold text-white mb-4">Legal</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><Link href="#" className="hover:text-white">Privacy Policy</Link></li>
-                <li><Link href="#" className="hover:text-white">Terms of Service</Link></li>
-                <li><Link href="#" className="hover:text-white">Disclaimer</Link></li>
-                <li><Link href="#" className="hover:text-white">SEBI Compliance</Link></li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-            <p className="text-gray-400">
-              © {new Date().getFullYear()} SS Sarthi Financial Services. All rights reserved. | Together Forever
-            </p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }

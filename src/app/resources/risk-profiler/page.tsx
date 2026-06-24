@@ -610,7 +610,7 @@ export default function RiskProfiler() {
     tc(C.mid)
     doc.setFont('helvetica', 'italic')
     doc.setFontSize(7.5)
-    const disclaimer = 'Disclaimer: This risk profile is based on responses provided by the applicant and is valid for 2 years from the date of profiling. The suggested asset allocations are indicative and serve as general guidelines only. Actual portfolio construction should be done in consultation with your wealth manager at Sarthi SIP. M: [+91 80003 83222] | sheetal@sarthisip.com | sarthisip.com'
+    const disclaimer = 'Disclaimer: This risk profile is based on responses provided by the applicant and is valid for 2 years from the date of profiling. The suggested asset allocations are indicative and serve as general guidelines only. Actual portfolio construction should be done in consultation with your wealth manager at Sarthi SIP. M: [+91 80003 83222] | hello@sarthisip.com | sarthisip.com'
     const dLines = doc.splitTextToSize(disclaimer, barW - 8)
     doc.text(dLines, margin + 4, y + 5)
 

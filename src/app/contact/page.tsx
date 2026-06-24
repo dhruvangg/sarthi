@@ -32,7 +32,7 @@ export default function ContactPage() {
       "name": "Sarthi SIP",
       "image": "https://sarthisip.com/logo.png",
       "telephone": "+918000383222",
-      "email": "sheetal@sarthisip.com",
+      "email": "hello@sarthisip.com",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "412, The Edge, Opp Malabar Royal Bungalow, Bhakti Circle Road, Nikol",
@@ -140,8 +140,8 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <h4 className="font-bold text-slate-900 text-sm mb-1">Email Address</h4>
-                      <a href="mailto:sheetal@sarthisip.com" className="text-xs text-slate-600 hover:underline font-semibold">
-                        sheetal@sarthisip.com
+                      <a href="mailto:hello@sarthisip.com" className="text-xs text-slate-600 hover:underline font-semibold">
+                        hello@sarthisip.com
                       </a>
                     </div>
                   </div>

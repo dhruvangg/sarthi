@@ -169,7 +169,7 @@ export function ContactForm({ title, buttonText }: ContactFormProps) {
           </Label>
           <Input 
             id="form-email"
-            placeholder="sheetal@sarthisip.com" 
+            placeholder="hello@sarthisip.com" 
             name="email" 
             value={formData.email}
             onChange={(e) => setFormData({...formData, email: e.target.value})}

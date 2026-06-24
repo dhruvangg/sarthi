@@ -43,19 +43,7 @@ export function Header({ showBackToHome = false }: HeaderProps) {
 
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm flex flex-col">
-      {/* Top Marquee for Free Portfolio Analysis */}
-      <div className="bg-gradient-to-r from-red-600 to-rose-600 text-white py-1.5 overflow-hidden border-b border-red-700/50 relative">
-        <Link href="/resources/risk-profiler" className="block w-full">
-          <div className="flex items-center whitespace-nowrap justify-center animate-in fade-in duration-500">
-            <div className="flex items-center gap-2 text-xs md:text-sm font-medium hover:underline">
-              <span className="animate-pulse">✨</span> 
-              <span>Free Portfolio Analysis - Discover your risk profile and optimize investments today</span>
-              <span aria-hidden="true" className="ml-1">&rarr;</span>
-            </div>
-          </div>
-        </Link>
-      </div>
-      
+
       <div className="container mx-auto px-4 md:px-8">
         <div className="flex items-center justify-between h-20 md:h-24">
           

@@ -194,9 +194,9 @@ export default function AboutPage() {
         <div className="container mx-auto px-4 md:px-8">
 
           <div className="max-w-3xl mx-auto text-center mb-16 space-y-3">
-            <Badge className="bg-red-50 text-red-700 border-red-100 font-semibold">Expert Advisors</Badge>
+            <Badge className="bg-red-50 text-red-700 border-red-100 font-semibold">Experts</Badge>
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 font-extrabold">
-              Meet Our Advisors
+              Meet our Team
             </h2>
             <p className="text-slate-500 text-sm md:text-base leading-relaxed">
               Our leadership is committed to transparency, compliance, and custom solutions for your wealth journey.

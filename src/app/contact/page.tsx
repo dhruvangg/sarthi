@@ -78,7 +78,7 @@ export default function ContactPage() {
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900">
             Contact{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-rose-600">
-              Our Advisors
+              Us
             </span>
           </h1>
           <p className="text-slate-600 text-base md:text-lg leading-relaxed max-w-xl mx-auto">
@@ -91,7 +91,7 @@ export default function ContactPage() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4 md:px-8 max-w-6xl">
           <div className="grid lg:grid-cols-12 gap-12 items-start">
-            
+
             {/* Form Column (Left) */}
             <div className="lg:col-span-7 bg-white border border-slate-200/80 rounded-2xl p-6 md:p-8 shadow-xl shadow-slate-100/50">
               <ContactForm title="Send A Direct Message" buttonText="Schedule Appointment" />
@@ -99,11 +99,11 @@ export default function ContactPage() {
 
             {/* Details and Map Column (Right) */}
             <div className="lg:col-span-5 space-y-8">
-              
+
               {/* Details Card */}
               <Card className="border-slate-200/85 bg-slate-50/65 shadow-sm">
                 <CardContent className="p-6 space-y-6">
-                  
+
                   {/* Office Location */}
                   <div className="flex items-start gap-4">
                     <div className="w-10 h-10 rounded-lg bg-red-100 text-red-600 flex items-center justify-center shrink-0">
@@ -125,7 +125,7 @@ export default function ContactPage() {
                       <Phone className="h-5 w-5" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-slate-900 text-sm mb-1">Advisor Direct Lines</h4>
+                      <h4 className="font-bold text-slate-900 text-sm mb-1">Team Direct Lines</h4>
                       <div className="text-xs text-slate-500 space-y-0.5 font-medium">
                         <p>Sheetal Suthar: <a href="tel:+918000383222" className="text-red-600 hover:underline font-bold">+91 80003 83222</a></p>
                         <p>Siddharth Pandya: <a href="tel:+918141316000" className="text-red-600 hover:underline font-bold">+91 81413 16000</a></p>

@@ -13,8 +13,8 @@ export function FloatingCTA() {
   }
 
   return (
-    <Link 
-      href="/resources/risk-profiler" 
+    <Link
+      href="/resources/risk-profiler"
       className="fixed bottom-6 left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-6 md:bottom-8 z-[100] group flex items-center"
       aria-label="Free Portfolio Analysis"
     >
@@ -23,7 +23,7 @@ export function FloatingCTA() {
           <PieChart className="w-5 h-5 animate-pulse" />
         </div>
         <span className="text-sm font-bold whitespace-nowrap">
-          Free Portfolio Analysis
+          Free Portfolio Review
         </span>
       </div>
     </Link>

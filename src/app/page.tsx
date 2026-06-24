@@ -77,7 +77,7 @@ export default function HomePage() {
             {/* Hero Left Content */}
             <div className="lg:col-span-7 space-y-6">
               <Badge className="bg-red-50 text-red-700 hover:bg-red-100 border-red-200/80 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider">
-                Trusted Financial Advisor
+                Your sarthi in your financial journey
               </Badge>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-slate-900">
                 Your Trusted Guide in{" "}
@@ -90,9 +90,9 @@ export default function HomePage() {
               </p>
 
               <div className="flex flex-wrap gap-4 pt-2">
-                <Link href="/contact">
+                <Link href="/resources/risk-profiler">
                   <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white font-semibold shadow-lg shadow-red-600/15 h-12 px-6">
-                    Schedule Free Audit
+                    Free Portfolio Review
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
@@ -124,7 +124,7 @@ export default function HomePage() {
             <div className="lg:col-span-5 relative">
               <div className="absolute -inset-1 bg-gradient-to-tr from-red-500 to-rose-500 rounded-2xl blur-lg opacity-10" />
               <div className="relative bg-white border border-slate-200/80 rounded-2xl p-6 md:p-8 shadow-2xl shadow-slate-100">
-                <ContactForm title="Request Advisor Callback" buttonText="Schedule Consultation" />
+                <ContactForm title="Request Callback" buttonText="Schedule Consultation" />
               </div>
             </div>
 
@@ -540,13 +540,13 @@ export default function HomePage() {
           <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4">
             <Link href="/contact">
               <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white font-semibold px-8 h-12 shadow-lg shadow-red-600/15">
-                Connect With Advisors
+                Connect with us
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
             <a href="tel:+918000383222">
               <Button size="lg" variant="outline" className="border-slate-200 text-slate-700 hover:bg-slate-50 h-12">
-                Call Advisor Now
+                Call us Now
               </Button>
             </a>
           </div>

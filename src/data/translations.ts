@@ -1,4 +1,7 @@
-export const TRANSLATIONS: Record<string, any[]> = {
+export type RiskOption = { label: string; detail: string; score: number };
+export type RiskQuestion = { section: string; icon: string; q: string; hint: string; opts: RiskOption[] };
+
+export const TRANSLATIONS: Record<string, RiskQuestion[]> = {
   hi: [
     {
       section: "व्यक्तिगत प्रोफ़ाइल",

@@ -85,7 +85,7 @@ export default function HomePage() {
                   Mutual Funds, Insurance & Valuation
                 </span>
               </h1>
-              <p className="text-slate-600 text-base md:text-lg leading-relaxed max-w-2xl">
+              <p className="text-slate-600 text-lg md:text-xl leading-relaxed max-w-2xl font-medium">
                 Expert advisory across Mutual Funds, Bonds, LIC, Taxation, General Insurance, and Govt-approved Property Valuation. Empowering investors with transparent, evidence-based wealth management.
               </p>
 
@@ -106,12 +106,12 @@ export default function HomePage() {
               {/* Stats Bar */}
               <div className="grid grid-cols-3 gap-6 pt-8 border-t border-slate-200/80 max-w-lg">
                 <div>
-                  <div className="text-2xl md:text-3xl font-extrabold text-slate-900">300+</div>
-                  <div className="text-xs md:text-sm text-slate-500 font-medium">Happy Clients</div>
+                  <div className="text-2xl md:text-3xl font-extrabold text-slate-900">500+</div>
+                  <div className="text-xs md:text-sm text-slate-500 font-medium">Wealthy Families</div>
                 </div>
                 <div>
-                  <div className="text-2xl md:text-3xl font-extrabold text-red-600">₹50Cr+</div>
-                  <div className="text-xs md:text-sm text-slate-500 font-medium">Assets Managed</div>
+                  <div className="text-2xl md:text-3xl font-extrabold text-red-600">360°</div>
+                  <div className="text-xs md:text-sm text-slate-500 font-medium">Wealth Management</div>
                 </div>
                 <div>
                   <div className="text-2xl md:text-3xl font-extrabold text-emerald-600">15+</div>
@@ -146,7 +146,7 @@ export default function HomePage() {
                 Sarthi SIP Financial Services
               </h2>
               <p className="text-slate-600 leading-relaxed text-sm md:text-base">
-                SS Sarthi signifies a dedicated guide or charioteer. We operate with strict compliance guidelines, supporting over 300+ retail and corporate investors with goal planning and asset management advisory solutions.
+                SS Sarthi signifies a dedicated guide or charioteer. We operate with strict compliance guidelines, supporting over 500+ wealthy families with goal planning and asset management advisory solutions.
               </p>
               <p className="text-slate-600 leading-relaxed text-sm md:text-base">
                 We believe in commission transparency, and fee disclosures. Under Sheetal Suthar and Siddharth Pandya, our advisory team is built to prioritize client goals above all else.

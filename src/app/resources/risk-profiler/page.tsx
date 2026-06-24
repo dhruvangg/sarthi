@@ -8,12 +8,13 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Badge } from "@/components/ui/badge"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { 
-  ClipboardList, CheckCircle, ArrowLeft, ArrowRight, Lock, 
-  FileText, Check, Sparkles, TrendingUp, PieChart, Shield, 
+import {
+  ClipboardList, CheckCircle, ArrowLeft, ArrowRight, Lock,
+  FileText, Check, Sparkles, TrendingUp, PieChart, Shield,
   Target, DollarSign, Calendar
 } from 'lucide-react'
 import Link from 'next/link'
+import { TRANSLATIONS, STEP0_TRANSLATIONS } from '@/data/translations'
 
 import { Header } from "@/components/Header"
 import { Footer } from "@/components/Footer"
@@ -207,14 +208,15 @@ export default function RiskProfiler() {
   // Page states
   const [step, setStep] = useState(0) // 0 = Intro form, 1..12 = Questions, 13 = Result
   const [answers, setAnswers] = useState<(number | null)[]>(new Array(QUESTIONS.length).fill(null))
-  
+
   // Metadata state
   const [meta, setMeta] = useState({
     name: '',
     date: '',
     pan: '',
     type: 'new',
-    minor: 'no'
+    minor: 'no',
+    language: 'en'
   })
 
   // Set default date client-side
@@ -289,7 +291,8 @@ export default function RiskProfiler() {
       date: new Date().toISOString().slice(0, 10),
       pan: '',
       type: 'new',
-      minor: 'no'
+      minor: 'no',
+      language: 'en'
     })
     setGateEmail('')
     setGatePhone('')
@@ -626,8 +629,11 @@ export default function RiskProfiler() {
 
   // Active question details
   const activeQIdx = step - 1
-  const activeQuestion = QUESTIONS[activeQIdx]
+  const currentQuestions = TRANSLATIONS[meta.language || 'en'] || QUESTIONS
+  const activeQuestion = step > 0 && step <= QUESTIONS.length ? currentQuestions[activeQIdx] : QUESTIONS[0]
   const pct = Math.round((step / (QUESTIONS.length + 1)) * 100)
+  
+  const step0 = STEP0_TRANSLATIONS[meta.language || 'en'] || STEP0_TRANSLATIONS.en
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col text-slate-800">
@@ -641,38 +647,56 @@ export default function RiskProfiler() {
 
       <main className="container mx-auto px-4 py-10 flex-grow max-w-3xl">
         {step === 0 && (
+          <div className="flex justify-end mb-4 animate-fade-in">
+            <div className="flex items-center gap-2">
+              <Label className="text-slate-700 text-xs font-bold uppercase tracking-wider hidden sm:block">Language / भाषा</Label>
+              <Select value={meta.language || 'en'} onValueChange={(value) => setMeta({ ...meta, language: value })}>
+                <SelectTrigger className="w-[140px] focus:ring-red-500 h-9 border-slate-200 bg-white shadow-sm font-medium">
+                  <SelectValue placeholder="Language" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="en">🇬🇧 English</SelectItem>
+                  <SelectItem value="hi">🇮🇳 हिंदी</SelectItem>
+                  <SelectItem value="gu">🇮🇳 ગુજરાતી</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        )}
+
+        {step === 0 && (
           <div className="space-y-6 animate-fade-in">
             <Card className="border-slate-200 shadow-md">
               <div className="bg-gradient-to-r from-slate-900 to-slate-800 px-6 py-6 md:px-8 text-white rounded-t-xl">
                 <span className="text-red-400 text-xs font-semibold uppercase tracking-widest block mb-2 font-mono">
-                  Section A — Risk Profiling
+                  {step0.sectionA}
                 </span>
                 <h1 className="text-2xl md:text-3xl font-extrabold font-display">
-                  Let's understand your investor profile
+                  {step0.title}
                 </h1>
                 <p className="text-slate-400 text-xs mt-2">
-                  {QUESTIONS.length} questions · ~5 minutes · Valid for 2 years
+                  {step0.subtitle.replace('{count}', String(QUESTIONS.length))}
                 </p>
               </div>
 
               <CardContent className="p-6 md:p-8 space-y-6">
                 <div className="bg-red-50/60 border-l-4 border-red-600 rounded-r-xl p-4 text-xs md:text-sm text-slate-600 leading-relaxed font-medium">
-                  This questionnaire assesses your risk tolerance, investment experience, and financial situation to recommend a suitable portfolio strategy. Re-assessment may be done if your profile or objectives change.
+                  {step0.description}
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="mName" className="text-slate-700 text-xs font-bold uppercase tracking-wider">Applicant Name</Label>
+                    <Label htmlFor="mName" className="text-slate-700 text-xs font-bold uppercase tracking-wider">{step0.applicantName}</Label>
                     <Input
                       id="mName"
                       value={meta.name}
                       onChange={(e) => setMeta({ ...meta, name: e.target.value })}
-                      placeholder="Full legal name"
+                      placeholder={step0.namePlaceholder}
                       className="mt-1 focus-visible:ring-red-500"
                     />
                   </div>
                   <div>
-                    <Label htmlFor="mDate" className="text-slate-700 text-xs font-bold uppercase tracking-wider">Date of Profiling</Label>
+                    <Label htmlFor="mDate" className="text-slate-700 text-xs font-bold uppercase tracking-wider">{step0.dateOfProfiling}</Label>
                     <Input
                       id="mDate"
                       type="date"
@@ -682,29 +706,29 @@ export default function RiskProfiler() {
                     />
                   </div>
                   <div>
-                    <Label htmlFor="mPan" className="text-slate-700 text-xs font-bold uppercase tracking-wider">Client ID / PAN (Optional)</Label>
+                    <Label htmlFor="mPan" className="text-slate-700 text-xs font-bold uppercase tracking-wider">{step0.panOptional}</Label>
                     <Input
                       id="mPan"
                       value={meta.pan}
                       onChange={(e) => setMeta({ ...meta, pan: e.target.value })}
-                      placeholder="e.g. ABCDE1234F"
+                      placeholder={step0.panPlaceholder}
                       className="mt-1 focus-visible:ring-red-500"
                     />
                   </div>
                   <div>
-                    <Label htmlFor="mType" className="text-slate-700 text-xs font-bold uppercase tracking-wider">Profiling Type</Label>
+                    <Label htmlFor="mType" className="text-slate-700 text-xs font-bold uppercase tracking-wider">{step0.profilingType}</Label>
                     <Select value={meta.type} onValueChange={(value) => setMeta({ ...meta, type: value })}>
                       <SelectTrigger className="mt-1 focus:ring-red-500">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="new">New Profiling</SelectItem>
-                        <SelectItem value="reprofiling">Re-profiling</SelectItem>
+                        <SelectItem value="new">{step0.newProfiling}</SelectItem>
+                        <SelectItem value="reprofiling">{step0.reprofiling}</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
                   <div className="sm:col-span-2">
-                    <Label className="text-slate-700 text-xs font-bold uppercase tracking-wider">Is the Applicant a Minor? (Age &lt; 18)</Label>
+                    <Label className="text-slate-700 text-xs font-bold uppercase tracking-wider">{step0.isMinor}</Label>
                     <div className="flex gap-6 mt-2">
                       <label className="flex items-center gap-2 cursor-pointer text-sm text-slate-700 font-semibold">
                         <input
@@ -715,7 +739,7 @@ export default function RiskProfiler() {
                           onChange={() => setMeta({ ...meta, minor: 'no' })}
                           className="accent-red-600 w-4 h-4"
                         />
-                        No
+                        {step0.minorNo}
                       </label>
                       <label className="flex items-center gap-2 cursor-pointer text-sm text-slate-700 font-semibold">
                         <input
@@ -726,25 +750,18 @@ export default function RiskProfiler() {
                           onChange={() => setMeta({ ...meta, minor: 'yes' })}
                           className="accent-red-600 w-4 h-4"
                         />
-                        Yes (Guardian details required)
+                        {step0.minorYes}
                       </label>
                     </div>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between pt-6 border-t border-slate-200">
-                  <div className="flex gap-1.5 flex-wrap max-w-sm">
-                    {QUESTIONS.map((q, idx) => (
-                      <span key={idx} className="text-xs px-2 py-1 rounded bg-slate-100 text-slate-600 font-bold" title={q.section}>
-                        {q.icon}
-                      </span>
-                    ))}
-                  </div>
+                <div className="flex items-center justify-end pt-6 border-t border-slate-200">
                   <Button
                     onClick={handleStart}
                     className="bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-2.5 rounded-xl shadow-md shadow-red-600/10 flex items-center gap-2"
                   >
-                    Begin Assessment
+                    {step0.beginAssessment}
                     <ArrowRight className="h-4 w-4" />
                   </Button>
                 </div>
@@ -769,9 +786,8 @@ export default function RiskProfiler() {
                 {QUESTIONS.map((_, i) => (
                   <div
                     key={i}
-                    className={`h-1.5 rounded-full flex-1 min-w-[12px] transition-colors duration-300 ${
-                      i < step ? 'bg-red-600' : i === step - 1 ? 'bg-red-400' : 'bg-slate-200'
-                    }`}
+                    className={`h-1.5 rounded-full flex-1 min-w-[12px] transition-colors duration-300 ${i < step ? 'bg-red-600' : i === step - 1 ? 'bg-red-400' : 'bg-slate-200'
+                      }`}
                   />
                 ))}
               </div>
@@ -779,7 +795,7 @@ export default function RiskProfiler() {
 
             {/* Question Card */}
             <Card className="border-slate-200 shadow-md">
-              <CardContent className="p-6 md:p-8 space-y-6">
+              <CardContent className="p-6 md:p-8 pt-4 md:pt-5 space-y-6">
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-2xl bg-red-50 text-red-700 flex items-center justify-center text-2xl shrink-0">
                     {activeQuestion.icon}
@@ -807,18 +823,16 @@ export default function RiskProfiler() {
                       <div
                         key={oIdx}
                         onClick={() => selectOption(activeQIdx, oIdx)}
-                        className={`border-2 rounded-xl p-4 cursor-pointer select-none transition-all duration-150 flex items-start gap-3 hover:-translate-y-0.5 hover:shadow-sm ${
-                          isSelected
-                            ? 'border-red-600 bg-red-50/50 shadow-sm'
-                            : 'border-slate-200 bg-white hover:border-slate-300'
-                        }`}
+                        className={`border-2 rounded-xl p-4 cursor-pointer select-none transition-all duration-150 flex items-start gap-3 hover:-translate-y-0.5 hover:shadow-sm ${isSelected
+                          ? 'border-red-600 bg-red-50/50 shadow-sm'
+                          : 'border-slate-200 bg-white hover:border-slate-300'
+                          }`}
                       >
                         <div
-                          className={`w-7 h-7 rounded-full border-2 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5 transition-colors duration-200 ${
-                            isSelected
-                              ? 'bg-red-600 text-white border-red-600'
-                              : 'border-slate-300 text-slate-500'
-                          }`}
+                          className={`w-7 h-7 rounded-full border-2 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5 transition-colors duration-200 ${isSelected
+                            ? 'bg-red-600 text-white border-red-600'
+                            : 'border-slate-300 text-slate-500'
+                            }`}
                         >
                           {String.fromCharCode(65 + oIdx)}
                         </div>
@@ -833,9 +847,8 @@ export default function RiskProfiler() {
                           )}
                         </div>
                         <div
-                          className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 mt-1.5 ${
-                            isSelected ? 'bg-red-600 border-red-600' : 'border-slate-300'
-                          }`}
+                          className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 mt-1.5 ${isSelected ? 'bg-red-600 border-red-600' : 'border-slate-300'
+                            }`}
                         >
                           {isSelected && <Check className="w-3 h-3 text-white stroke-[3]" />}
                         </div>

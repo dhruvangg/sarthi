@@ -12,7 +12,7 @@ import { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "About Us | Sarthi SIP - Legacy of Trust & Financial Planning",
-  description: "Learn about the story, values, and expert advisors at Sarthi SIP. Empowering over 300 families with systematic wealth creation and property valuation under Sheetal Suthar and Siddharth Pandya.",
+  description: "Learn about the story, values, and expert advisors at Sarthi SIP. Empowering over 500 wealthy families with systematic wealth creation and property valuation under Sheetal Suthar and Siddharth Pandya.",
   alternates: {
     canonical: "https://sarthisip.com/about",
   },
@@ -40,12 +40,12 @@ export default function AboutPage() {
         {
           "@type": "Person",
           "name": "Sheetal Suthar",
-          "jobTitle": "Founder & Financial Planner"
+          "jobTitle": "Financial Advisor"
         },
         {
           "@type": "Person",
           "name": "Siddharth Pandya",
-          "jobTitle": "Co-Founder & Property Advisory Lead"
+          "jobTitle": "Financial Advisor"
         }
       ],
       "knowsAbout": ["Mutual Funds", "Systematic Investment Plans", "Property Valuation", "Tax Planning", "Insurance Planning"]
@@ -83,16 +83,16 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-10 max-w-3xl mx-auto">
             <Card className="border-slate-100 shadow-lg shadow-slate-100/50 bg-white">
               <CardContent className="p-6 text-center">
-                <div className="text-3xl font-extrabold text-slate-900 mb-1">300+</div>
-                <div className="text-sm font-bold text-red-600 mb-1">Satisfied Clients</div>
+                <div className="text-3xl font-extrabold text-slate-900 mb-1">500+</div>
+                <div className="text-sm font-bold text-red-600 mb-1">Wealthy Families</div>
                 <p className="text-xs text-slate-500">Families and individuals building generational wealth</p>
               </CardContent>
             </Card>
 
             <Card className="border-slate-100 shadow-lg shadow-slate-100/50 bg-white">
               <CardContent className="p-6 text-center">
-                <div className="text-3xl font-extrabold text-slate-900 mb-1">₹50Cr+</div>
-                <div className="text-sm font-bold text-red-600 mb-1">Assets Under Advisory</div>
+                <div className="text-3xl font-extrabold text-slate-900 mb-1">360°</div>
+                <div className="text-sm font-bold text-red-600 mb-1">Wealth Management</div>
                 <p className="text-xs text-slate-500">Invested across diverse, robust asset classes</p>
               </CardContent>
             </Card>
@@ -123,7 +123,7 @@ export default function AboutPage() {
                 The name &quot;**Sarthi**&quot; signifies a guide or charioteer. Just as a sarthi steers the chariot safely through challenges, we guide our clients through the complex world of finance, ensuring their investments align with their ultimate life goals.
               </p>
               <p className="text-slate-600 leading-relaxed">
-                Established with a vision to make professional financial advice accessible, transparent, and commission-unbiased, Sarthi SIP has grown to manage portfolios for over 300 families. We do not believe in one-size-fits-all products; instead, we analyze, validate, and strategize each portfolio with mathematical rigor.
+                Established with a vision to make professional financial advice accessible, transparent, and commission-unbiased, Sarthi SIP has grown to manage portfolios for over 500 wealthy families. We do not believe in one-size-fits-all products; instead, we analyze, validate, and strategize each portfolio with mathematical rigor.
               </p>
 
               {/* Credentials Checklist */}
@@ -213,15 +213,11 @@ export default function AboutPage() {
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-slate-900">Sheetal Suthar</h3>
-                    <p className="text-xs text-red-600 font-semibold uppercase tracking-wider">Founder & Financial Planner</p>
+                    <p className="text-xs text-red-600 font-semibold uppercase tracking-wider">Financial Advisor</p>
                   </div>
                 </div>
 
                 <div className="space-y-2.5 text-slate-600 text-sm border-t border-slate-100 pt-4">
-                  <div className="flex items-center gap-2">
-                    <BookOpen className="h-4 w-4 text-red-600 shrink-0" />
-                    <span>MBA in Finance & Certified Mutual Fund Specialist</span>
-                  </div>
                   <div className="flex items-center gap-2">
                     <Award className="h-4 w-4 text-red-600 shrink-0" />
                     <span>15+ Years of Asset Management Experience</span>
@@ -243,23 +239,19 @@ export default function AboutPage() {
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-slate-900">Siddharth Pandya</h3>
-                    <p className="text-xs text-red-600 font-semibold uppercase tracking-wider">Co-Founder & Property Advisory Lead</p>
+                    <p className="text-xs text-red-600 font-semibold uppercase tracking-wider">Financial Advisor</p>
                   </div>
                 </div>
 
                 <div className="space-y-2.5 text-slate-600 text-sm border-t border-slate-100 pt-4">
                   <div className="flex items-center gap-2">
-                    <BookOpen className="h-4 w-4 text-red-600 shrink-0" />
-                    <span>Government Approved Valuer & B.E. Civil</span>
-                  </div>
-                  <div className="flex items-center gap-2">
                     <Award className="h-4 w-4 text-red-600 shrink-0" />
-                    <span>15+ Years in Property Valuation & Real Estate Advisory</span>
+                    <span>15+ Years in Insurance & LIC Advisory</span>
                   </div>
                 </div>
 
                 <p className="text-xs text-slate-500 leading-relaxed italic border-l-2 border-emerald-500 pl-3">
-                  &quot;Property is a major financial decision. We offer legal, accurate, and realistic valuation to guard your hard-earned savings.&quot;
+                  &quot;Protecting your family&apos;s future is a vital step in financial planning. We help you navigate practical and reliable insurance solutions to safeguard what matters most.&quot;
                 </p>
               </CardContent>
             </Card>

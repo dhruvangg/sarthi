@@ -14,7 +14,7 @@ import {
   Target, DollarSign, Calendar
 } from 'lucide-react'
 import Link from 'next/link'
-import { TRANSLATIONS, STEP0_TRANSLATIONS } from '@/data/translations'
+import { TRANSLATIONS, STEP0_TRANSLATIONS, RiskQuestion } from '@/data/translations'
 
 import { Header } from "@/components/Header"
 import { Footer } from "@/components/Footer"
@@ -22,7 +22,7 @@ import { Footer } from "@/components/Footer"
 // ─────────────────────────────────────────────
 // DATA STATED FROM ORIGINAL HTML
 // ─────────────────────────────────────────────
-const QUESTIONS = [
+const QUESTIONS: RiskQuestion[] = [
   {
     section: "Personal Profile",
     icon: "👤",

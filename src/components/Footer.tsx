@@ -84,9 +84,7 @@ export function Footer() {
               <li className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 text-red-600 shrink-0 mt-0.5" />
                 <span className="leading-relaxed text-slate-600">
-                  412, The Edge, Opp Malabar Royal Bungalow,<br />
-                  Bhakti Circle Road, Nikol,<br />
-                  Ahmedabad - 380049
+                  412, The Edge, Opp. Malabar Royal Bungalows, Bhakti Circle Road, Nikol, Ahmedabad-382350
                 </span>
               </li>
               <li className="flex items-start gap-3">

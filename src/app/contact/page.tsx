@@ -35,10 +35,10 @@ export default function ContactPage() {
       "email": "hello@sarthisip.com",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "412, The Edge, Opp Malabar Royal Bungalow, Bhakti Circle Road, Nikol",
+        "streetAddress": "412, The Edge, Opp. Malabar Royal Bungalows, Bhakti Circle Road, Nikol",
         "addressLocality": "Ahmedabad",
         "addressRegion": "Gujarat",
-        "postalCode": "380049",
+        "postalCode": "382350",
         "addressCountry": "IN"
       },
       "url": "https://sarthisip.com/contact",
@@ -50,10 +50,9 @@ export default function ContactPage() {
           "Wednesday",
           "Thursday",
           "Friday",
-          "Saturday"
         ],
         "opens": "10:00",
-        "closes": "19:00"
+        "closes": "20:00"
       }
     }
   }
@@ -94,7 +93,7 @@ export default function ContactPage() {
 
             {/* Form Column (Left) */}
             <div className="lg:col-span-7 bg-white border border-slate-200/80 rounded-2xl p-6 md:p-8 shadow-xl shadow-slate-100/50">
-              <ContactForm title="Send A Direct Message" buttonText="Schedule Appointment" />
+              <ContactForm title="Schedule Appointment" buttonText="Schedule Appointment/Consultation" />
             </div>
 
             {/* Details and Map Column (Right) */}
@@ -112,9 +111,7 @@ export default function ContactPage() {
                     <div>
                       <h4 className="font-bold text-slate-900 text-sm mb-1">Office Location</h4>
                       <p className="text-xs text-slate-500 leading-relaxed font-medium">
-                        412, The Edge, Opp Malabar Royal Bungalow,<br />
-                        Bhakti Circle Road, Nikol,<br />
-                        Ahmedabad - 380049
+                        412, The Edge, Opp. Malabar Royal Bungalows, Bhakti Circle Road, Nikol, Ahmedabad-382350
                       </p>
                     </div>
                   </div>
@@ -154,8 +151,8 @@ export default function ContactPage() {
                     <div>
                       <h4 className="font-bold text-slate-900 text-sm mb-1">Office Hours</h4>
                       <p className="text-xs text-slate-500 font-medium">
-                        Monday – Saturday: 10:00 AM – 7:00 PM<br />
-                        Sunday: Closed
+                        Monday – Friday: 10:00 AM – 8:00 PM<br />
+                        Saturday – Sunday – Appointment based
                       </p>
                     </div>
                   </div>

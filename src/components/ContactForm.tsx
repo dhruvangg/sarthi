@@ -187,7 +187,7 @@ export function ContactForm({ title, buttonText }: ContactFormProps) {
         {/* Services Select */}
         <div className="space-y-1.5">
           <Label htmlFor="form-service" className="text-slate-700 dark:text-slate-300 text-xs font-semibold uppercase tracking-wider">
-            Primary Service of Interest
+            Interested In
           </Label>
           <select 
             id="form-service"
@@ -199,7 +199,7 @@ export function ContactForm({ title, buttonText }: ContactFormProps) {
             onChange={(e) => setFormData({...formData, services: e.target.value})}
           >
             <option value="" disabled>Select Primary Interest</option>
-            <option value="Mutual Fund Planning">Mutual Fund Planning</option>
+            <option value="Mutual Funds Investment">Mutual Funds Investment</option>
             <option value="Insurance Advisory">Insurance Advisory</option>
             <option value="Tax Planning">Tax Planning</option>
             <option value="Property Valuation">Property Valuation</option>

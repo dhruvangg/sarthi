@@ -124,7 +124,7 @@ export default function HomePage() {
             <div className="lg:col-span-5 relative">
               <div className="absolute -inset-1 bg-gradient-to-tr from-red-500 to-rose-500 rounded-2xl blur-lg opacity-10" />
               <div className="relative bg-white border border-slate-200/80 rounded-2xl p-6 md:p-8 shadow-2xl shadow-slate-100">
-                <ContactForm title="Request Callback" buttonText="Schedule Consultation" />
+                <ContactForm title="Schedule Appointment" buttonText="Schedule Appointment/Consultation" />
               </div>
             </div>
 
@@ -213,11 +213,11 @@ export default function HomePage() {
         <div className="container mx-auto px-4 md:px-8">
 
           <div className="max-w-3xl mx-auto text-center mb-16 space-y-3">
-            <Badge className="bg-red-50 text-red-700 border-red-100 font-semibold">
+            {/* <Badge className="bg-red-50 text-red-700 border-red-100 font-semibold">
               Our Services
-            </Badge>
+            </Badge> */}
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 font-extrabold">
-              What We Do Best
+              Our Services
             </h2>
             <p className="text-slate-500 text-sm md:text-base leading-relaxed">
               We align our capabilities across three main pillars: investment growth, risk shield coverage, and legal property valuation.
@@ -277,9 +277,9 @@ export default function HomePage() {
                   <div className="space-y-6">
                     <h3 className="text-2xl font-bold text-slate-900">Life & General Insurance Audits</h3>
                     <p className="text-slate-600 text-sm leading-relaxed">
-                      Insurance planning is critical to protect your assets. We assist with mapping LIC term life policies, premium coverage amounts, and health plans.
+                      We assist for Life Insurance and we provide comprehensive plans LIC and Tata AIG Life Insurance
                     </p>
-                    <div className="space-y-3">
+                    {/* <div className="space-y-3">
                       <div className="flex items-center gap-3">
                         <CheckCircle className="h-5 w-5 text-red-600 shrink-0" />
                         <span className="text-sm font-medium text-slate-700">Fiduciary comparison of cover features.</span>
@@ -292,7 +292,7 @@ export default function HomePage() {
                         <CheckCircle className="h-5 w-5 text-red-600 shrink-0" />
                         <span className="text-sm font-medium text-slate-700">Health indemnity cover audits for families.</span>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                   <div className="space-y-4 bg-slate-50/50 p-6 rounded-2xl border border-slate-100">
                     <h4 className="font-bold text-slate-800 text-sm">Insurance Pillars:</h4>
@@ -350,36 +350,27 @@ export default function HomePage() {
               <Card className="bg-white border-slate-200/80 shadow-md">
                 <CardContent className="p-8 md:p-10 grid md:grid-cols-2 gap-12 items-center">
                   <div className="space-y-6">
-                    <h3 className="text-2xl font-bold text-slate-900">Government Approved Property Valuation</h3>
+                    <h3 className="text-2xl font-bold text-slate-900">Property Valuation</h3>
                     <p className="text-slate-600 text-sm leading-relaxed">
-                      Siddharth Pandya leads our property advisory. We issue legally binding, precise valuation reports for buildings, industrial areas, and agricultural land in Gujarat.
+                      Our property valuation team is lead by Mr. Omprakash Pandya (Govt. Approved and Registered Agri. Land Valuer)
                     </p>
                     <div className="space-y-4">
                       <div className="space-y-4">
-                        <h4 className="font-bold text-slate-800 text-base">Valuation Expertise:</h4>
+                        <h4 className="font-bold text-slate-800 text-base">We provide Valuation Reports of:</h4>
                         <ul className="space-y-2 text-slate-600 text-sm">
                           <li className="flex items-start gap-2">
                             <CheckCircle className="h-4 w-4 text-red-600 mt-0.5 shrink-0" />
-                            <span>Government-approved physical property assessments.</span>
+                            <span>Agricultural and N.A. Land</span>
                           </li>
                           <li className="flex items-start gap-2">
                             <CheckCircle className="h-4 w-4 text-red-600 mt-0.5 shrink-0" />
-                            <span>Accurate resale projection models using locality growth indexes.</span>
+                            <span>Residential building/bungalow</span>
                           </li>
                           <li className="flex items-start gap-2">
                             <CheckCircle className="h-4 w-4 text-red-600 mt-0.5 shrink-0" />
-                            <span>Secured loan mortgage assessment advisory.</span>
+                            <span>Industrial Sheds, Plant and Machinery, Jewelry</span>
                           </li>
                         </ul>
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-slate-800 text-base mb-4">Supported Properties:</h4>
-                        <div className="grid grid-cols-2 gap-2 text-xs">
-                          <Badge variant="outline" className="justify-center py-2 border-slate-200 font-medium text-slate-700">Residential Apartments</Badge>
-                          <Badge variant="outline" className="justify-center py-2 border-slate-200 font-medium text-slate-700">Commercial Spaces</Badge>
-                          <Badge variant="outline" className="justify-center py-2 border-slate-200 font-medium text-slate-700">Industrial Sheds</Badge>
-                          <Badge variant="outline" className="justify-center py-2 border-slate-200 font-medium text-slate-700">Agricultural Plots</Badge>
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -396,9 +387,9 @@ export default function HomePage() {
         <div className="container mx-auto px-4 md:px-8">
 
           <div className="max-w-3xl mx-auto text-center mb-16 space-y-3">
-            <Badge className="bg-red-50 text-red-700 border-red-100 font-semibold">
+            {/* <Badge className="bg-red-50 text-red-700 border-red-100 font-semibold">
               Interactive Tools
-            </Badge>
+            </Badge> */}
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 font-extrabold">
               Try Free Financial Resources
             </h2>

@@ -64,7 +64,7 @@ export function Footer() {
                 <Link href="/#services" className="text-slate-500 hover:text-red-600 transition-colors font-medium">Mutual Funds Advisory</Link>
               </li>
               <li>
-                <Link href="/#services" className="text-slate-500 hover:text-red-600 transition-colors font-medium">LIC & Insurance Planning</Link>
+                <Link href="/#services" className="text-slate-500 hover:text-red-600 transition-colors font-medium">Insurance Planning</Link>
               </li>
               <li>
                 <Link href="/#services" className="text-slate-500 hover:text-red-600 transition-colors font-medium">Tax & ELSS Planning</Link>

@@ -5,11 +5,20 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Sparkles, CheckCircle2, AlertCircle } from 'lucide-react'
+import { Textarea } from "@/components/ui/textarea"
 
 interface ContactFormProps {
   title: string
   buttonText: string
 }
+
+const SERVICE_OPTIONS = [
+  "Mutual Funds Investment",
+  "Insurance Advisory",
+  "Tax Planning",
+  "Property Valuation",
+  "Comprehensive Financial Planning"
+];
 
 export function ContactForm({ title, buttonText }: ContactFormProps) {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -17,7 +26,8 @@ export function ContactForm({ title, buttonText }: ContactFormProps) {
     name: '',
     phone: '',
     email: '',
-    services: ''
+    services: [] as string[],
+    remarks: ''
   });
 
   const [errors, setErrors] = useState({
@@ -27,33 +37,41 @@ export function ContactForm({ title, buttonText }: ContactFormProps) {
     services: ''
   });
 
+  const handleServiceChange = (service: string) => {
+    setFormData(prev => {
+      const isSelected = prev.services.includes(service);
+      if (isSelected) {
+        return { ...prev, services: prev.services.filter(s => s !== service) };
+      } else {
+        return { ...prev, services: [...prev.services, service] };
+      }
+    });
+  };
+
   const validate = () => {
     let isValid = true;
     const newErrors = { name: '', phone: '', email: '', services: '' };
 
     if (!formData.name.trim()) {
-      newErrors.name = 'Full name is required';
+      newErrors.name = 'Name is required';
       isValid = false;
     }
     
     if (!formData.phone.trim()) {
-      newErrors.phone = 'Phone number is required';
+      newErrors.phone = 'Mobile number is required';
       isValid = false;
     } else if (!/^\+?[\d\s-]{10,}$/.test(formData.phone)) {
-      newErrors.phone = 'Please enter a valid phone number';
+      newErrors.phone = 'Please enter a valid mobile number';
       isValid = false;
     }
 
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email address is required';
-      isValid = false;
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+    if (formData.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = 'Please enter a valid email address';
       isValid = false;
     }
 
-    if (!formData.services) {
-      newErrors.services = 'Please select a service of interest';
+    if (formData.services.length === 0) {
+      newErrors.services = 'Please select at least one service of interest';
       isValid = false;
     }
 
@@ -75,12 +93,15 @@ export function ContactForm({ title, buttonText }: ContactFormProps) {
           "Content-Type": "application/json",
           "Accept": "application/json"
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({
+          ...formData,
+          services: formData.services.join(', ')
+        })
       });
       
       if (response.ok) {
         setStatus("success");
-        setFormData({ name: '', phone: '', email: '', services: '' });
+        setFormData({ name: '', phone: '', email: '', services: [], remarks: '' });
       } else {
         setStatus("error");
       }
@@ -121,7 +142,7 @@ export function ContactForm({ title, buttonText }: ContactFormProps) {
         {/* Name input */}
         <div className="space-y-1.5">
           <Label htmlFor="form-name" className="text-slate-700 dark:text-slate-300 text-xs font-semibold uppercase tracking-wider">
-            Your Full Name
+            Your Name <span className="text-red-500">*</span>
           </Label>
           <Input 
             id="form-name"
@@ -143,7 +164,7 @@ export function ContactForm({ title, buttonText }: ContactFormProps) {
         {/* Phone input */}
         <div className="space-y-1.5">
           <Label htmlFor="form-phone" className="text-slate-700 dark:text-slate-300 text-xs font-semibold uppercase tracking-wider">
-            Phone Number
+            Mobile Number <span className="text-red-500">*</span>
           </Label>
           <Input 
             id="form-phone"
@@ -184,32 +205,51 @@ export function ContactForm({ title, buttonText }: ContactFormProps) {
           )}
         </div>
 
-        {/* Services Select */}
-        <div className="space-y-1.5">
-          <Label htmlFor="form-service" className="text-slate-700 dark:text-slate-300 text-xs font-semibold uppercase tracking-wider">
-            Interested In
+        {/* Services Checkboxes */}
+        <div className="space-y-2.5">
+          <Label className="text-slate-700 dark:text-slate-300 text-xs font-semibold uppercase tracking-wider">
+            Interested In <span className="text-red-500">*</span>
           </Label>
-          <select 
-            id="form-service"
-            className={`w-full h-11 px-3 border ${
-              errors.services ? 'border-red-500 focus:ring-red-500' : 'border-slate-200 focus:ring-red-500'
-            } rounded-lg bg-slate-50/50 focus:bg-white focus:outline-none focus:ring-2 transition-all text-sm text-slate-800`} 
-            name="services"
-            value={formData.services}
-            onChange={(e) => setFormData({...formData, services: e.target.value})}
-          >
-            <option value="" disabled>Select Primary Interest</option>
-            <option value="Mutual Funds Investment">Mutual Funds Investment</option>
-            <option value="Insurance Advisory">Insurance Advisory</option>
-            <option value="Tax Planning">Tax Planning</option>
-            <option value="Property Valuation">Property Valuation</option>
-            <option value="Comprehensive Financial Planning">Comprehensive Financial Planning</option>
-          </select>
+          <div className={`grid grid-cols-1 sm:grid-cols-2 gap-3 p-3 border rounded-lg bg-slate-50/50 ${
+            errors.services ? 'border-red-500' : 'border-slate-200'
+          }`}>
+            {SERVICE_OPTIONS.map((option) => (
+              <label key={option} className="flex items-center gap-2.5 cursor-pointer group">
+                <div className="relative flex items-center justify-center w-5 h-5">
+                  <input
+                    type="checkbox"
+                    className="peer appearance-none w-5 h-5 border border-slate-300 rounded focus:ring-2 focus:ring-red-500 focus:outline-none checked:bg-red-600 checked:border-red-600 transition-colors cursor-pointer"
+                    checked={formData.services.includes(option)}
+                    onChange={() => handleServiceChange(option)}
+                  />
+                  <CheckCircle2 className="absolute w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 pointer-events-none" />
+                </div>
+                <span className="text-sm text-slate-700 group-hover:text-slate-900 transition-colors">
+                  {option}
+                </span>
+              </label>
+            ))}
+          </div>
           {errors.services && (
             <p className="text-red-600 text-xs flex items-center gap-1 mt-1 font-medium">
               <AlertCircle className="h-3 w-3" /> {errors.services}
             </p>
           )}
+        </div>
+
+        {/* Remarks input */}
+        <div className="space-y-1.5">
+          <Label htmlFor="form-remarks" className="text-slate-700 dark:text-slate-300 text-xs font-semibold uppercase tracking-wider">
+            Remarks
+          </Label>
+          <Textarea 
+            id="form-remarks"
+            placeholder="Any specific questions or requirements?" 
+            name="remarks" 
+            value={formData.remarks}
+            onChange={(e) => setFormData({...formData, remarks: e.target.value})}
+            className="min-h-[80px] border-slate-200 focus-visible:ring-red-500 rounded-lg bg-slate-50/50 focus:bg-white transition-all resize-y"
+          />
         </div>
 
         {status === "error" && (

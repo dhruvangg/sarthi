@@ -12,7 +12,7 @@ import { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "About Us | Sarthi SIP - Legacy of Trust & Financial Planning",
-  description: "Learn about the story, values, and expert advisors at Sarthi SIP. Empowering over 500 wealthy families with systematic wealth creation and property valuation under Sheetal Suthar and Siddharth Pandya.",
+  description: "Learn about the story, values, and expert advisors at Sarthi SIP. Empowering over 500 families with systematic wealth creation and property valuation under our expert advisory team.",
   alternates: {
     canonical: "https://sarthisip.com/about",
   },
@@ -36,18 +36,7 @@ export default function AboutPage() {
       "name": "Sarthi SIP",
       "url": "https://sarthisip.com",
       "logo": "https://sarthisip.com/logo.png",
-      "founder": [
-        {
-          "@type": "Person",
-          "name": "Sheetal Suthar",
-          "jobTitle": "Financial Advisor"
-        },
-        {
-          "@type": "Person",
-          "name": "Siddharth Pandya",
-          "jobTitle": "Financial Advisor"
-        }
-      ],
+
       "knowsAbout": ["Mutual Funds", "Systematic Investment Plans", "Property Valuation", "Tax Planning", "Insurance Planning"]
     }
   }
@@ -84,7 +73,7 @@ export default function AboutPage() {
             <Card className="border-slate-100 shadow-lg shadow-slate-100/50 bg-white">
               <CardContent className="p-6 text-center">
                 <div className="text-3xl font-extrabold text-slate-900 mb-1">500+</div>
-                <div className="text-sm font-bold text-red-600 mb-1">Wealthy Families</div>
+                <div className="text-sm font-bold text-red-600 mb-1">Families</div>
                 <p className="text-xs text-slate-500">Families and individuals building generational wealth</p>
               </CardContent>
             </Card>
@@ -123,7 +112,7 @@ export default function AboutPage() {
                 The name &quot;**Sarthi**&quot; signifies a guide or charioteer. Just as a sarthi steers the chariot safely through challenges, we guide our clients through the complex world of finance, ensuring their investments align with their ultimate life goals.
               </p>
               <p className="text-slate-600 leading-relaxed">
-                Established with a vision to make professional financial advice accessible, transparent, and commission-unbiased, Sarthi SIP has grown to manage portfolios for over 500 wealthy families. We do not believe in one-size-fits-all products; instead, we analyze, validate, and strategize each portfolio with mathematical rigor.
+                Established with a vision to make professional financial advice accessible, transparent, and commission-unbiased, Sarthi SIP has grown to manage portfolios for over 500 families. We do not believe in one-size-fits-all products; instead, we analyze, validate, and strategize each portfolio with mathematical rigor.
               </p>
 
               {/* Credentials Checklist */}
@@ -189,76 +178,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Leadership Advisors Section */}
-      <section className="py-20 bg-slate-50 border-y border-slate-200/60">
-        <div className="container mx-auto px-4 md:px-8">
 
-          <div className="max-w-3xl mx-auto text-center mb-16 space-y-3">
-            <Badge className="bg-red-50 text-red-700 border-red-100 font-semibold">Experts</Badge>
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 font-extrabold">
-              Meet our Team
-            </h2>
-            <p className="text-slate-500 text-sm md:text-base leading-relaxed">
-              Our leadership is committed to transparency, compliance, and custom solutions for your wealth journey.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
-            {/* Adviser 1 */}
-            <Card className="bg-white border-slate-200/80 shadow-md hover:shadow-lg transition-shadow duration-300">
-              <CardContent className="p-8 space-y-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-red-500 to-rose-600 flex items-center justify-center text-white font-extrabold text-2xl shadow-md">
-                    SS
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-slate-900">Sheetal Suthar</h3>
-                    <p className="text-xs text-red-600 font-semibold uppercase tracking-wider">Financial Advisor</p>
-                  </div>
-                </div>
-
-                <div className="space-y-2.5 text-slate-600 text-sm border-t border-slate-100 pt-4">
-                  <div className="flex items-center gap-2">
-                    <Award className="h-4 w-4 text-red-600 shrink-0" />
-                    <span>15+ Years of Asset Management Experience</span>
-                  </div>
-                </div>
-
-                <p className="text-xs text-slate-500 leading-relaxed italic border-l-2 border-red-500 pl-3">
-                  &quot;Our commitment is to ensure clients understand where and why they invest, taking out the confusion from money management.&quot;
-                </p>
-              </CardContent>
-            </Card>
-
-            {/* Adviser 2 */}
-            <Card className="bg-white border-slate-200/80 shadow-md hover:shadow-lg transition-shadow duration-300">
-              <CardContent className="p-8 space-y-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-emerald-500 to-teal-600 flex items-center justify-center text-white font-extrabold text-2xl shadow-md">
-                    SP
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-slate-900">Siddharth Pandya</h3>
-                    <p className="text-xs text-red-600 font-semibold uppercase tracking-wider">Financial Advisor</p>
-                  </div>
-                </div>
-
-                <div className="space-y-2.5 text-slate-600 text-sm border-t border-slate-100 pt-4">
-                  <div className="flex items-center gap-2">
-                    <Award className="h-4 w-4 text-red-600 shrink-0" />
-                    <span>15+ Years in Insurance & LIC Advisory</span>
-                  </div>
-                </div>
-
-                <p className="text-xs text-slate-500 leading-relaxed italic border-l-2 border-emerald-500 pl-3">
-                  &quot;Protecting your family&apos;s future is a vital step in financial planning. We help you navigate practical and reliable insurance solutions to safeguard what matters most.&quot;
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-
-        </div>
-      </section>
 
       {/* Core Values Section */}
       <section className="py-20 bg-white">
@@ -336,7 +256,7 @@ export default function AboutPage() {
         <div className="container mx-auto px-4 md:px-8 text-center space-y-6 max-w-3xl">
           <h2 className="text-3xl font-extrabold tracking-tight">Let Us Be Your Financial Charioteer</h2>
           <p className="text-slate-600 text-sm md:text-base leading-relaxed max-w-xl mx-auto">
-            Schedule a free initial assessment with Sheetal Suthar or Siddharth Pandya to look at your current investments and properties.
+            Schedule a free initial assessment with our advisors to look at your current investments and properties.
           </p>
           <div className="flex justify-center gap-4 pt-2">
             <Link href="/contact">

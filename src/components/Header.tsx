@@ -94,6 +94,17 @@ export function Header({ showBackToHome = false }: HeaderProps) {
                     About Us
                   </Link>
 
+                  <Link
+                    href="/services"
+                    className={`text-sm font-semibold tracking-wide transition-colors duration-200 ${
+                      isActive("/services")
+                        ? "text-red-600 font-bold border-b-2 border-red-500 pb-1"
+                        : "text-slate-600 hover:text-red-600"
+                    }`}
+                  >
+                    Services
+                  </Link>
+
                   {/* Resources Hover Dropdown */}
                   <div 
                     className="relative"
@@ -204,6 +215,18 @@ export function Header({ showBackToHome = false }: HeaderProps) {
                 }`}
               >
                 About Us
+              </Link>
+
+              <Link
+                href="/services"
+                onClick={() => setMobileMenuOpen(false)}
+                className={`text-base font-semibold transition-colors duration-200 py-1.5 ${
+                  isActive("/services")
+                    ? "text-red-600 pl-2 border-l-4 border-red-500"
+                    : "text-slate-700 hover:text-red-600"
+                }`}
+              >
+                Services
               </Link>
 
               {/* Mobile Resources Sub-Menu Accordion */}

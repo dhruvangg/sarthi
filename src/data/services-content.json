@@ -1,0 +1,40 @@
+{
+  "services": [
+    {
+      "id": "mutual-funds",
+      "number": "01",
+      "title": "Mutual Funds Investment",
+      "description": "Systematic wealth creation through actively managed and index mutual funds.",
+      "iconName": "PieChart",
+      "features": ["Risk-profiled asset allocation", "SIP and Lumpsum strategies", "Portfolio rebalancing"],
+      "tags": ["Equity", "Debt", "Hybrid", "ELSS"]
+    },
+    {
+      "id": "insurance",
+      "number": "02",
+      "title": "Insurance & Protection",
+      "description": "Comprehensive life and general insurance to shield your family and assets.",
+      "iconName": "Shield",
+      "features": ["Term Life Insurance", "Health Coverage", "Vehicle & Property Insurance"],
+      "tags": ["LIC", "Health", "General"]
+    },
+    {
+      "id": "tax-planning",
+      "number": "03",
+      "title": "Tax Planning",
+      "description": "Strategic tax optimization to maximize your take-home returns.",
+      "iconName": "Calculator",
+      "features": ["Section 80C Investments", "Capital Gains Planning", "Tax harvesting"],
+      "tags": ["ELSS", "NPS", "Tax Bonds"]
+    },
+    {
+      "id": "property-valuation",
+      "number": "04",
+      "title": "Property Valuation",
+      "description": "Government-approved, accurate valuation reports for all your real estate needs.",
+      "iconName": "Home",
+      "features": ["Visa purposes", "Capital gains computation", "Bank loan assessments"],
+      "tags": ["Govt Approved", "Residential", "Commercial"]
+    }
+  ]
+}

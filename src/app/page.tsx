@@ -13,7 +13,7 @@ import { Metadata } from "next"
 import { Header } from "@/components/Header"
 import { Footer } from "@/components/Footer"
 import { ContactForm } from "@/components/ContactForm"
-import homepageContent from "@/data/homepage-content.json"
+import homepageContentData from "@/data/homepage-content.json";
 
 const IconMap = {
   Calculator,
@@ -40,6 +40,11 @@ export const metadata: Metadata = {
 }
 
 export default function HomePage() {
+  const homepageContent = homepageContentData || {
+    financialResources: [],
+    testimonials: []
+  };
+
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "WebSite",
@@ -107,7 +112,7 @@ export default function HomePage() {
               <div className="grid grid-cols-3 gap-6 pt-8 border-t border-slate-200/80 max-w-lg">
                 <div>
                   <div className="text-2xl md:text-3xl font-extrabold text-slate-900">500+</div>
-                  <div className="text-xs md:text-sm text-slate-500 font-medium">Wealthy Families</div>
+                  <div className="text-xs md:text-sm text-slate-500 font-medium">Families</div>
                 </div>
                 <div>
                   <div className="text-2xl md:text-3xl font-extrabold text-red-600">360°</div>
@@ -133,7 +138,7 @@ export default function HomePage() {
       </section>
 
       {/* About Us Brief Preview */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-slate-50 border-b border-slate-100">
         <div className="container mx-auto px-4 md:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
 
@@ -146,10 +151,10 @@ export default function HomePage() {
                 Sarthi SIP Financial Services
               </h2>
               <p className="text-slate-600 leading-relaxed text-sm md:text-base">
-                SS Sarthi signifies a dedicated guide or charioteer. We operate with strict compliance guidelines, supporting over 500+ wealthy families with goal planning and asset management advisory solutions.
+                SS Sarthi signifies a dedicated guide or charioteer. We operate with strict compliance guidelines, supporting over 500+ families with goal planning and asset management advisory solutions.
               </p>
               <p className="text-slate-600 leading-relaxed text-sm md:text-base">
-                We believe in commission transparency, and fee disclosures. Under Sheetal Suthar and Siddharth Pandya, our advisory team is built to prioritize client goals above all else.
+                We believe in commission transparency, and fee disclosures. Our advisory team is built to prioritize client goals above all else.
               </p>
               <div className="flex gap-4 pt-2">
                 <Link href="/about">
@@ -208,180 +213,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Services Section with custom tabs layout */}
-      <section id="services" className="py-20 bg-slate-50 border-y border-slate-200/60">
-        <div className="container mx-auto px-4 md:px-8">
-
-          <div className="max-w-3xl mx-auto text-center mb-16 space-y-3">
-            {/* <Badge className="bg-red-50 text-red-700 border-red-100 font-semibold">
-              Our Services
-            </Badge> */}
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 font-extrabold">
-              Our Services
-            </h2>
-            <p className="text-slate-500 text-sm md:text-base leading-relaxed">
-              We align our capabilities across three main pillars: investment growth, risk shield coverage, and legal property valuation.
-            </p>
-          </div>
-
-          <Tabs defaultValue="funds" className="max-w-5xl mx-auto">
-            <TabsList className="grid w-full grid-cols-1 md:grid-cols-4 h-auto p-1.5 bg-slate-200/50 rounded-xl mb-12 gap-1.5">
-              <TabsTrigger value="funds" className="py-3 rounded-lg text-sm font-semibold transition-all data-[state=active]:bg-red-600 data-[state=active]:text-white">Mutual Funds</TabsTrigger>
-              <TabsTrigger value="insurance" className="py-3 rounded-lg text-sm font-semibold transition-all data-[state=active]:bg-red-600 data-[state=active]:text-white">LIC & Insurance</TabsTrigger>
-              <TabsTrigger value="taxation" className="py-3 rounded-lg text-sm font-semibold transition-all data-[state=active]:bg-red-600 data-[state=active]:text-white">Tax & ELSS</TabsTrigger>
-              <TabsTrigger value="valuation" className="py-3 rounded-lg text-sm font-semibold transition-all data-[state=active]:bg-red-600 data-[state=active]:text-white">Property Valuation</TabsTrigger>
-            </TabsList>
-
-            {/* Tab 1: Mutual Funds */}
-            <TabsContent value="funds" className="focus-visible:outline-none">
-              <Card className="bg-white border-slate-200/80 shadow-md">
-                <CardContent className="p-8 md:p-10 grid md:grid-cols-2 gap-12 items-center">
-                  <div className="space-y-6">
-                    <h3 className="text-2xl font-bold text-slate-900">Systematic Mutual Fund Advisory</h3>
-                    <p className="text-slate-600 text-sm leading-relaxed">
-                      Mutual Funds offer a flexible way to generate wealth over time. We help choose and manage equity, debt, and hybrid funds that best fit your timelines and risk capacity.
-                    </p>
-                    <div className="space-y-3">
-                      <div className="flex items-center gap-3">
-                        <CheckCircle className="h-5 w-5 text-red-600 shrink-0" />
-                        <span className="text-sm font-medium text-slate-700">SIP vs Lumpsum optimization plans.</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <CheckCircle className="h-5 w-5 text-red-600 shrink-0" />
-                        <span className="text-sm font-medium text-slate-700">Performance benchmarking against major indexes.</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <CheckCircle className="h-5 w-5 text-red-600 shrink-0" />
-                        <span className="text-sm font-medium text-slate-700">Regular re-balancing and reviews of lagging funds.</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="space-y-4 bg-slate-50/50 p-6 rounded-2xl border border-slate-100">
-                    <h4 className="font-bold text-slate-800 text-sm">Key Products Advised:</h4>
-                    <div className="flex flex-wrap gap-2 text-xs">
-                      <Badge variant="outline" className="py-1.5 border-slate-200 font-medium text-slate-700">Large Cap Funds</Badge>
-                      <Badge variant="outline" className="py-1.5 border-slate-200 font-medium text-slate-700">Mid & Small Cap Funds</Badge>
-                      <Badge variant="outline" className="py-1.5 border-slate-200 font-medium text-slate-700">Flexi Cap / Multi Cap</Badge>
-                      <Badge variant="outline" className="py-1.5 border-slate-200 font-medium text-slate-700">Hybrid / Balanced Advantage</Badge>
-                      <Badge variant="outline" className="py-1.5 border-slate-200 font-medium text-slate-700">Liquid & Overnight Funds</Badge>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            {/* Tab 2: LIC & Insurance */}
-            <TabsContent value="insurance" className="focus-visible:outline-none">
-              <Card className="bg-white border-slate-200/80 shadow-md">
-                <CardContent className="p-8 md:p-10 grid md:grid-cols-2 gap-12 items-center">
-                  <div className="space-y-6">
-                    <h3 className="text-2xl font-bold text-slate-900">Life & General Insurance Audits</h3>
-                    <p className="text-slate-600 text-sm leading-relaxed">
-                      We assist for Life Insurance and we provide comprehensive plans LIC and Tata AIG Life Insurance
-                    </p>
-                    {/* <div className="space-y-3">
-                      <div className="flex items-center gap-3">
-                        <CheckCircle className="h-5 w-5 text-red-600 shrink-0" />
-                        <span className="text-sm font-medium text-slate-700">Fiduciary comparison of cover features.</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <CheckCircle className="h-5 w-5 text-red-600 shrink-0" />
-                        <span className="text-sm font-medium text-slate-700">Claim settlement assistance and documentation support.</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <CheckCircle className="h-5 w-5 text-red-600 shrink-0" />
-                        <span className="text-sm font-medium text-slate-700">Health indemnity cover audits for families.</span>
-                      </div>
-                    </div> */}
-                  </div>
-                  <div className="space-y-4 bg-slate-50/50 p-6 rounded-2xl border border-slate-100">
-                    <h4 className="font-bold text-slate-800 text-sm">Insurance Pillars:</h4>
-                    <div className="flex flex-wrap gap-2 text-xs">
-                      <Badge variant="outline" className="py-1.5 border-slate-200 font-medium text-slate-700">LIC Endowment Plans</Badge>
-                      <Badge variant="outline" className="py-1.5 border-slate-200 font-medium text-slate-700">Term Life Covers</Badge>
-                      <Badge variant="outline" className="py-1.5 border-slate-200 font-medium text-slate-700">Indemnity Health Insurance</Badge>
-                      <Badge variant="outline" className="py-1.5 border-slate-200 font-medium text-slate-700">Critical Illness Riders</Badge>
-                      <Badge variant="outline" className="py-1.5 border-slate-200 font-medium text-slate-700">Motor & Asset Insurance</Badge>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            {/* Tab 3: Tax & ELSS */}
-            <TabsContent value="taxation" className="focus-visible:outline-none">
-              <Card className="bg-white border-slate-200/80 shadow-md">
-                <CardContent className="p-8 md:p-10 grid md:grid-cols-2 gap-12 items-center">
-                  <div className="space-y-6">
-                    <h3 className="text-2xl font-bold text-slate-900">Tax Exemption Planning</h3>
-                    <p className="text-slate-600 text-sm leading-relaxed">
-                      Legally minimize tax liabilities by utilizing lock-in mutual funds, retirement options, and insurance premium deductions under current laws.
-                    </p>
-                    <div className="space-y-3">
-                      <div className="flex items-center gap-3">
-                        <CheckCircle className="h-5 w-5 text-red-600 shrink-0" />
-                        <span className="text-sm font-medium text-slate-700">Section 80C ELSS planning (3-year lock-in only).</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <CheckCircle className="h-5 w-5 text-red-600 shrink-0" />
-                        <span className="text-sm font-medium text-slate-700">Capital gains tax reduction advisory.</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <CheckCircle className="h-5 w-5 text-red-600 shrink-0" />
-                        <span className="text-sm font-medium text-slate-700">Corporate employee tax-saving audits.</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="space-y-4 bg-slate-50/50 p-6 rounded-2xl border border-slate-100">
-                    <h4 className="font-bold text-slate-800 text-sm">Tax Saving Paths:</h4>
-                    <div className="flex flex-wrap gap-2 text-xs">
-                      <Badge variant="outline" className="py-1.5 border-slate-200 font-medium text-slate-700">ELSS Mutual Funds</Badge>
-                      <Badge variant="outline" className="py-1.5 border-slate-200 font-medium text-slate-700">National Pension System (NPS)</Badge>
-                      <Badge variant="outline" className="py-1.5 border-slate-200 font-medium text-slate-700">80D Health Premium Deductions</Badge>
-                      <Badge variant="outline" className="py-1.5 border-slate-200 font-medium text-slate-700">80C Life Insurance Covers</Badge>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            {/* Tab 4: Property Valuation */}
-            <TabsContent value="valuation" className="focus-visible:outline-none">
-              <Card className="bg-white border-slate-200/80 shadow-md">
-                <CardContent className="p-8 md:p-10 grid md:grid-cols-2 gap-12 items-center">
-                  <div className="space-y-6">
-                    <h3 className="text-2xl font-bold text-slate-900">Property Valuation</h3>
-                    <p className="text-slate-600 text-sm leading-relaxed">
-                      Our property valuation team is lead by Mr. Omprakash Pandya (Govt. Approved and Registered Agri. Land Valuer)
-                    </p>
-                    <div className="space-y-4">
-                      <div className="space-y-4">
-                        <h4 className="font-bold text-slate-800 text-base">We provide Valuation Reports of:</h4>
-                        <ul className="space-y-2 text-slate-600 text-sm">
-                          <li className="flex items-start gap-2">
-                            <CheckCircle className="h-4 w-4 text-red-600 mt-0.5 shrink-0" />
-                            <span>Agricultural and N.A. Land</span>
-                          </li>
-                          <li className="flex items-start gap-2">
-                            <CheckCircle className="h-4 w-4 text-red-600 mt-0.5 shrink-0" />
-                            <span>Residential building/bungalow</span>
-                          </li>
-                          <li className="flex items-start gap-2">
-                            <CheckCircle className="h-4 w-4 text-red-600 mt-0.5 shrink-0" />
-                            <span>Industrial Sheds, Plant and Machinery, Jewelry</span>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
-          </Tabs>
-
-        </div>
-      </section>
-
       {/* Tools & Resources Grid */}
       <section id="tools" className="py-20 bg-white">
         <div className="container mx-auto px-4 md:px-8">
@@ -399,7 +230,7 @@ export default function HomePage() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {homepageContent.financialResources.map((tool, idx) => {
+            {(homepageContent?.financialResources || []).map((tool: any, idx: number) => {
               const IconComponent = IconMap[tool.iconName as keyof typeof IconMap] || Calculator;
               return (
                 <Card key={idx} className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-slate-100">
@@ -423,97 +254,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-20 bg-slate-50 border-t border-slate-200/60">
-        <div className="container mx-auto px-4 md:px-8">
-
-          <div className="max-w-3xl mx-auto text-center mb-16 space-y-3">
-            <Badge className="bg-red-50 text-red-700 border-none font-semibold">
-              Client Feedback
-            </Badge>
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 font-extrabold">
-              What Our Clients Say
-            </h2>
-            <p className="text-slate-500 text-sm md:text-base leading-relaxed">
-              We manage portfolios for families across India with commitment to transparent, long-term growth.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {homepageContent.testimonials.map((t, idx) => (
-              <Card key={idx} className="p-6 md:p-8 bg-white border-slate-200/80 shadow-sm relative hover:border-red-100 hover:shadow-md transition-all duration-300">
-                <div className="flex items-center gap-1 mb-4 text-red-500">
-                  {[...Array(t.rating)].map((_, i) => (
-                    <Star key={i} className="h-4.5 w-4.5 fill-current text-red-600" />
-                  ))}
-                </div>
-                <p className="text-slate-600 text-sm leading-relaxed mb-6 italic">
-                  &quot;{t.text}&quot;
-                </p>
-                <div>
-                  <div className="font-bold text-slate-900 text-sm">{t.name}</div>
-                  <div className="text-xs text-slate-500">{t.subtitle}</div>
-                </div>
-              </Card>
-            ))}
-          </div>
-
-        </div>
-      </section>
-
-      {/* How We Work */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 md:px-8">
-
-          <div className="max-w-3xl mx-auto text-center mb-16 space-y-3">
-            <Badge className="bg-red-50 text-red-700 border-none font-semibold">
-              Step-By-Step Process
-            </Badge>
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 font-extrabold">
-              Our Systematic Approach
-            </h2>
-            <p className="text-slate-500 text-sm md:text-base leading-relaxed">
-              We guide you from initial discovery to active compound monitoring.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-4 gap-8 max-w-5xl mx-auto">
-            <div className="text-center space-y-3">
-              <div className="w-14 h-14 bg-red-50 border border-red-100 rounded-full flex items-center justify-center mx-auto text-red-600 font-extrabold text-lg">
-                1
-              </div>
-              <h3 className="font-bold text-slate-900">Discovery Call</h3>
-              <p className="text-xs text-slate-500 leading-relaxed font-medium">We schedule a phone call to list your current investments, age profile, and wealth goals.</p>
-            </div>
-
-            <div className="text-center space-y-3">
-              <div className="w-14 h-14 bg-red-50 border border-red-100 rounded-full flex items-center justify-center mx-auto text-red-600 font-extrabold text-lg">
-                2
-              </div>
-              <h3 className="font-bold text-slate-900">Custom Allocation</h3>
-              <p className="text-xs text-slate-500 leading-relaxed font-medium">We structure a dedicated plan including Mutual Fund selection, ELSS caps, and life covers.</p>
-            </div>
-
-            <div className="text-center space-y-3">
-              <div className="w-14 h-14 bg-red-50 border border-red-100 rounded-full flex items-center justify-center mx-auto text-red-600 font-extrabold text-lg">
-                3
-              </div>
-              <h3 className="font-bold text-slate-900">Execution</h3>
-              <p className="text-xs text-slate-500 leading-relaxed font-medium">Setting up systematic investment plans (SIP), filing covers, or issuing valuation certificates.</p>
-            </div>
-
-            <div className="text-center space-y-3">
-              <div className="w-14 h-14 bg-red-50 border border-red-100 rounded-full flex items-center justify-center mx-auto text-red-600 font-extrabold text-lg">
-                4
-              </div>
-              <h3 className="font-bold text-slate-900">Periodic Review</h3>
-              <p className="text-xs text-slate-500 leading-relaxed font-medium">Annual portfolio re-balancing checks to review lagging funds and capture index shifts.</p>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
       {/* Conversion Banner Section */}
       <section className="bg-gradient-to-br from-red-50 via-white to-rose-50 text-slate-900 py-16 relative overflow-hidden border-t border-red-100">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(220,38,38,0.04),transparent_60%)]" />
@@ -525,7 +265,7 @@ export default function HomePage() {
             Take Control of Your Wealth Protection and Growth
           </h2>
           <p className="text-slate-600 text-sm md:text-base leading-relaxed max-w-2xl mx-auto">
-            Contact Sheetal Suthar or Siddharth Pandya directly. Let us schedule a free review session of your current mutual funds or value your property.
+            Contact our advisory team directly. Let us schedule a free review session of your current mutual funds or value your property.
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4">

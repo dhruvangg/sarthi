@@ -81,7 +81,7 @@ export default function ContactPage() {
             </span>
           </h1>
           <p className="text-slate-600 text-base md:text-lg leading-relaxed max-w-xl mx-auto">
-            Have questions about Mutual Fund SIPs, taxation planning, or need a government-approved property valuation? We are here to help.
+            Have questions about Mutual Fund SIPs Investment, taxation planning, Insurance or need a property valuation? We are here to help.
           </p>
         </div>
       </section>
@@ -93,7 +93,7 @@ export default function ContactPage() {
 
             {/* Form Column (Left) */}
             <div className="lg:col-span-7 bg-white border border-slate-200/80 rounded-2xl p-6 md:p-8 shadow-xl shadow-slate-100/50">
-              <ContactForm title="Schedule Appointment" buttonText="Schedule Appointment/Consultation" />
+              <ContactForm title="Schedule Appointment" buttonText="Send Request" />
             </div>
 
             {/* Details and Map Column (Right) */}
@@ -103,29 +103,15 @@ export default function ContactPage() {
               <Card className="border-slate-200/85 bg-slate-50/65 shadow-sm">
                 <CardContent className="p-6 space-y-6">
 
-                  {/* Office Location */}
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-lg bg-red-100 text-red-600 flex items-center justify-center shrink-0">
-                      <MapPin className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-slate-900 text-sm mb-1">Office Location</h4>
-                      <p className="text-xs text-slate-500 leading-relaxed font-medium">
-                        412, The Edge, Opp. Malabar Royal Bungalows, Bhakti Circle Road, Nikol, Ahmedabad-382350
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Direct Lines */}
+                  {/* Call/WhatsApp */}
                   <div className="flex items-start gap-4">
                     <div className="w-10 h-10 rounded-lg bg-red-100 text-red-600 flex items-center justify-center shrink-0">
                       <Phone className="h-5 w-5" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-slate-900 text-sm mb-1">Team Direct Lines</h4>
+                      <h4 className="font-bold text-slate-900 text-sm mb-1">Call/WhatsApp</h4>
                       <div className="text-xs text-slate-500 space-y-0.5 font-medium">
-                        <p>Sheetal Suthar: <a href="tel:+918000383222" className="text-red-600 hover:underline font-bold">+91 80003 83222</a></p>
-                        <p>Siddharth Pandya: <a href="tel:+918141316000" className="text-red-600 hover:underline font-bold">+91 81413 16000</a></p>
+                        <a href="tel:+918000383222" className="text-red-600 hover:underline font-bold">+91 8000 383 222</a>
                       </div>
                     </div>
                   </div>
@@ -151,8 +137,21 @@ export default function ContactPage() {
                     <div>
                       <h4 className="font-bold text-slate-900 text-sm mb-1">Office Hours</h4>
                       <p className="text-xs text-slate-500 font-medium">
-                        Monday – Friday: 10:00 AM – 8:00 PM<br />
+                        Monday – Friday: 10:00 AM – 7:00 PM<br />
                         Saturday – Sunday – Appointment based
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Office Location */}
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-lg bg-red-100 text-red-600 flex items-center justify-center shrink-0">
+                      <MapPin className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-slate-900 text-sm mb-1">Office Location</h4>
+                      <p className="text-xs text-slate-500 leading-relaxed font-medium">
+                        412, The Edge, Opp. Malabar Royal Bungalows, Bhakti Circle Road, Nikol, Ahmedabad-382350
                       </p>
                     </div>
                   </div>

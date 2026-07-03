@@ -597,7 +597,7 @@ export default function RiskProfiler() {
     doc.setFont('helvetica', 'normal')
     doc.setFontSize(8)
     doc.text(`Name: ${gateName}`, margin, y)
-    doc.text('Name: Sheetal Suthar', margin + sigColW + 10, y)
+    doc.text('Name: Authorized Signatory', margin + sigColW + 10, y)
     y += 5
     doc.text(`Date: ${meta.date}`, margin, y)
     doc.text('EMP Code: ___________', margin + sigColW + 10, y)
@@ -1108,7 +1108,7 @@ export default function RiskProfiler() {
                     Wealth Manager Signature
                   </h5>
                   <div className="border border-slate-200 rounded-xl h-16 bg-slate-50 flex items-end px-3 py-2">
-                    <span className="text-[10px] text-slate-400 font-bold">Sheetal Suthar</span>
+                    <span className="text-[10px] text-slate-400 font-bold">Authorized Signatory</span>
                   </div>
                   <div className="text-[10px] text-slate-400 font-bold">EMP Code: ARN-257409</div>
                 </div>

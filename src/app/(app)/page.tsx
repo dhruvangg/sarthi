@@ -15,6 +15,9 @@ import { Footer } from "@/components/Footer"
 import { ContactForm } from "@/components/ContactForm"
 import homepageContentData from "@/data/homepage-content.json";
 
+import { getPayload } from 'payload'
+import config from '@payload-config'
+
 const IconMap = {
   Calculator,
   Target,
@@ -39,11 +42,18 @@ export const metadata: Metadata = {
   }
 }
 
-export default function HomePage() {
-  const homepageContent = homepageContentData || {
-    financialResources: [],
-    testimonials: []
-  };
+export default async function HomePage() {
+  const payload = await getPayload({ config });
+  
+  let homepageContent: any = homepageContentData;
+  try {
+    const globalData = await payload.findGlobal({ slug: 'home-page' });
+    if (globalData && Object.keys(globalData).length > 0 && globalData.hero?.heading) {
+      homepageContent = globalData;
+    }
+  } catch (err) {
+    console.log("Using fallback JSON data for HomePage.");
+  }
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -82,46 +92,43 @@ export default function HomePage() {
             {/* Hero Left Content */}
             <div className="lg:col-span-7 space-y-6">
               <Badge className="bg-red-50 text-red-700 hover:bg-red-100 border-red-200/80 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider">
-                Your sarthi in your financial journey
+                {homepageContent.hero.badge}
               </Badge>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-slate-900">
-                Your Trusted Guide in{" "}
+                {homepageContent.hero.heading}{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-rose-600">
-                  Mutual Funds, Insurance & Valuation
+                  {homepageContent.hero.highlightedText}
                 </span>
               </h1>
               <p className="text-slate-600 text-lg md:text-xl leading-relaxed max-w-2xl font-medium">
-                Expert advisory across Mutual Funds, Bonds, LIC, Taxation, General Insurance, and Govt-approved Property Valuation. Empowering investors with transparent, evidence-based wealth management.
+                {homepageContent.hero.description}
               </p>
 
               <div className="flex flex-wrap gap-4 pt-2">
-                <Link href="/resources/risk-profiler">
+                <Link href={homepageContent.hero.primaryButtonHref}>
                   <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white font-semibold shadow-lg shadow-red-600/15 h-12 px-6">
-                    Free Portfolio Review
+                    {homepageContent.hero.primaryButtonText}
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
-                <Link href="#tools">
+                <Link href={homepageContent.hero.secondaryButtonHref}>
                   <Button size="lg" variant="outline" className="border-slate-200 text-slate-700 hover:bg-slate-50 h-12 px-6">
-                    Try Financial Tools
+                    {homepageContent.hero.secondaryButtonText}
                   </Button>
                 </Link>
               </div>
 
               {/* Stats Bar */}
               <div className="grid grid-cols-3 gap-6 pt-8 border-t border-slate-200/80 max-w-lg">
-                <div>
-                  <div className="text-2xl md:text-3xl font-extrabold text-slate-900">500+</div>
-                  <div className="text-xs md:text-sm text-slate-500 font-medium">Families</div>
-                </div>
-                <div>
-                  <div className="text-2xl md:text-3xl font-extrabold text-red-600">360°</div>
-                  <div className="text-xs md:text-sm text-slate-500 font-medium">Wealth Management</div>
-                </div>
-                <div>
-                  <div className="text-2xl md:text-3xl font-extrabold text-emerald-600">15+</div>
-                  <div className="text-xs md:text-sm text-slate-500 font-medium">Years Experience</div>
-                </div>
+                {homepageContent.hero.stats.map((stat: any, idx: number) => {
+                  const colors = ["text-slate-900", "text-red-600", "text-emerald-600"];
+                  return (
+                    <div key={idx}>
+                      <div className={`text-2xl md:text-3xl font-extrabold ${colors[idx % colors.length]}`}>{stat.value}</div>
+                      <div className="text-xs md:text-sm text-slate-500 font-medium">{stat.label}</div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
 
@@ -129,7 +136,7 @@ export default function HomePage() {
             <div className="lg:col-span-5 relative">
               <div className="absolute -inset-1 bg-gradient-to-tr from-red-500 to-rose-500 rounded-2xl blur-lg opacity-10" />
               <div className="relative bg-white border border-slate-200/80 rounded-2xl p-6 md:p-8 shadow-2xl shadow-slate-100">
-                <ContactForm title="Schedule Appointment" buttonText="Schedule Appointment/Consultation" />
+                <ContactForm title={homepageContent.hero.formTitle} buttonText={homepageContent.hero.formButtonText} />
               </div>
             </div>
 
@@ -145,21 +152,21 @@ export default function HomePage() {
             {/* Text details */}
             <div className="space-y-6">
               <Badge className="bg-red-50 text-red-700 border-none font-semibold px-3 py-1 text-xs">
-                About Our Firm
+                {homepageContent.aboutUs.badge}
               </Badge>
               <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 font-extrabold">
-                Sarthi SIP Financial Services
+                {homepageContent.aboutUs.heading}
               </h2>
               <p className="text-slate-600 leading-relaxed text-sm md:text-base">
-                SS Sarthi signifies a dedicated guide or charioteer. We operate with strict compliance guidelines, supporting over 500+ families with goal planning and asset management advisory solutions.
+                {homepageContent.aboutUs.description1}
               </p>
               <p className="text-slate-600 leading-relaxed text-sm md:text-base">
-                We believe in commission transparency, and fee disclosures. Our advisory team is built to prioritize client goals above all else.
+                {homepageContent.aboutUs.description2}
               </p>
               <div className="flex gap-4 pt-2">
-                <Link href="/about">
+                <Link href={homepageContent.aboutUs.buttonHref}>
                   <Button variant="outline" className="border-red-600 text-red-600 hover:bg-red-50 font-semibold">
-                    Read Our Full Legacy Story
+                    {homepageContent.aboutUs.buttonText}
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
@@ -168,45 +175,20 @@ export default function HomePage() {
 
             {/* Icons Cards block */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <Card className="border-slate-100 shadow-sm">
-                <CardContent className="p-6 space-y-3">
-                  <div className="w-10 h-10 rounded-lg bg-red-50 text-red-600 flex items-center justify-center">
-                    <TrendingUp className="h-5 w-5" />
-                  </div>
-                  <h4 className="font-bold text-slate-900 text-sm">Grow Wealth</h4>
-                  <p className="text-xs text-slate-500">Maximize compounding growth with rolling return index models.</p>
-                </CardContent>
-              </Card>
-
-              <Card className="border-slate-100 shadow-sm">
-                <CardContent className="p-6 space-y-3">
-                  <div className="w-10 h-10 rounded-lg bg-red-50 text-red-600 flex items-center justify-center">
-                    <Shield className="h-5 w-5" />
-                  </div>
-                  <h4 className="font-bold text-slate-900 text-sm">Protect Assets</h4>
-                  <p className="text-xs text-slate-500">Fiduciary planning to shield your dependents and capital reserves.</p>
-                </CardContent>
-              </Card>
-
-              <Card className="border-slate-100 shadow-sm">
-                <CardContent className="p-6 space-y-3">
-                  <div className="w-10 h-10 rounded-lg bg-red-50 text-red-600 flex items-center justify-center">
-                    <Calculator className="h-5 w-5" />
-                  </div>
-                  <h4 className="font-bold text-slate-900 text-sm">Precise Calculations</h4>
-                  <p className="text-xs text-slate-500">Calculate target corpora, SIP interest rates, and tax exemptions.</p>
-                </CardContent>
-              </Card>
-
-              <Card className="border-slate-100 shadow-sm">
-                <CardContent className="p-6 space-y-3">
-                  <div className="w-10 h-10 rounded-lg bg-red-50 text-red-600 flex items-center justify-center">
-                    <Users className="h-5 w-5" />
-                  </div>
-                  <h4 className="font-bold text-slate-900 text-sm">Fiduciary Trust</h4>
-                  <p className="text-xs text-slate-500">Always recommending what fits you, not what pays commissions.</p>
-                </CardContent>
-              </Card>
+              {homepageContent.aboutUs.features.map((feature: any, idx: number) => {
+                const IconComponent = IconMap[feature.iconName as keyof typeof IconMap] || TrendingUp;
+                return (
+                  <Card key={idx} className="border-slate-100 shadow-sm">
+                    <CardContent className="p-6 space-y-3">
+                      <div className="w-10 h-10 rounded-lg bg-red-50 text-red-600 flex items-center justify-center">
+                        <IconComponent className="h-5 w-5" />
+                      </div>
+                      <h4 className="font-bold text-slate-900 text-sm">{feature.title}</h4>
+                      <p className="text-xs text-slate-500">{feature.description}</p>
+                    </CardContent>
+                  </Card>
+                );
+              })}
             </div>
 
           </div>
@@ -222,15 +204,15 @@ export default function HomePage() {
               Interactive Tools
             </Badge> */}
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 font-extrabold">
-              Try Free Financial Resources
+              {homepageContent.financialResources.heading}
             </h2>
             <p className="text-slate-500 text-sm md:text-base leading-relaxed">
-              Plan your systematic savings, evaluate retirement sums, or profile your risk tolerance instantly.
+              {homepageContent.financialResources.description}
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {(homepageContent?.financialResources || []).map((tool: any, idx: number) => {
+            {(homepageContent?.financialResources?.items || []).map((tool: any, idx: number) => {
               const IconComponent = IconMap[tool.iconName as keyof typeof IconMap] || Calculator;
               return (
                 <Card key={idx} className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-slate-100">
@@ -259,38 +241,39 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(220,38,38,0.04),transparent_60%)]" />
         <div className="container mx-auto px-4 md:px-8 relative z-10 text-center space-y-6 max-w-3xl">
           <Badge className="bg-red-100 text-red-700 border-red-200/80 px-3 py-1 text-xs font-semibold">
-            Start Your Financial Journey
+            {homepageContent.conversionBanner.badge}
           </Badge>
           <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900">
-            Take Control of Your Wealth Protection and Growth
+            {homepageContent.conversionBanner.heading}
           </h2>
           <p className="text-slate-600 text-sm md:text-base leading-relaxed max-w-2xl mx-auto">
-            Contact our advisory team directly. Let us schedule a free review session of your current mutual funds or value your property.
+            {homepageContent.conversionBanner.description}
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4">
-            <Link href="/contact">
+            <Link href={homepageContent.conversionBanner.primaryButtonHref}>
               <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white font-semibold px-8 h-12 shadow-lg shadow-red-600/15">
-                Connect with us
+                {homepageContent.conversionBanner.primaryButtonText}
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
-            <a href="tel:+918000383222">
+            <a href={homepageContent.conversionBanner.secondaryButtonHref}>
               <Button size="lg" variant="outline" className="border-slate-200 text-slate-700 hover:bg-slate-50 h-12">
-                Call us Now
+                {homepageContent.conversionBanner.secondaryButtonText}
               </Button>
             </a>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-md mx-auto pt-8 text-xs text-slate-500 font-medium">
-            <div className="flex items-center justify-center gap-2">
-              <MapPin className="h-4.5 w-4.5 text-red-600 shrink-0" />
-              <span>Office: Nikol, Ahmedabad</span>
-            </div>
-            <div className="flex items-center justify-center gap-2">
-              <Clock className="h-4.5 w-4.5 text-red-600 shrink-0" />
-              <span>Response time: Under 24 Hrs</span>
-            </div>
+            {homepageContent.conversionBanner.contactInfo.map((info: any, idx: number) => {
+              const IconComponent = info.iconName === 'Clock' ? Clock : MapPin;
+              return (
+                <div key={idx} className="flex items-center justify-center gap-2">
+                  <IconComponent className="h-4.5 w-4.5 text-red-600 shrink-0" />
+                  <span>{info.text}</span>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>

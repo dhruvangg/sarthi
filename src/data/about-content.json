@@ -1,0 +1,102 @@
+{
+  "seo": {
+    "title": "About Us | Sarthi SIP - Legacy of Trust & Financial Planning",
+    "description": "Learn about the story, values, and expert advisors at Sarthi SIP. Empowering over 500 families with systematic wealth creation and property valuation under our expert advisory team."
+  },
+  "hero": {
+    "badge": "Our Legacy of Trust",
+    "heading": "Guiding You Towards",
+    "highlightedText": "Financial Freedom",
+    "description": "At Sarthi SIP, we act as your financial charioteer, steering your investments with precision, transparency, and deep market expertise.",
+    "stats": [
+      {
+        "value": "500+",
+        "label": "Families",
+        "subLabel": "Families and individuals building generational wealth"
+      },
+      {
+        "value": "360°",
+        "label": "Wealth Management",
+        "subLabel": "Invested across diverse, robust asset classes"
+      },
+      {
+        "value": "15+",
+        "label": "Years Experience",
+        "subLabel": "Navigating changing market cycles with success"
+      }
+    ]
+  },
+  "story": {
+    "badge": "Our Journey",
+    "heading": "Our Story: The Trusted Financial Guide",
+    "paragraphs": [
+      "The name \"**Sarthi**\" signifies a guide or charioteer. Just as a sarthi steers the chariot safely through challenges, we guide our clients through the complex world of finance, ensuring their investments align with their ultimate life goals.",
+      "Established with a vision to make professional financial advice accessible, transparent, and commission-unbiased, Sarthi SIP has grown to manage portfolios for over 500 families. We do not believe in one-size-fits-all products; instead, we analyze, validate, and strategize each portfolio with mathematical rigor."
+    ],
+    "credentials": [
+      {
+        "iconName": "CheckCircle",
+        "title": "AMFI Registered",
+        "description": "Verified distributor credentials"
+      },
+      {
+        "iconName": "CheckCircle",
+        "title": "Property Valuers",
+        "description": "Govt approved valuation consultants"
+      },
+      {
+        "iconName": "CheckCircle",
+        "title": "Tax Advisory Specialists",
+        "description": "Optimizing tax liabilities seamlessly"
+      },
+      {
+        "iconName": "CheckCircle",
+        "title": "LIC & Insurance Experts",
+        "description": "Comprehensive risk cover strategies"
+      }
+    ],
+    "mission": {
+      "badge": "Our Mission",
+      "heading": "Empowering Wealth & Protection",
+      "description": "To empower individuals and businesses to build sustainable wealth and secure protection policies using data-backed decisions, absolute transparency, and customized financial strategies."
+    },
+    "vision": {
+      "badge": "Our Vision",
+      "heading": "Leading with Fiduciary Trust",
+      "description": "To be recognized as India's most reliable, customer-centric financial advisory firm, famous for our values, ethical approach, and standard of wealth protection and growth."
+    }
+  },
+  "values": {
+    "badge": "Guiding Principles",
+    "heading": "Our Core Values",
+    "description": "Every financial calculation, valuation report, and advisor session is governed by these core beliefs.",
+    "items": [
+      {
+        "iconName": "Award",
+        "title": "Integrity First",
+        "description": "We believe in fee clarity and honest representation. No hidden markups or commission-pushing."
+      },
+      {
+        "iconName": "ShieldCheck",
+        "title": "Fiduciary Trust",
+        "description": "We operate as your fiduciary. Your financial growth and protection are our primary responsibilities."
+      },
+      {
+        "iconName": "Target",
+        "title": "Analytical Precision",
+        "description": "We use screening algorithms, rolling returns, and strict civil metrics to advise, not guesses."
+      },
+      {
+        "iconName": "Users",
+        "title": "Long-term Partnership",
+        "description": "We walk alongside you through marriage, home buying, retirement, and everything in between."
+      }
+    ]
+  },
+  "cta": {
+    "heading": "Let Us Be Your Financial Charioteer",
+    "description": "Schedule a free initial assessment with our advisors to look at your current investments and properties.",
+    "buttonText": "Schedule Free Consultation",
+    "buttonHref": "/contact"
+  }
+}

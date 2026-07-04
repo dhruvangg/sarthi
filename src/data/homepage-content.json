@@ -1,66 +1,129 @@
 {
-  "financialResources": [
-    {
-      "iconName": "Calculator",
-      "title": "SIP Calculator",
-      "description": "Estimate the compound interest growth of your systematic monthly plans.",
-      "href": "/resources/sip",
-      "buttonText": "Start SIP Calculator"
-    },
-    {
-      "iconName": "Target",
-      "title": "Goal Planner",
-      "description": "Establish educational, marriage, or retirement targets with timelines.",
-      "href": "/resources/goal-planner",
-      "buttonText": "Plan My Goals"
-    },
-    {
-      "iconName": "BarChart3",
-      "title": "Risk Profiler",
-      "description": "Determine your exact investment risk capacity under standard metrics.",
-      "href": "/resources/risk-profiler",
-      "buttonText": "Test My Profile"
-    },
-    {
-      "iconName": "PieChart",
-      "title": "Fund Screener",
-      "description": "Screen Mutual Funds based on return percentages, standard deviation and Sharpe ratios.",
-      "href": "/resources/fund-screener",
-      "buttonText": "Screen Mutual Funds"
-    },
-    {
-      "iconName": "Home",
-      "title": "Property Valuator",
-      "description": "Need an official valuation or local guide estimation for a plot/building?",
-      "href": "/contact",
-      "buttonText": "Connect Valuation Lead"
-    },
-    {
-      "iconName": "Shield",
-      "title": "Insurance Calculator",
-      "description": "Estimate your cover guidelines based on monthly dependents expenses.",
-      "href": "/contact",
-      "buttonText": "Get Custom Quote"
-    }
-  ],
-  "testimonials": [
-    {
-      "rating": 5,
-      "text": "Sarthi SIP helped me structure a diverse Mutual Fund SIP portfolio. Their transparency, fee clarity, and periodic reviews have given me absolute trust in my wealth journey.",
-      "name": "Rajesh Patel",
-      "subtitle": "Business Owner, Nikol, Ahmedabad"
-    },
-    {
-      "rating": 5,
-      "text": "The tax strategies recommended by Sheetal Suthar saved me over ₹60,000 in deductions. She helped me mapping ELSS fund lock-ins and medical covers seamlessly.",
-      "name": "Priya Sharma",
-      "subtitle": "Lead software engineer, Bengaluru"
-    },
-    {
-      "rating": 5,
-      "text": "Siddharth Pandya's property valuation report was highly accurate and legally sound. It helped our family complete a secure commercial lease negotiations in Ahmedabad.",
-      "name": "Amit Trivedi",
-      "subtitle": "Director, Manufacturing, Delhi NCR"
-    }
-  ]
+  "seo": {
+    "title": "Sarthi SIP | Mutual Funds, Insurance & Property Valuation",
+    "description": "Invest in systematic plans and build wealth with Sarthi SIP (formerly SS Sarthi Financial Services). Expert mutual fund advisory, LIC insurance policies, tax planning, and government-approved property valuation in Ahmedabad."
+  },
+  "hero": {
+    "badge": "Your sarthi in your financial journey",
+    "heading": "Your Trusted Guide in",
+    "highlightedText": "Mutual Funds, Insurance & Valuation",
+    "description": "Expert advisory across Mutual Funds, Bonds, LIC, Taxation, General Insurance, and Govt-approved Property Valuation. Empowering investors with transparent, evidence-based wealth management.",
+    "primaryButtonText": "Free Portfolio Review",
+    "primaryButtonHref": "/resources/risk-profiler",
+    "secondaryButtonText": "Try Financial Tools",
+    "secondaryButtonHref": "#tools",
+    "stats": [
+      {
+        "value": "500+",
+        "label": "Families"
+      },
+      {
+        "value": "360°",
+        "label": "Wealth Management"
+      },
+      {
+        "value": "15+",
+        "label": "Years Experience"
+      }
+    ],
+    "formTitle": "Schedule Appointment",
+    "formButtonText": "Schedule Appointment/Consultation"
+  },
+  "aboutUs": {
+    "badge": "About Our Firm",
+    "heading": "Sarthi SIP Financial Services",
+    "description1": "SS Sarthi signifies a dedicated guide or charioteer. We operate with strict compliance guidelines, supporting over 500+ families with goal planning and asset management advisory solutions.",
+    "description2": "We believe in commission transparency, and fee disclosures. Our advisory team is built to prioritize client goals above all else.",
+    "buttonText": "Read Our Full Legacy Story",
+    "buttonHref": "/about",
+    "features": [
+      {
+        "iconName": "TrendingUp",
+        "title": "Grow Wealth",
+        "description": "Maximize compounding growth with rolling return index models."
+      },
+      {
+        "iconName": "Shield",
+        "title": "Protect Assets",
+        "description": "Fiduciary planning to shield your dependents and capital reserves."
+      },
+      {
+        "iconName": "Calculator",
+        "title": "Precise Calculations",
+        "description": "Calculate target corpora, SIP interest rates, and tax exemptions."
+      },
+      {
+        "iconName": "Users",
+        "title": "Fiduciary Trust",
+        "description": "Always recommending what fits you, not what pays commissions."
+      }
+    ]
+  },
+  "financialResources": {
+    "heading": "Try Free Financial Resources",
+    "description": "Plan your systematic savings, evaluate retirement sums, or profile your risk tolerance instantly.",
+    "items": [
+      {
+        "iconName": "Calculator",
+        "title": "SIP Calculator",
+        "description": "Estimate the compound interest growth of your systematic monthly plans.",
+        "href": "/resources/sip",
+        "buttonText": "Start SIP Calculator"
+      },
+      {
+        "iconName": "Target",
+        "title": "Goal Planner",
+        "description": "Establish educational, marriage, or retirement targets with timelines.",
+        "href": "/resources/goal-planner",
+        "buttonText": "Plan My Goals"
+      },
+      {
+        "iconName": "BarChart3",
+        "title": "Risk Profiler",
+        "description": "Determine your exact investment risk capacity under standard metrics.",
+        "href": "/resources/risk-profiler",
+        "buttonText": "Test My Profile"
+      },
+      {
+        "iconName": "PieChart",
+        "title": "Fund Screener",
+        "description": "Screen Mutual Funds based on return percentages, standard deviation and Sharpe ratios.",
+        "href": "/resources/fund-screener",
+        "buttonText": "Screen Mutual Funds"
+      },
+      {
+        "iconName": "Home",
+        "title": "Property Valuator",
+        "description": "Need an official valuation or local guide estimation for a plot/building?",
+        "href": "/contact",
+        "buttonText": "Connect Valuation Lead"
+      },
+      {
+        "iconName": "Shield",
+        "title": "Insurance Calculator",
+        "description": "Estimate your cover guidelines based on monthly dependents expenses.",
+        "href": "/contact",
+        "buttonText": "Get Custom Quote"
+      }
+    ]
+  },
+  "conversionBanner": {
+    "badge": "Start Your Financial Journey",
+    "heading": "Take Control of Your Wealth Protection and Growth",
+    "description": "Contact our advisory team directly. Let us schedule a free review session of your current mutual funds or value your property.",
+    "primaryButtonText": "Connect with us",
+    "primaryButtonHref": "/contact",
+    "secondaryButtonText": "Call us Now",
+    "secondaryButtonHref": "tel:+918000383222",
+    "contactInfo": [
+      {
+        "iconName": "MapPin",
+        "text": "Office: Nikol, Ahmedabad"
+      },
+      {
+        "iconName": "Clock",
+        "text": "Response time: Under 24 Hrs"
+      }
+    ]
+  }
 }

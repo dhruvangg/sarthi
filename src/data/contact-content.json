@@ -1,0 +1,37 @@
+{
+  "seo": {
+    "title": "Contact Us | Sarthi SIP - Mutual Fund & Investment Advisory",
+    "description": "Get in touch with the expert financial advisors at Sarthi SIP. Call us, send an email, or visit our office in Nikol, Ahmedabad for systematic investment plans and mutual fund guidance."
+  },
+  "hero": {
+    "badge": "Get In Touch",
+    "heading": "Contact",
+    "highlightedText": "Us",
+    "description": "Have questions about Mutual Fund SIPs Investment, taxation planning, Insurance or need a property valuation? We are here to help."
+  },
+  "form": {
+    "title": "Schedule Appointment",
+    "buttonText": "Send Request"
+  },
+  "contactDetails": {
+    "phone": {
+      "label": "Call/WhatsApp",
+      "number": "+91 8000 383 222",
+      "href": "tel:+918000383222"
+    },
+    "email": {
+      "label": "Email Address",
+      "address": "hello@sarthisip.com",
+      "href": "mailto:hello@sarthisip.com"
+    },
+    "hours": {
+      "label": "Office Hours",
+      "text": "Monday – Friday: 10:00 AM – 7:00 PM\nSaturday – Sunday – Appointment based"
+    },
+    "location": {
+      "label": "Office Location",
+      "text": "412, The Edge, Opp. Malabar Royal Bungalows, Bhakti Circle Road, Nikol, Ahmedabad-382350",
+      "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.391782299839!2d72.6738981!3d23.0461625!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e876007ec1cdb%3A0xe9f79b0c279a0cf5!2sThe%20Edge!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "seo": {
+    "title": "SIP Calculator | Sarthi SIP",
+    "description": "Calculate returns and future value of your systematic investment plans (SIP) in mutual funds."
+  },
+  "hero": {
+    "badge": "Interactive Tools",
+    "heading": "SIP Calculator",
+    "description": "Calculate the future value of your Systematic Investment Plan (SIP) investments with compound growth projections."
+  },
+  "investmentDetails": {
+    "title": "Investment Details",
+    "description": "Enter your SIP investment parameters",
+    "monthlyInvestmentLabel": "Monthly Investment Amount",
+    "expectedReturnLabel": "Expected Annual Return (%)",
+    "timePeriodLabel": "Investment Period (Years)"
+  },
+  "investmentResults": {
+    "title": "Investment Results",
+    "totalInvestmentLabel": "Total Investment",
+    "estimatedReturnsLabel": "Estimated Returns",
+    "totalValueLabel": "Total Value"
+  },
+  "visualRepresentation": {
+    "title": "Investment Breakdown",
+    "principalAmountLabel": "Principal Amount",
+    "returnsLabel": "Returns"
+  },
+  "actions": {
+    "primaryButtonText": "Start SIP Investment",
+    "primaryButtonHref": "/contact",
+    "secondaryButtonText": "Get Expert Advice",
+    "secondaryButtonHref": "/contact"
+  },
+  "disclaimer": {
+    "text": "The calculations are based on the inputs provided and assumed rate of return. Actual returns may vary depending on market conditions. Mutual fund investments are subject to market risks. Please read all scheme-related documents carefully before investing."
+  }
+}

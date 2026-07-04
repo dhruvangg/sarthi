@@ -1,0 +1,73 @@
+{
+  "seo": {
+    "title": "Goal Planner | Sarthi SIP",
+    "description": "Establish long-term target corpora and calculate monthly mutual fund savings required."
+  },
+  "hero": {
+    "badge": "Interactive Tools",
+    "heading": "Goal Planner",
+    "description": "Plan your financial goals like retirement, education, or a dream home, and calculate how much you need to invest monthly."
+  },
+  "goalDetails": {
+    "title": "Goal Details",
+    "description": "Define your financial goal and timeline",
+    "goalTypeLabel": "Goal Type",
+    "goalAmountLabel": "Goal Amount (Today's Value)",
+    "timeToGoalLabel": "Time to Goal (Years)",
+    "goalTypes": [
+      { "id": "retirement", "name": "Retirement Planning", "icon": "🏖️" },
+      { "id": "education", "name": "Child Education", "icon": "🎓" },
+      { "id": "house", "name": "Dream Home", "icon": "🏠" },
+      { "id": "car", "name": "Car Purchase", "icon": "🚗" },
+      { "id": "vacation", "name": "Dream Vacation", "icon": "✈️" },
+      { "id": "emergency", "name": "Emergency Fund", "icon": "🛡️" }
+    ]
+  },
+  "investmentParameters": {
+    "title": "Investment Parameters",
+    "description": "Set your investment assumptions",
+    "currentSavingsLabel": "Current Savings for this Goal",
+    "expectedReturnLabel": "Expected Annual Return (%)",
+    "inflationLabel": "Expected Inflation Rate (%)"
+  },
+  "goalAnalysis": {
+    "title": "Goal Analysis",
+    "goalAmountLabel": "Goal Amount (Today's Value)",
+    "inflationAdjustedGoalLabel": "Inflation-Adjusted Goal Amount",
+    "monthlyInvestmentNeededLabel": "Monthly Investment Needed"
+  },
+  "investmentTimeline": {
+    "title": "Investment Timeline",
+    "currentAgeLabel": "Current Age",
+    "goalAchievementAgeLabel": "Goal Achievement Age",
+    "investmentPeriodLabel": "Investment Period",
+    "totalMonthlyInvestmentsLabel": "Total Monthly Investments"
+  },
+  "actions": {
+    "primaryButtonText": "Start Goal-Based Investment",
+    "primaryButtonHref": "/contact",
+    "secondaryButtonText": "Get Personalized Plan",
+    "secondaryButtonHref": "/contact"
+  },
+  "tips": {
+    "title": "💡 Goal Planning Tips",
+    "items": [
+      {
+        "heading": "Start Early",
+        "description": "The power of compounding works best when you start early. Even small amounts can grow significantly over time."
+      },
+      {
+        "heading": "Review Regularly",
+        "description": "Review your goals annually and adjust your investments based on life changes and market conditions."
+      },
+      {
+        "heading": "Consider Inflation",
+        "description": "Always factor in inflation when planning for long-term goals to maintain purchasing power."
+      },
+      {
+        "heading": "Diversify Investments",
+        "description": "Spread your investments across different asset classes to manage risk effectively."
+      }
+    ]
+  }
+}

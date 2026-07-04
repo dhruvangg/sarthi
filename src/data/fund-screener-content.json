@@ -1,0 +1,40 @@
+{
+  "seo": {
+    "title": "Live Mutual Fund Screener | Sarthi SIP",
+    "description": "Screen and search live mutual fund Net Asset Values (NAV) sourced daily from AMFI."
+  },
+  "hero": {
+    "badge": "Interactive Tools",
+    "heading": "Live Mutual Fund Screener",
+    "description": "Find the latest Net Asset Value (NAV) and details of mutual funds directly from AMFI."
+  },
+  "filters": {
+    "title": "Filters",
+    "description": "Search by name or category",
+    "searchLabel": "Search Fund Name or ID",
+    "searchPlaceholder": "e.g. HDFC Top 100",
+    "categoryLabel": "Fund Category",
+    "categoryPlaceholder": "Select category",
+    "allCategories": "All Categories",
+    "fundHouseLabel": "Fund House",
+    "fundHousePlaceholder": "Select fund house",
+    "allFundHouses": "All Fund Houses",
+    "applyButton": "Apply Filters",
+    "resetButton": "Reset"
+  },
+  "results": {
+    "title": "Results",
+    "loadingText": "Fetching latest NAV data from AMFI...",
+    "errorTitle": "Error Loading Data",
+    "errorButton": "Try Again",
+    "prevButton": "Prev",
+    "nextButton": "Next",
+    "noResults": "No funds found matching your criteria.",
+    "investButton": "Invest in this fund",
+    "prevPageButton": "Previous Page",
+    "nextPageButton": "Next Page"
+  },
+  "disclaimer": {
+    "text": "Past performance is not indicative of future results. Mutual fund investments are subject to market risks. Please read all scheme-related documents carefully before investing. Data is sourced directly from AMFI (Association of Mutual Funds in India)."
+  }
+}

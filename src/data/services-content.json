@@ -1,40 +1,99 @@
 {
+  "seo": {
+    "title": "Our Services | Sarthi SIP",
+    "description": "Comprehensive financial services including Mutual Funds, LIC, Tax Planning, and Property Valuation."
+  },
+  "hero": {
+    "badge": "Our Capabilities",
+    "heading": "Comprehensive",
+    "highlightedText": "Financial Services",
+    "description": "We align our capabilities across three main pillars: investment growth, risk shield coverage, and legal property valuation."
+  },
   "services": [
     {
       "id": "mutual-funds",
       "number": "01",
-      "title": "Mutual Funds Investment",
-      "description": "Systematic wealth creation through actively managed and index mutual funds.",
       "iconName": "PieChart",
-      "features": ["Risk-profiled asset allocation", "SIP and Lumpsum strategies", "Portfolio rebalancing"],
-      "tags": ["Equity", "Debt", "Hybrid", "ELSS"]
+      "title": "Mutual Funds & SIPs",
+      "description": "Goal-based investment planning using top-performing mutual funds. We design portfolios that balance risk and maximize long-term compounding growth.",
+      "features": [
+        "Index Funds & Large Cap strategy",
+        "Small & Mid-cap satellite allocation",
+        "ELSS Tax-saving fund advisory",
+        "Retirement corpus building"
+      ],
+      "tags": [
+        "Wealth Creation",
+        "Tax Savings",
+        "Goal Planning",
+        "Portfolio Review"
+      ]
     },
     {
       "id": "insurance",
       "number": "02",
-      "title": "Insurance & Protection",
-      "description": "Comprehensive life and general insurance to shield your family and assets.",
       "iconName": "Shield",
-      "features": ["Term Life Insurance", "Health Coverage", "Vehicle & Property Insurance"],
-      "tags": ["LIC", "Health", "General"]
+      "title": "Life & Health Insurance",
+      "description": "Protect your family's financial future with optimal term life covers and comprehensive medical insurance policies.",
+      "features": [
+        "Term Life covers (LIC)",
+        "Comprehensive Family Floater Health",
+        "Critical Illness riders",
+        "Claim settlement assistance"
+      ],
+      "tags": [
+        "Risk Protection",
+        "Family Security",
+        "Tax Benefits",
+        "Medical Covers"
+      ]
     },
     {
       "id": "tax-planning",
       "number": "03",
-      "title": "Tax Planning",
-      "description": "Strategic tax optimization to maximize your take-home returns.",
       "iconName": "Calculator",
-      "features": ["Section 80C Investments", "Capital Gains Planning", "Tax harvesting"],
-      "tags": ["ELSS", "NPS", "Tax Bonds"]
+      "title": "Tax Optimization",
+      "description": "Strategic tax planning to minimize your liability and maximize your take-home returns under current tax regimes.",
+      "features": [
+        "80C & 80D Deductions",
+        "Capital Gains harvesting",
+        "Old vs New regime analysis",
+        "HUF & Corporate Tax planning"
+      ],
+      "tags": [
+        "ITR Strategy",
+        "Section 80C",
+        "Capital Gains",
+        "Wealth Retention"
+      ]
     },
     {
       "id": "property-valuation",
       "number": "04",
-      "title": "Property Valuation",
-      "description": "Government-approved, accurate valuation reports for all your real estate needs.",
       "iconName": "Home",
-      "features": ["Visa purposes", "Capital gains computation", "Bank loan assessments"],
-      "tags": ["Govt Approved", "Residential", "Commercial"]
+      "title": "Property Valuation",
+      "description": "Government approved and registered property valuers for accurate, legally compliant estimations of real estate assets.",
+      "features": [
+        "Visa & Immigration Valuations",
+        "Bank Loan collaterals",
+        "Capital Gains tax calculation",
+        "Commercial lease evaluations"
+      ],
+      "tags": [
+        "Govt Approved",
+        "Real Estate",
+        "Legal Compliance",
+        "Accurate Estimates"
+      ]
     }
-  ]
+  ],
+  "conversionBanner": {
+    "badge": "Secure Your Financial Future",
+    "heading": "Let our experts design a customized portfolio",
+    "description": "Contact our advisory team directly. Let us schedule a free review session of your current mutual funds or evaluate your property.",
+    "primaryButtonText": "Schedule a Consultation",
+    "primaryButtonHref": "/contact",
+    "secondaryButtonText": "Call us Now",
+    "secondaryButtonHref": "tel:+918000383222"
+  }
 }

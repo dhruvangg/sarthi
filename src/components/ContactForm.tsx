@@ -17,7 +17,8 @@ const SERVICE_OPTIONS = [
   "Insurance Advisory",
   "Tax Planning",
   "Property Valuation",
-  "Comprehensive Financial Planning"
+  "Comprehensive Financial Planning",
+  "All types of Loan"
 ];
 
 export function ContactForm({ title, buttonText }: ContactFormProps) {
@@ -146,7 +147,7 @@ export function ContactForm({ title, buttonText }: ContactFormProps) {
           </Label>
           <Input 
             id="form-name"
-            placeholder="John Doe" 
+            placeholder="" 
             name="name" 
             value={formData.name}
             onChange={(e) => setFormData({...formData, name: e.target.value})}
@@ -168,7 +169,7 @@ export function ContactForm({ title, buttonText }: ContactFormProps) {
           </Label>
           <Input 
             id="form-phone"
-            placeholder="+91 98765 43210" 
+            placeholder="" 
             name="phone" 
             value={formData.phone}
             onChange={(e) => setFormData({...formData, phone: e.target.value})}
@@ -190,7 +191,7 @@ export function ContactForm({ title, buttonText }: ContactFormProps) {
           </Label>
           <Input 
             id="form-email"
-            placeholder="hello@sarthisip.com" 
+            placeholder="" 
             name="email" 
             value={formData.email}
             onChange={(e) => setFormData({...formData, email: e.target.value})}
@@ -240,7 +241,7 @@ export function ContactForm({ title, buttonText }: ContactFormProps) {
         {/* Remarks input */}
         <div className="space-y-1.5">
           <Label htmlFor="form-remarks" className="text-slate-700 dark:text-slate-300 text-xs font-semibold uppercase tracking-wider">
-            Remarks
+            Additional Queries
           </Label>
           <Textarea 
             id="form-remarks"

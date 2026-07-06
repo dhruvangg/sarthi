@@ -24,7 +24,9 @@ const IconMap = {
   BarChart3,
   PieChart,
   Home,
-  Shield
+  Shield,
+  TrendingUp,
+  Users
 };
 
 export const metadata: Metadata = {

@@ -50,7 +50,7 @@ export function Header({ showBackToHome = false }: HeaderProps) {
           {/* Logo */}
           <Link href="/" className="flex items-center shrink-0">
             <Image
-              src="/logo.png?v=2"
+              src="/logo1.png?v=1"
               alt="Sarthi SIP"
               width={160}
               height={160}
@@ -75,8 +75,8 @@ export function Header({ showBackToHome = false }: HeaderProps) {
                   <Link
                     href="/"
                     className={`text-sm font-semibold tracking-wide transition-colors duration-200 ${isActive("/")
-                        ? "text-red-600 font-bold border-b-2 border-red-500 pb-1"
-                        : "text-slate-600 hover:text-red-600"
+                      ? "text-red-600 font-bold border-b-2 border-red-500 pb-1"
+                      : "text-slate-600 hover:text-red-600"
                       }`}
                   >
                     Home
@@ -85,8 +85,8 @@ export function Header({ showBackToHome = false }: HeaderProps) {
                   <Link
                     href="/about"
                     className={`text-sm font-semibold tracking-wide transition-colors duration-200 ${isActive("/about")
-                        ? "text-red-600 font-bold border-b-2 border-red-500 pb-1"
-                        : "text-slate-600 hover:text-red-600"
+                      ? "text-red-600 font-bold border-b-2 border-red-500 pb-1"
+                      : "text-slate-600 hover:text-red-600"
                       }`}
                   >
                     About Us
@@ -95,8 +95,8 @@ export function Header({ showBackToHome = false }: HeaderProps) {
                   <Link
                     href="/services"
                     className={`text-sm font-semibold tracking-wide transition-colors duration-200 ${isActive("/services")
-                        ? "text-red-600 font-bold border-b-2 border-red-500 pb-1"
-                        : "text-slate-600 hover:text-red-600"
+                      ? "text-red-600 font-bold border-b-2 border-red-500 pb-1"
+                      : "text-slate-600 hover:text-red-600"
                       }`}
                   >
                     Services
@@ -111,8 +111,8 @@ export function Header({ showBackToHome = false }: HeaderProps) {
                     <button
                       type="button"
                       className={`text-sm font-semibold tracking-wide transition-colors duration-200 flex items-center gap-1 pb-1 outline-none ${isResourcesActive()
-                          ? "text-red-600 font-bold border-b-2 border-red-500"
-                          : "text-slate-600 hover:text-red-600"
+                        ? "text-red-600 font-bold border-b-2 border-red-500"
+                        : "text-slate-600 hover:text-red-600"
                         }`}
                     >
                       <span>Resources</span>
@@ -127,8 +127,8 @@ export function Header({ showBackToHome = false }: HeaderProps) {
                             key={subLink.name}
                             href={subLink.href}
                             className={`block px-4 py-2.5 text-sm transition-colors duration-150 ${pathname === subLink.href
-                                ? "bg-red-50 text-red-600 font-semibold"
-                                : "text-slate-700 hover:bg-slate-50 hover:text-red-600"
+                              ? "bg-red-50 text-red-600 font-semibold"
+                              : "text-slate-700 hover:bg-slate-50 hover:text-red-600"
                               }`}
                           >
                             {subLink.name}
@@ -141,8 +141,8 @@ export function Header({ showBackToHome = false }: HeaderProps) {
                   <Link
                     href="/contact"
                     className={`text-sm font-semibold tracking-wide transition-colors duration-200 ${isActive("/contact")
-                        ? "text-red-600 font-bold border-b-2 border-red-500 pb-1"
-                        : "text-slate-600 hover:text-red-600"
+                      ? "text-red-600 font-bold border-b-2 border-red-500 pb-1"
+                      : "text-slate-600 hover:text-red-600"
                       }`}
                   >
                     Contact Us
@@ -191,8 +191,8 @@ export function Header({ showBackToHome = false }: HeaderProps) {
                 href="/"
                 onClick={() => setMobileMenuOpen(false)}
                 className={`text-base font-semibold transition-colors duration-200 py-1.5 ${isActive("/") && pathname === "/"
-                    ? "text-red-600 pl-2 border-l-4 border-red-500"
-                    : "text-slate-700 hover:text-red-600"
+                  ? "text-red-600 pl-2 border-l-4 border-red-500"
+                  : "text-slate-700 hover:text-red-600"
                   }`}
               >
                 Home
@@ -202,8 +202,8 @@ export function Header({ showBackToHome = false }: HeaderProps) {
                 href="/about"
                 onClick={() => setMobileMenuOpen(false)}
                 className={`text-base font-semibold transition-colors duration-200 py-1.5 ${isActive("/about")
-                    ? "text-red-600 pl-2 border-l-4 border-red-500"
-                    : "text-slate-700 hover:text-red-600"
+                  ? "text-red-600 pl-2 border-l-4 border-red-500"
+                  : "text-slate-700 hover:text-red-600"
                   }`}
               >
                 About Us
@@ -213,8 +213,8 @@ export function Header({ showBackToHome = false }: HeaderProps) {
                 href="/services"
                 onClick={() => setMobileMenuOpen(false)}
                 className={`text-base font-semibold transition-colors duration-200 py-1.5 ${isActive("/services")
-                    ? "text-red-600 pl-2 border-l-4 border-red-500"
-                    : "text-slate-700 hover:text-red-600"
+                  ? "text-red-600 pl-2 border-l-4 border-red-500"
+                  : "text-slate-700 hover:text-red-600"
                   }`}
               >
                 Services
@@ -253,8 +253,8 @@ export function Header({ showBackToHome = false }: HeaderProps) {
                 href="/contact"
                 onClick={() => setMobileMenuOpen(false)}
                 className={`text-base font-semibold transition-colors duration-200 py-1.5 ${isActive("/contact")
-                    ? "text-red-600 pl-2 border-l-4 border-red-500"
-                    : "text-slate-700 hover:text-red-600"
+                  ? "text-red-600 pl-2 border-l-4 border-red-500"
+                  : "text-slate-700 hover:text-red-600"
                   }`}
               >
                 Contact Us

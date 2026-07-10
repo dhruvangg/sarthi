@@ -11,7 +11,7 @@ export function Footer() {
           <div className="space-y-4">
             <Link href="/" className="inline-block bg-white border border-slate-100 rounded-lg p-2 max-w-[180px] shadow-sm">
               <Image
-                src="/logo1.png?v=1"
+                src="/logo1.png?v=2"
                 alt="Sarthi SIP"
                 width={150}
                 height={150}

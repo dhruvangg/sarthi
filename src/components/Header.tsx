@@ -50,7 +50,7 @@ export function Header({ showBackToHome = false }: HeaderProps) {
           {/* Logo */}
           <Link href="/" className="flex items-center shrink-0">
             <Image
-              src="/logo1.png?v=1"
+              src="/logo1.png?v=2"
               alt="Sarthi SIP"
               width={160}
               height={160}

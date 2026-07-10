@@ -3,6 +3,8 @@ import { postgresAdapter } from '@payloadcms/db-postgres'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
 import { Users } from './src/collections/Users'
+import { ContactSubmissions } from './src/collections/ContactSubmissions'
+import { RiskProfileSubmissions } from './src/collections/RiskProfileSubmissions'
 
 import { HomePage } from './src/globals/HomePage'
 import { AboutPage } from './src/globals/AboutPage'
@@ -16,7 +18,7 @@ export default buildConfig({
   admin: {
     user: Users.slug,
   },
-  collections: [Users],
+  collections: [Users, ContactSubmissions, RiskProfileSubmissions],
   globals: [
     HomePage,
     AboutPage,

@@ -68,6 +68,8 @@ export interface Config {
   blocks: {};
   collections: {
     users: User;
+    'contact-submissions': ContactSubmission;
+    'risk-profile-submissions': RiskProfileSubmission;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -76,6 +78,8 @@ export interface Config {
   collectionsJoins: {};
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
+    'contact-submissions': ContactSubmissionsSelect<false> | ContactSubmissionsSelect<true>;
+    'risk-profile-submissions': RiskProfileSubmissionsSelect<false> | RiskProfileSubmissionsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -157,6 +161,65 @@ export interface User {
   collection: 'users';
 }
 /**
+ * Form submissions from the website contact forms.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-submissions".
+ */
+export interface ContactSubmission {
+  id: number;
+  name: string;
+  phone: string;
+  email?: string | null;
+  services?:
+    ('mutual-funds' | 'insurance' | 'tax-planning' | 'property-valuation' | 'financial-planning' | 'loan')[] | null;
+  remarks?: string | null;
+  /**
+   * Which page the form was submitted from (e.g., "homepage", "contact")
+   */
+  source?: string | null;
+  status?: ('new' | 'contacted' | 'closed') | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Risk profiler form submissions with full assessment responses.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "risk-profile-submissions".
+ */
+export interface RiskProfileSubmission {
+  id: number;
+  name: string;
+  phone: string;
+  email: string;
+  pan?: string | null;
+  profilingType?: ('new' | 'reprofiling') | null;
+  isMinor?: boolean | null;
+  profilingDate?: string | null;
+  language?: ('en' | 'hi' | 'gu') | null;
+  q1Age?: ('under-40' | '40-55' | '55-70' | 'over-70') | null;
+  q2Income?: ('increasing' | 'steady' | 'variable' | 'retired') | null;
+  q3TimeHorizon?: ('under-1yr' | '1-3yr' | '3-5yr' | 'over-5yr') | null;
+  q4LossTolerance?: ('liquidate' | 'wait' | 'hold' | 'buy-more') | null;
+  q5Knowledge?: ('limited' | 'moderate' | 'advanced' | 'extensive') | null;
+  q6InvestmentStyle?: ('conservative' | 'moderate-risk' | 'high-return' | 'max-growth') | null;
+  q7Dependents?: ('4-plus' | '2-3' | '1' | 'none') | null;
+  q8EmergencyFund?: ('none' | '1-3months' | '3-6months' | '6plus-months') | null;
+  q9Debt?: ('very-high' | 'significant' | 'moderate' | 'none') | null;
+  q10PriorExperience?: ('no-distressing' | 'no-understood' | 'yes-panicked' | 'yes-stayed') | null;
+  q11ReturnExpectation?: ('6-7pct' | '8-10pct' | '11-15pct' | '15plus-pct') | null;
+  q12GoalClarity?: ('no-goals' | 'vague' | 'defined' | 'specific') | null;
+  riskProfile: 'conservative' | 'balanced' | 'growth' | 'high-growth';
+  score: number;
+  maxScore: number;
+  debtAllocation?: number | null;
+  equityAllocation?: number | null;
+  status?: ('new' | 'contacted' | 'closed') | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -179,10 +242,19 @@ export interface PayloadKv {
  */
 export interface PayloadLockedDocument {
   id: number;
-  document?: {
-    relationTo: 'users';
-    value: number | User;
-  } | null;
+  document?:
+    | ({
+        relationTo: 'users';
+        value: number | User;
+      } | null)
+    | ({
+        relationTo: 'contact-submissions';
+        value: number | ContactSubmission;
+      } | null)
+    | ({
+        relationTo: 'risk-profile-submissions';
+        value: number | RiskProfileSubmission;
+      } | null);
   globalSlug?: string | null;
   user: {
     relationTo: 'users';
@@ -246,6 +318,55 @@ export interface UsersSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-submissions_select".
+ */
+export interface ContactSubmissionsSelect<T extends boolean = true> {
+  name?: T;
+  phone?: T;
+  email?: T;
+  services?: T;
+  remarks?: T;
+  source?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "risk-profile-submissions_select".
+ */
+export interface RiskProfileSubmissionsSelect<T extends boolean = true> {
+  name?: T;
+  phone?: T;
+  email?: T;
+  pan?: T;
+  profilingType?: T;
+  isMinor?: T;
+  profilingDate?: T;
+  language?: T;
+  q1Age?: T;
+  q2Income?: T;
+  q3TimeHorizon?: T;
+  q4LossTolerance?: T;
+  q5Knowledge?: T;
+  q6InvestmentStyle?: T;
+  q7Dependents?: T;
+  q8EmergencyFund?: T;
+  q9Debt?: T;
+  q10PriorExperience?: T;
+  q11ReturnExpectation?: T;
+  q12GoalClarity?: T;
+  riskProfile?: T;
+  score?: T;
+  maxScore?: T;
+  debtAllocation?: T;
+  equityAllocation?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

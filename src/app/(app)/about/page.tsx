@@ -39,7 +39,7 @@ export const metadata: Metadata = {
 
 export default async function AboutPage() {
   const payload = await getPayload({ config });
-  
+
   let aboutContent: any = aboutpageContentData;
   try {
     const globalData = await payload.findGlobal({ slug: 'about-page' });

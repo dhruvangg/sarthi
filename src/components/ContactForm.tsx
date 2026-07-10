@@ -88,19 +88,31 @@ export function ContactForm({ title, buttonText }: ContactFormProps) {
     setStatus("loading");
     
     try {
-      const response = await fetch("https://formspree.io/f/xkoklyde", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        },
-        body: JSON.stringify({
-          ...formData,
-          services: formData.services.join(', ')
+      // Fire both requests in parallel: Formspree (email notification) + Payload CMS (admin panel)
+      const [formspreeResult, _payloadResult] = await Promise.allSettled([
+        fetch("https://formspree.io/f/xkoklyde", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify({
+            ...formData,
+            services: formData.services.join(', ')
+          })
+        }),
+        fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            ...formData,
+            source: window.location.pathname === '/' ? 'homepage' : window.location.pathname.replace('/', '')
+          })
         })
-      });
+      ]);
       
-      if (response.ok) {
+      // UI success depends on Formspree (primary notification channel)
+      if (formspreeResult.status === 'fulfilled' && formspreeResult.value.ok) {
         setStatus("success");
         setFormData({ name: '', phone: '', email: '', services: [], remarks: '' });
       } else {

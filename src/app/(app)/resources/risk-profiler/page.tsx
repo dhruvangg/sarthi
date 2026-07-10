@@ -323,6 +323,65 @@ export default function RiskProfiler() {
       return
     }
 
+
+    // Save to Payload CMS (fire-and-forget, don't block PDF download)
+    const score = calculateScore()
+    const profile = getProfile(score)
+
+    // Map answer indices to Payload select values for each question
+    const Q_VALUE_MAPS = [
+      ['under-40', '40-55', '55-70', 'over-70'],           // Q1: Age
+      ['increasing', 'steady', 'variable', 'retired'],      // Q2: Income
+      ['under-1yr', '1-3yr', '3-5yr', 'over-5yr'],         // Q3: Time Horizon
+      ['liquidate', 'wait', 'hold', 'buy-more'],            // Q4: Loss Tolerance
+      ['limited', 'moderate', 'advanced', 'extensive'],      // Q5: Knowledge
+      ['conservative', 'moderate-risk', 'high-return', 'max-growth'], // Q6: Style
+      ['4-plus', '2-3', '1', 'none'],                       // Q7: Dependents
+      ['none', '1-3months', '3-6months', '6plus-months'],   // Q8: Emergency Fund
+      ['very-high', 'significant', 'moderate', 'none'],     // Q9: Debt
+      ['no-distressing', 'no-understood', 'yes-panicked', 'yes-stayed'], // Q10: Experience
+      ['6-7pct', '8-10pct', '11-15pct', '15plus-pct'],     // Q11: Return
+      ['no-goals', 'vague', 'defined', 'specific'],         // Q12: Goal Clarity
+    ]
+
+    const getQValue = (qIdx: number) =>
+      answers[qIdx] !== null ? Q_VALUE_MAPS[qIdx][answers[qIdx]!] : undefined
+
+    fetch('/api/risk-profile', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        // Step 0: Applicant info
+        name: gateName,
+        email: gateEmail,
+        phone: gatePhone,
+        pan: meta.pan || undefined,
+        profilingType: meta.type,
+        isMinor: meta.minor === 'yes',
+        profilingDate: meta.date,
+        language: meta.language || 'en',
+        // Questions 1-12
+        q1Age: getQValue(0),
+        q2Income: getQValue(1),
+        q3TimeHorizon: getQValue(2),
+        q4LossTolerance: getQValue(3),
+        q5Knowledge: getQValue(4),
+        q6InvestmentStyle: getQValue(5),
+        q7Dependents: getQValue(6),
+        q8EmergencyFund: getQValue(7),
+        q9Debt: getQValue(8),
+        q10PriorExperience: getQValue(9),
+        q11ReturnExpectation: getQValue(10),
+        q12GoalClarity: getQValue(11),
+        // Result
+        riskProfile: profile.name.toLowerCase().replace(' ', '-'),
+        score,
+        maxScore: QUESTIONS.length * 6,
+        debtAllocation: profile.debt,
+        equityAllocation: profile.eq,
+      }),
+    }).catch(() => {}) // Silently ignore API errors
+
     // Success! Generate PDF report
     setShowGateModal(false)
     await generatePdfReport()

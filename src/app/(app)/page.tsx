@@ -46,13 +46,14 @@ export const metadata: Metadata = {
 
 export default async function HomePage() {
   const payload = await getPayload({ config });
-  
+
   let homepageContent: any = homepageContentData;
   try {
     const globalData = await payload.findGlobal({ slug: 'home-page' });
     if (globalData && Object.keys(globalData).length > 0 && globalData.hero?.heading) {
       homepageContent = globalData;
     }
+    console.log(homepageContent);
   } catch (err) {
     console.log("Using fallback JSON data for HomePage.");
   }
@@ -160,6 +161,7 @@ export default async function HomePage() {
                 {homepageContent.aboutUs.heading}
               </h2>
               <p className="text-slate-600 leading-relaxed text-sm md:text-base">
+
                 {homepageContent.aboutUs.description1}
               </p>
               <p className="text-slate-600 leading-relaxed text-sm md:text-base">

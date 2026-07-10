@@ -53,7 +53,6 @@ export default async function HomePage() {
     if (globalData && Object.keys(globalData).length > 0 && globalData.hero?.heading) {
       homepageContent = globalData;
     }
-    console.log(homepageContent);
   } catch (err) {
     console.log("Using fallback JSON data for HomePage.");
   }

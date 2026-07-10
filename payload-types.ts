@@ -86,7 +86,7 @@ export interface Config {
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
   };
   db: {
-    defaultIDType: number;
+    defaultIDType: string;
   };
   fallbackLocale: null;
   globals: {
@@ -140,7 +140,7 @@ export interface UserAuthOperations {
  * via the `definition` "users".
  */
 export interface User {
-  id: number;
+  id: string;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -167,7 +167,7 @@ export interface User {
  * via the `definition` "contact-submissions".
  */
 export interface ContactSubmission {
-  id: number;
+  id: string;
   name: string;
   phone: string;
   email?: string | null;
@@ -189,7 +189,7 @@ export interface ContactSubmission {
  * via the `definition` "risk-profile-submissions".
  */
 export interface RiskProfileSubmission {
-  id: number;
+  id: string;
   name: string;
   phone: string;
   email: string;
@@ -224,7 +224,7 @@ export interface RiskProfileSubmission {
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
-  id: number;
+  id: string;
   key: string;
   data:
     | {
@@ -241,24 +241,24 @@ export interface PayloadKv {
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
-  id: number;
+  id: string;
   document?:
     | ({
         relationTo: 'users';
-        value: number | User;
+        value: string | User;
       } | null)
     | ({
         relationTo: 'contact-submissions';
-        value: number | ContactSubmission;
+        value: string | ContactSubmission;
       } | null)
     | ({
         relationTo: 'risk-profile-submissions';
-        value: number | RiskProfileSubmission;
+        value: string | RiskProfileSubmission;
       } | null);
   globalSlug?: string | null;
   user: {
     relationTo: 'users';
-    value: number | User;
+    value: string | User;
   };
   updatedAt: string;
   createdAt: string;
@@ -268,10 +268,10 @@ export interface PayloadLockedDocument {
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: number;
+  id: string;
   user: {
     relationTo: 'users';
-    value: number | User;
+    value: string | User;
   };
   key?: string | null;
   value?:
@@ -291,7 +291,7 @@ export interface PayloadPreference {
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: number;
+  id: string;
   name?: string | null;
   batch?: number | null;
   updatedAt: string;
@@ -413,7 +413,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  * via the `definition` "home-page".
  */
 export interface HomePage {
-  id: number;
+  id: string;
   seo: {
     title: string;
     description: string;
@@ -494,7 +494,7 @@ export interface HomePage {
  * via the `definition` "about-page".
  */
 export interface AboutPage {
-  id: number;
+  id: string;
   seo: {
     title: string;
     description: string;
@@ -561,7 +561,7 @@ export interface AboutPage {
  * via the `definition` "contact-page".
  */
 export interface ContactPage {
-  id: number;
+  id: string;
   seo: {
     title: string;
     description: string;
@@ -605,7 +605,7 @@ export interface ContactPage {
  * via the `definition` "services-page".
  */
 export interface ServicesPage {
-  id: number;
+  id: string;
   seo: {
     title: string;
     description: string;
@@ -654,7 +654,7 @@ export interface ServicesPage {
  * via the `definition` "fund-screener-page".
  */
 export interface FundScreenerPage {
-  id: number;
+  id: string;
   seo: {
     title: string;
     description: string;
@@ -701,7 +701,7 @@ export interface FundScreenerPage {
  * via the `definition` "goal-planner-page".
  */
 export interface GoalPlannerPage {
-  id: number;
+  id: string;
   seo: {
     title: string;
     description: string;
@@ -769,7 +769,7 @@ export interface GoalPlannerPage {
  * via the `definition` "sip-page".
  */
 export interface SipPage {
-  id: number;
+  id: string;
   seo: {
     title: string;
     description: string;

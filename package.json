@@ -12,7 +12,7 @@
     "generate:types": "payload generate:types"
   },
   "dependencies": {
-    "@payloadcms/db-postgres": "^3.85.2",
+    "@payloadcms/db-mongodb": "^3.85.2",
     "@payloadcms/next": "^3.85.2",
     "@payloadcms/richtext-lexical": "^3.85.2",
     "@radix-ui/react-label": "^2.1.7",

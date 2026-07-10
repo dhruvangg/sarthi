@@ -46,7 +46,7 @@ export function Header({ showBackToHome = false }: HeaderProps) {
 
       <div className="container mx-auto px-4 md:px-8">
         <div className="flex items-center justify-between h-20 md:h-24">
-          
+
           {/* Logo */}
           <Link href="/" className="flex items-center shrink-0">
             <Image
@@ -74,50 +74,46 @@ export function Header({ showBackToHome = false }: HeaderProps) {
                   {/* Home & About links */}
                   <Link
                     href="/"
-                    className={`text-sm font-semibold tracking-wide transition-colors duration-200 ${
-                      isActive("/")
+                    className={`text-sm font-semibold tracking-wide transition-colors duration-200 ${isActive("/")
                         ? "text-red-600 font-bold border-b-2 border-red-500 pb-1"
                         : "text-slate-600 hover:text-red-600"
-                    }`}
+                      }`}
                   >
                     Home
                   </Link>
 
                   <Link
                     href="/about"
-                    className={`text-sm font-semibold tracking-wide transition-colors duration-200 ${
-                      isActive("/about")
+                    className={`text-sm font-semibold tracking-wide transition-colors duration-200 ${isActive("/about")
                         ? "text-red-600 font-bold border-b-2 border-red-500 pb-1"
                         : "text-slate-600 hover:text-red-600"
-                    }`}
+                      }`}
                   >
                     About Us
                   </Link>
 
                   <Link
                     href="/services"
-                    className={`text-sm font-semibold tracking-wide transition-colors duration-200 ${
-                      isActive("/services")
+                    className={`text-sm font-semibold tracking-wide transition-colors duration-200 ${isActive("/services")
                         ? "text-red-600 font-bold border-b-2 border-red-500 pb-1"
                         : "text-slate-600 hover:text-red-600"
-                    }`}
+                      }`}
                   >
                     Services
                   </Link>
 
                   {/* Resources Hover Dropdown */}
-                  <div 
+                  <div
                     className="relative"
                     onMouseEnter={() => setResourcesDropdownOpen(true)}
                     onMouseLeave={() => setResourcesDropdownOpen(false)}
                   >
                     <button
                       type="button"
-                      className={`text-sm font-semibold tracking-wide transition-colors duration-200 flex items-center gap-1 pb-1 outline-none ${
-                        isResourcesActive()
+                      className={`text-sm font-semibold tracking-wide transition-colors duration-200 flex items-center gap-1 pb-1 outline-none ${isResourcesActive()
                           ? "text-red-600 font-bold border-b-2 border-red-500"
                           : "text-slate-600 hover:text-red-600"
-                      }`}
+                        }`}
                     >
                       <span>Resources</span>
                       <ChevronDown className={`h-4.5 w-4.5 transition-transform duration-200 ${resourcesDropdownOpen ? 'rotate-180' : ''}`} />
@@ -130,11 +126,10 @@ export function Header({ showBackToHome = false }: HeaderProps) {
                           <Link
                             key={subLink.name}
                             href={subLink.href}
-                            className={`block px-4 py-2.5 text-sm transition-colors duration-150 ${
-                              pathname === subLink.href
+                            className={`block px-4 py-2.5 text-sm transition-colors duration-150 ${pathname === subLink.href
                                 ? "bg-red-50 text-red-600 font-semibold"
                                 : "text-slate-700 hover:bg-slate-50 hover:text-red-600"
-                            }`}
+                              }`}
                           >
                             {subLink.name}
                           </Link>
@@ -145,16 +140,15 @@ export function Header({ showBackToHome = false }: HeaderProps) {
 
                   <Link
                     href="/contact"
-                    className={`text-sm font-semibold tracking-wide transition-colors duration-200 ${
-                      isActive("/contact")
+                    className={`text-sm font-semibold tracking-wide transition-colors duration-200 ${isActive("/contact")
                         ? "text-red-600 font-bold border-b-2 border-red-500 pb-1"
                         : "text-slate-600 hover:text-red-600"
-                    }`}
+                      }`}
                   >
                     Contact Us
                   </Link>
                 </nav>
-                
+
                 <Link href="/contact">
                   <Button className="bg-red-600 hover:bg-red-700 text-white font-semibold shadow-md shadow-red-600/10">
                     Let&apos;s Connect
@@ -196,11 +190,10 @@ export function Header({ showBackToHome = false }: HeaderProps) {
               <Link
                 href="/"
                 onClick={() => setMobileMenuOpen(false)}
-                className={`text-base font-semibold transition-colors duration-200 py-1.5 ${
-                  isActive("/") && pathname === "/"
+                className={`text-base font-semibold transition-colors duration-200 py-1.5 ${isActive("/") && pathname === "/"
                     ? "text-red-600 pl-2 border-l-4 border-red-500"
                     : "text-slate-700 hover:text-red-600"
-                }`}
+                  }`}
               >
                 Home
               </Link>
@@ -208,11 +201,10 @@ export function Header({ showBackToHome = false }: HeaderProps) {
               <Link
                 href="/about"
                 onClick={() => setMobileMenuOpen(false)}
-                className={`text-base font-semibold transition-colors duration-200 py-1.5 ${
-                  isActive("/about")
+                className={`text-base font-semibold transition-colors duration-200 py-1.5 ${isActive("/about")
                     ? "text-red-600 pl-2 border-l-4 border-red-500"
                     : "text-slate-700 hover:text-red-600"
-                }`}
+                  }`}
               >
                 About Us
               </Link>
@@ -220,11 +212,10 @@ export function Header({ showBackToHome = false }: HeaderProps) {
               <Link
                 href="/services"
                 onClick={() => setMobileMenuOpen(false)}
-                className={`text-base font-semibold transition-colors duration-200 py-1.5 ${
-                  isActive("/services")
+                className={`text-base font-semibold transition-colors duration-200 py-1.5 ${isActive("/services")
                     ? "text-red-600 pl-2 border-l-4 border-red-500"
                     : "text-slate-700 hover:text-red-600"
-                }`}
+                  }`}
               >
                 Services
               </Link>
@@ -234,14 +225,13 @@ export function Header({ showBackToHome = false }: HeaderProps) {
                 <button
                   type="button"
                   onClick={() => setMobileResourcesOpen(!mobileResourcesOpen)}
-                  className={`text-base font-semibold w-full text-left py-1.5 flex items-center justify-between transition-colors ${
-                    isResourcesActive() ? "text-red-600" : "text-slate-700"
-                  }`}
+                  className={`text-base font-semibold w-full text-left py-1.5 flex items-center justify-between transition-colors ${isResourcesActive() ? "text-red-600" : "text-slate-700"
+                    }`}
                 >
                   <span>Resources</span>
                   <ChevronDown className={`h-5 w-5 transition-transform ${mobileResourcesOpen ? 'rotate-180' : ''}`} />
                 </button>
-                
+
                 {mobileResourcesOpen && (
                   <div className="pl-4 border-l border-slate-150 space-y-2.5 py-1.5 animate-in slide-in-from-top-2 duration-150">
                     {resourceSubLinks.map((subLink) => (
@@ -249,9 +239,8 @@ export function Header({ showBackToHome = false }: HeaderProps) {
                         key={subLink.name}
                         href={subLink.href}
                         onClick={() => setMobileMenuOpen(false)}
-                        className={`block text-sm font-medium transition-colors ${
-                          pathname === subLink.href ? "text-red-600" : "text-slate-600 hover:text-red-600"
-                        }`}
+                        className={`block text-sm font-medium transition-colors ${pathname === subLink.href ? "text-red-600" : "text-slate-600 hover:text-red-600"
+                          }`}
                       >
                         {subLink.name}
                       </Link>
@@ -263,18 +252,17 @@ export function Header({ showBackToHome = false }: HeaderProps) {
               <Link
                 href="/contact"
                 onClick={() => setMobileMenuOpen(false)}
-                className={`text-base font-semibold transition-colors duration-200 py-1.5 ${
-                  isActive("/contact")
+                className={`text-base font-semibold transition-colors duration-200 py-1.5 ${isActive("/contact")
                     ? "text-red-600 pl-2 border-l-4 border-red-500"
                     : "text-slate-700 hover:text-red-600"
-                }`}
+                  }`}
               >
                 Contact Us
               </Link>
             </nav>
-            
+
             <div className="h-px bg-slate-100" />
-            
+
             <div className="flex flex-col gap-3">
               <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
                 <Button className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold h-11">

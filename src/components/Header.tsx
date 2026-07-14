@@ -137,16 +137,6 @@ export function Header({ showBackToHome = false }: HeaderProps) {
                       </div>
                     )}
                   </div>
-
-                  <Link
-                    href="/contact"
-                    className={`text-sm font-semibold tracking-wide transition-colors duration-200 ${isActive("/contact")
-                      ? "text-red-600 font-bold border-b-2 border-red-500 pb-1"
-                      : "text-slate-600 hover:text-red-600"
-                      }`}
-                  >
-                    Contact Us
-                  </Link>
                 </nav>
 
                 <Link href="/contact">
@@ -248,17 +238,6 @@ export function Header({ showBackToHome = false }: HeaderProps) {
                   </div>
                 )}
               </div>
-
-              <Link
-                href="/contact"
-                onClick={() => setMobileMenuOpen(false)}
-                className={`text-base font-semibold transition-colors duration-200 py-1.5 ${isActive("/contact")
-                  ? "text-red-600 pl-2 border-l-4 border-red-500"
-                  : "text-slate-700 hover:text-red-600"
-                  }`}
-              >
-                Contact Us
-              </Link>
             </nav>
 
             <div className="h-px bg-slate-100" />
@@ -271,7 +250,7 @@ export function Header({ showBackToHome = false }: HeaderProps) {
               </Link>
               <a href="tel:+918000383222" className="flex items-center justify-center gap-2 text-slate-700 hover:text-red-600 font-semibold py-2.5 text-sm">
                 <PhoneCall className="h-4 w-4" />
-                <span>Call Advisor (Sheetal)</span>
+                <span>Call Advisor</span>
               </a>
             </div>
           </div>

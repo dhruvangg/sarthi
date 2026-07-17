@@ -111,8 +111,11 @@ export function ContactForm({ title, buttonText }: ContactFormProps) {
         })
       ]);
       
-      // UI success depends on Formspree (primary notification channel)
-      if (formspreeResult.status === 'fulfilled' && formspreeResult.value.ok) {
+      // UI success depends on both Formspree and local API
+      const isFormspreeOk = formspreeResult.status === 'fulfilled' && formspreeResult.value.ok;
+      const isPayloadOk = _payloadResult.status === 'fulfilled' && _payloadResult.value.ok;
+
+      if (isFormspreeOk && isPayloadOk) {
         setStatus("success");
         setFormData({ name: '', phone: '', email: '', services: [], remarks: '' });
       } else {

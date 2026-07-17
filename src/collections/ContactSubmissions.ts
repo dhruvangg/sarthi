@@ -1,4 +1,5 @@
 import { CollectionConfig } from 'payload'
+import { encryptFieldHook, decryptFieldHook } from '../lib/encryption'
 
 export const ContactSubmissions: CollectionConfig = {
   slug: 'contact-submissions',
@@ -20,17 +21,29 @@ export const ContactSubmissions: CollectionConfig = {
       type: 'text',
       required: true,
       label: 'Full Name',
+      hooks: {
+        beforeChange: [encryptFieldHook],
+        afterRead: [decryptFieldHook],
+      },
     },
     {
       name: 'phone',
       type: 'text',
       required: true,
       label: 'Mobile Number',
+      hooks: {
+        beforeChange: [encryptFieldHook],
+        afterRead: [decryptFieldHook],
+      },
     },
     {
       name: 'email',
-      type: 'email',
+      type: 'text',
       label: 'Email Address',
+      hooks: {
+        beforeChange: [encryptFieldHook],
+        afterRead: [decryptFieldHook],
+      },
     },
     {
       name: 'services',
@@ -50,6 +63,10 @@ export const ContactSubmissions: CollectionConfig = {
       name: 'remarks',
       type: 'textarea',
       label: 'Additional Queries',
+      hooks: {
+        beforeChange: [encryptFieldHook],
+        afterRead: [decryptFieldHook],
+      },
     },
     {
       name: 'source',

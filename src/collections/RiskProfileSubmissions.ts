@@ -1,4 +1,5 @@
 import { CollectionConfig } from 'payload'
+import { encryptFieldHook, decryptFieldHook } from '../lib/encryption'
 
 export const RiskProfileSubmissions: CollectionConfig = {
   slug: 'risk-profile-submissions',
@@ -30,12 +31,20 @@ export const RiskProfileSubmissions: CollectionConfig = {
               type: 'text',
               required: true,
               label: 'Applicant Name',
+              hooks: {
+                beforeChange: [encryptFieldHook],
+                afterRead: [decryptFieldHook],
+              },
             },
             {
               name: 'phone',
               type: 'text',
               required: true,
               label: 'Mobile Number',
+              hooks: {
+                beforeChange: [encryptFieldHook],
+                afterRead: [decryptFieldHook],
+              },
             },
           ],
         },
@@ -44,14 +53,22 @@ export const RiskProfileSubmissions: CollectionConfig = {
           fields: [
             {
               name: 'email',
-              type: 'email',
+              type: 'text',
               required: true,
               label: 'Email Address',
+              hooks: {
+                beforeChange: [encryptFieldHook],
+                afterRead: [decryptFieldHook],
+              },
             },
             {
               name: 'pan',
               type: 'text',
               label: 'PAN / Client ID',
+              hooks: {
+                beforeChange: [encryptFieldHook],
+                afterRead: [decryptFieldHook],
+              },
             },
           ],
         },

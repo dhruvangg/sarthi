@@ -51,7 +51,7 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error('Contact form submission error:', error)
     return NextResponse.json(
-      { error: 'Failed to save submission.' },
+      { error: 'Failed to save submission.', details: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     )
   }

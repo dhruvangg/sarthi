@@ -478,13 +478,6 @@ export interface HomePage {
     primaryButtonHref: string;
     secondaryButtonText: string;
     secondaryButtonHref: string;
-    contactInfo?:
-      | {
-          iconName: string;
-          text: string;
-          id?: string | null;
-        }[]
-      | null;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -885,13 +878,6 @@ export interface HomePageSelect<T extends boolean = true> {
         primaryButtonHref?: T;
         secondaryButtonText?: T;
         secondaryButtonHref?: T;
-        contactInfo?:
-          | T
-          | {
-              iconName?: T;
-              text?: T;
-              id?: T;
-            };
       };
   updatedAt?: T;
   createdAt?: T;

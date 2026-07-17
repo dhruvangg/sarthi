@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { Phone, Mail, MapPin, ShieldCheck, Heart } from "lucide-react"
+import { Phone, Mail, MapPin, ShieldCheck, Heart, Clock } from "lucide-react"
 
 export function Footer() {
   return (
@@ -84,7 +84,7 @@ export function Footer() {
               <li className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 text-red-600 shrink-0 mt-0.5" />
                 <span className="leading-relaxed text-slate-600">
-                  412, The Edge, Opp. Malabar Royal Bungalows, Bhakti Circle Road, Nikol, Ahmedabad-382350
+                  412, The Edge, <br /> Opp. Malabar Royal Bungalows, <br /> Bhakti Circle Road, Nikol, <br /> Ahmedabad-382350
                 </span>
               </li>
               <li className="flex items-start gap-3">
@@ -98,6 +98,12 @@ export function Footer() {
                 <a href="mailto:hello@sarthisip.com" className="text-slate-600 hover:text-red-600 transition-colors font-medium">
                   hello@sarthisip.com
                 </a>
+              </li>
+              <li className="flex items-center gap-3">
+                <Clock className="h-5 w-5 text-red-600 shrink-0" />
+                <span className="text-slate-600 font-medium">
+                  Response time: Under 24 Hrs
+                </span>
               </li>
             </ul>
           </div>

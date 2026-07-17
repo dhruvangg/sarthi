@@ -89,14 +89,6 @@ export const HomePage: GlobalConfig = {
         { name: 'primaryButtonHref', type: 'text', required: true, defaultValue: '/contact' },
         { name: 'secondaryButtonText', type: 'text', required: true, defaultValue: 'Call us Now' },
         { name: 'secondaryButtonHref', type: 'text', required: true, defaultValue: 'tel:+918000383222' },
-        {
-          name: 'contactInfo',
-          type: 'array',
-          fields: [
-            { name: 'iconName', type: 'text', required: true },
-            { name: 'text', type: 'text', required: true },
-          ]
-        }
       ]
     }
   ]

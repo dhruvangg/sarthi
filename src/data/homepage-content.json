@@ -114,16 +114,6 @@
     "primaryButtonText": "Connect with us",
     "primaryButtonHref": "/contact",
     "secondaryButtonText": "Call us Now",
-    "secondaryButtonHref": "tel:+918000383222",
-    "contactInfo": [
-      {
-        "iconName": "MapPin",
-        "text": "Office: Nikol, Ahmedabad"
-      },
-      {
-        "iconName": "Clock",
-        "text": "Response time: Under 24 Hrs"
-      }
-    ]
+    "secondaryButtonHref": "tel:+918000383222"
   }
 }

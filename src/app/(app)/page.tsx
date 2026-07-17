@@ -267,17 +267,7 @@ export default async function HomePage() {
             </a>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-md mx-auto pt-8 text-xs text-slate-500 font-medium">
-            {homepageContent.conversionBanner.contactInfo.map((info: any, idx: number) => {
-              const IconComponent = info.iconName === 'Clock' ? Clock : MapPin;
-              return (
-                <div key={idx} className="flex items-center justify-center gap-2">
-                  <IconComponent className="h-4.5 w-4.5 text-red-600 shrink-0" />
-                  <span>{info.text}</span>
-                </div>
-              );
-            })}
-          </div>
+
         </div>
       </section>
 

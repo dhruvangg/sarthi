@@ -58,6 +58,32 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FinancialService",
+              "name": "Sarthi SIP",
+              "image": "https://sarthisip.com/logo.png",
+              "@id": "https://sarthisip.com",
+              "url": "https://sarthisip.com",
+              "telephone": "+918000383222",
+              "email": "hello@sarthisip.com",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "412, The Edge, Opp. Malabar Royal Bungalows, Bhakti Circle Road, Nikol",
+                "addressLocality": "Ahmedabad",
+                "postalCode": "382350",
+                "addressRegion": "Gujarat",
+                "addressCountry": "IN"
+              },
+              "sameAs": [
+                "https://share.google/srRXwiZJC0oTaemhF"
+              ]
+            })
+          }}
+        />
         <Script id="google-tag-manager" strategy="afterInteractive">
           {`
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':

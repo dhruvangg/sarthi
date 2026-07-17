@@ -70,7 +70,7 @@ export function Footer() {
                 <Link href="/#services" className="text-slate-500 hover:text-red-600 transition-colors font-medium">Tax & ELSS Planning</Link>
               </li>
               <li>
-                <Link href="/#services" className="text-slate-500 hover:text-red-600 transition-colors font-medium">Property Valuation</Link>
+                <Link href="/services/property-valuation-ahmedabad" className="text-slate-500 hover:text-red-600 transition-colors font-medium">Property Valuation</Link>
               </li>
             </ul>
           </div>

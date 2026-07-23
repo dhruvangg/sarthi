@@ -162,14 +162,14 @@ export default function ContactPage() {
               {/* Map embed */}
               <div className="relative rounded-2xl overflow-hidden border border-slate-200 bg-slate-100 shadow-inner h-64">
                 <iframe
-                  title="Sarthi SIP Office Location"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.391782299839!2d72.6738981!3d23.0461625!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e876007ec1cdb%3A0xe9f79b0c279a0cf5!2sThe%20Edge!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                  title="Sarthi SIP"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.2428971808813!2d72.67250657591265!3d23.051554915244854!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xad08e308209d5a29%3A0x16269b4f27120550!2sSarthi%20InvestMart!5e0!3m2!1sen!2sin!4v1784785767538!5m2!1sen!2sin"
                   width="100%"
                   height="100%"
-                  style={{ border: 0 }}
+                  style={{ borderWidth: 0 }}
                   allowFullScreen={true}
                   loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
+                  referrerPolicy="strict-origin-when-cross-origin"
                   className="absolute inset-0"
                 />
               </div>
